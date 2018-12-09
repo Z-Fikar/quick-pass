@@ -187,7 +187,7 @@ window.onload = function() {
           var data = JSON.parse(hr.response);
           if (data.SuccessMessage) {
             alert(data.InfoMessage);
-            location.href = "profil.php";
+            location.href = "profil.html";
           }
           var galat = document.getElementById("lblGalat");
           while (galat.firstChild) {

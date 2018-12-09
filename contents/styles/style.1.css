@@ -5,6 +5,9 @@ body {
 .header {
   background: #009191;
   height: 66px;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .head-title {
@@ -33,32 +36,32 @@ body {
   position: absolute;
   width: 280px;
   height: 100%;
-  top:0px;
+  top: 0px;
   z-index: -1;
 }
 
-.sidemenu ul{
-	padding: 60px 0 0;
-	border-bottom: 1px solid lightgray;
+.sidemenu ul {
+  padding: 60px 0 0;
+  border-bottom: 1px solid lightgray;
 }
-.sidemenu ul li{
-	list-style: none;
-	padding: 10px 10px;
-	border-top: 1px solid lightgray;
-}
-
-.sidemenu ul li:hover{
-	background: #222222;
+.sidemenu ul li {
+  list-style: none;
+  padding: 10px 10px;
+  border-top: 1px solid lightgray;
 }
 
-.main{
-	margin-left: 280px;
+.sidemenu ul li:hover {
+  background: #222222;
 }
 
-.main iframe{
-	width: 100%;
-	height: 90vh;
-	border: none;
-	position: relative;
-	top: 0;
+.main {
+  margin-left: 280px;
+}
+
+.main iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  position: relative;
+  top: 0;
 }

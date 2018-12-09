@@ -1,163 +1,179 @@
 * {
-	box-sizing: border-box;
-	font-family: Roboto;
+  box-sizing: border-box;
+  font-family: Roboto;
 }
 
-.container, .medium-container {
-	background: #F2F2F2;
-	padding: 1% 4%;
-	margin: 0 auto 60px auto;
-	box-shadow: 0px 10px 10px 5px #00000055;
-	width: 400px;
-	position: relative;
-	top: 5vh;
+.container,
+.medium-container,
+.iframe-container {
+  background: #f2f2f2;
+  padding: 1% 4%;
+  margin: 0 auto 60px auto;
+  box-shadow: 0px 10px 10px 5px #00000055;
+  width: 400px;
+  position: relative;
+  top: 5vh;
+}
+
+.iframe-container {
+  width: 1000px;
+  margin: 45px auto 55px auto;
 }
 
 .logo-container {
-	margin: 0 auto 25px;
-	text-align: center;
+  margin: 0 auto 25px;
+  text-align: center;
 }
 
 .logo-container img {
-	display: block;
-	height: 150px;
-	margin: 0 auto;
-	text-align: center;
+  display: block;
+  height: 150px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .logo-container label {
-	font-family: Overpass;
-	font-size: 40px;
+  font-family: Overpass;
+  font-size: 40px;
 }
 
 .f-title {
-	font-style: italic;
+  font-style: italic;
 }
 
 .l-title {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .col {
-	margin: 0 auto 15px auto;
+  margin: 0 auto 15px auto;
 }
 
-.col label, .col input, .col button, .col select, .col textarea {
-	font-size: 16px;
-	display: block;
-	width: 100%;
-	padding-left: 20px;
+.col label,
+.col input,
+.col button,
+.col select,
+.col textarea {
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  padding-left: 20px;
 }
 
-.col input, .col button, .col select, .col textarea {
-	border-radius: 20px;
-	border: 2px solid #008181;
-	padding-top: 10px;
-	padding-bottom: 10px;
+.col input,
+.col button,
+.col select,
+.col textarea {
+  border-radius: 20px;
+  border: 2px solid #008181;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.col button, .col label {
-	font-weight: bold;
+.col button,
+.col label {
+  font-weight: bold;
 }
 
 label {
-	/* color: #008181; */
-	color: #ff6300;
+  /* color: #008181; */
+  color: #ff6300;
 }
 
 .btn-full {
-	background-color: #008181;
-	color: white;
+  background-color: #008181;
+  color: white;
 }
 
 .btn-full {
-	background-color: #008181;
-	color: white;
+  background-color: #008181;
+  color: white;
 }
 
 .btn-border {
-	background-color: white;
-	color: #008181;
-	border-color: #008181;
+  background-color: white;
+  color: #008181;
+  border-color: #008181;
 }
 
 .col input:invalid {
-	box-shadow: 0px 0px 10px 3px #FF000055;
+  box-shadow: 0px 0px 10px 3px #ff000055;
 }
 
 .medium-container {
-	width: 1000px;
+  width: 1000px;
 }
 
 .left-part-container {
-	float: left;
+  float: left;
 }
 
 .right-part-container {
-	margin-left: 250px;
+  margin-left: 250px;
 }
 
 .col input[type="radio"] {
-	display: inline;
-	width: auto;
-	margin-left: 15px;
+  display: inline;
+  width: auto;
+  margin-left: 15px;
 }
 
-.col-right, .col-left {
-	display: inline-block;
+.col-right,
+.col-left {
+  display: inline-block;
 }
 
 .col-right {
-	width: 70%;
+  width: 70%;
 }
 
 .col-left {
-	width: 28%;
-	float: right;
+  width: 28%;
+  float: right;
 }
 
 #txtPekerjaan {
-	transition: display 0.2s ease-out;
+  transition: display 0.2s ease-out;
 }
 
 .col textarea {
-	resize: vertical;
-	min-height: 120px;
+  resize: vertical;
+  min-height: 120px;
 }
 
-.radio-group{
-	width: 100%;
-	margin: 0 auto;
-	text-align: center;
-	display: inline-flex;
+.radio-group {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: inline-flex;
 }
-.radio-group label{
-	display: inline;
-	border: 2px solid #008181;
-	margin: 0px auto;
-	text-align: center;
-	padding: 10px 15px;
-	font-size: 1em;
+.radio-group label {
+  display: inline;
+  border: 2px solid #008181;
+  margin: 0px auto;
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 1em;
 }
-.radio-group label:first-of-type{
-	border-radius: 30px 0 0 30px;
+.radio-group label:first-of-type {
+  border-radius: 30px 0 0 30px;
 }
-.radio-group label:last-of-type{
-	border-radius: 0 30px 30px 0;
+.radio-group label:last-of-type {
+  border-radius: 0 30px 30px 0;
 }
-.radio-group input{
-	display: none !important;
-}
-
-.radio-group input:checked + label{
-	color: #fff;
-	background: #008181;
+.radio-group input {
+  display: none !important;
 }
 
-.galat{
-	color:#E10039;;
-	font-size: 14px !important;
-	text-align: center;
-	margin: 0 auto;
-	padding-left: 0 !important;
+.radio-group input:checked + label {
+  color: #fff;
+  background: #008181;
+}
+
+.galat {
+  color: #e10039;
+  font-size: 14px !important;
+  text-align: center;
+  margin: 0 auto;
+  padding-left: 0 !important;
 }

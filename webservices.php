@@ -355,6 +355,133 @@ function get_akun(){
     echo json_encode($return);
 }
 
+function update_akun()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $str_json = file_get_contents('php://input');
+        $d = json_decode($str_json);
+
+        $UserID = $_SESSION["UserID"];
+        $NamaLengkap = $d->NamaLengkap;
+        $JenisKelamin = $d->JenisKelamin;
+        $NamaLain = $d->NamaLain;
+        $TinggiBadan = $d->TinggiBadan;
+        $TempatLahir = $d->TempatLahir;
+        $TanggalLahir = $d->TanggalLahir;
+        $NomorKTPWNI = $d->NomorKTPWNI;
+        $TanggalDikeluarkan = $d->TanggalDikeluarkan;
+        $TempatDikeluarkan = $d->TempatDikeluarkan;
+        $TanggalBerakhir = $d->TanggalBerakhir;
+        $Alamat = $d->Alamat;
+        $Telepon = $d->Telepon;
+        $StatusSipilID = $d->StatusSipilID;
+
+        $PekerjaanID = $d->PekerjaanID;
+        $Pekerjaan = $d->Pekerjaan;
+        $NamaAlamatKantor = $d->NamaAlamatKantor;
+        $TeleponKantor = $d->TeleponKantor;
+
+        $NamaIbu = $d->NamaIbu;
+        $KewarganegaraanIbu = $d->KewarganegaraanIbu;
+        $TempatLahirIbu = $d->TempatLahirIbu;
+        $TanggalLahirIbu = $d->TanggalLahirIbu;
+
+        $NamaAyah = $d->NamaAyah;
+        $KewarganegaraanAyah = $d->KewarganegaraanAyah;
+        $TempatLahirAyah = $d->TempatLahirAyah;
+        $TanggalLahirAyah = $d->TanggalLahirAyah;
+
+        $AlamatOrangTua = $d->AlamatOrangTua;
+        $TeleponOrangTua = $d->TeleponOrangTua;
+
+        $NamaPasangan = $d->NamaPasangan;
+        $KewarganegaraanPasangan = $d->KewarganegaraanPasangan;
+        $TempatLahirPasangan = $d->TempatLahirPasangan;
+        $TanggalLahirPasangan = $d->TanggalLahirPasangan;
+
+        mysqli_begin_transaction($conn);
+
+        $AlamatEmail = $d->AlamatEmail;
+        if($tmp = $d->KataSandi){
+            $KataSandi = md5($tmp);
+            $kueri = "
+                update Otentikasi set
+                    AlamatEmail = '$AlamatEmail',
+                    KataSandi = '$KataSandi'
+                where ID = $UserID";
+        }else{
+            $kueri = "
+                update Otentikasi set
+                    AlamatEmail = '$AlamatEmail'
+                where ID = $UserID";
+        }
+        mysqli_query($conn, $kueri);
+
+        $kueri = "
+			update Profil set
+                UserID = $UserID, 
+                NamaLengkap = '$NamaLengkap', 
+                JenisKelamin = '$JenisKelamin', 
+                NamaLain = '$NamaLain', 
+                TinggiBadan = $TinggiBadan, 
+                TempatLahir = '$TempatLahir', 
+                TanggalLahir = '$TanggalLahir',
+                
+                NomorKTPWNI = '$NomorKTPWNI', 
+                TanggalDikeluarkan = '$TanggalDikeluarkan', 
+                TempatDikeluarkan = '$TempatDikeluarkan', 
+                TanggalBerakhir = '$TanggalBerakhir',
+                Alamat = '$Alamat', 
+                Telepon = '$Telepon', 
+                StatusSipilID = $StatusSipilID,
+
+                PekerjaanID = $PekerjaanID, 
+                Pekerjaan = '$Pekerjaan', 
+                NamaAlamatKantor = '$NamaAlamatKantor', 
+                TeleponKantor = '$TeleponKantor',
+
+                NamaIbu = '$NamaIbu', 
+                KewarganegaraanIbu = '$KewarganegaraanIbu', 
+                TempatLahirIbu = '$TempatLahirIbu', 
+                TanggalLahirIbu = '$TanggalLahirIbu',
+                NamaAyah = '$NamaAyah', 
+                KewarganegaraanAyah = '$KewarganegaraanAyah', 
+                TempatLahirAyah = '$TempatLahirAyah', 
+                TanggalLahirAyah = '$TanggalLahirAyah',
+                
+                AlamatOrangTua = '$AlamatOrangTua', 
+                TeleponOrangTua = '$TeleponOrangTua',
+                NamaPasangan = '$NamaPasangan', 
+                KewarganegaraanPasangan = '$KewarganegaraanPasangan', 
+                TempatLahirPasangan = '$TempatLahirPasangan', 
+                TanggalLahirPasangan = '$TanggalLahirPasangan'
+			where UserID = $UserID";
+        mysqli_query($conn, $kueri);
+
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Perubahan berhasil disimpan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        $return = array(
+            "InfoMessage" => "Perubahan gagal dilakukan: $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
 $str_json = file_get_contents('php://input');
 if (!empty($str_json)) {
     $d = json_decode($str_json);

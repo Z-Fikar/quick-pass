@@ -1,3 +1,7 @@
+if(window==window.top){
+  location.href = "/quickpass"
+}
+
 window.onload = function() {
   var change_pekerjaan = function(element) {
     input = document.getElementById("txtPekerjaan");
@@ -86,7 +90,7 @@ window.onload = function() {
 
   var change_date = function(str_date) {
     var list_date = str_date.split(" ");
-    var str_date = [list_date[1], list_date[0], list_date[2]].join(" ");
+    var str_date = list_date.reverse().join("-");
     return new Date(str_date);
   };
 

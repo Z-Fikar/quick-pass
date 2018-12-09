@@ -1,0 +1,223 @@
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title>Profil | QuickPass</title>
+	<link rel="icon" type="image/png" href="../../assets/images/logo.png" />
+	<link
+	rel="stylesheet"
+	type="text/css"
+	href="../../contents/styles/style.css"
+	/>
+	<link
+	rel="stylesheet"
+	type="text/css"
+	href="../../contents/styles/accordion.css"
+	/>
+	<script type="text/javascript" src="../../contents/scripts/profilController.js"></script>
+	<script
+	type="text/javascript"
+	src="../../contents/scripts/accordion.js"
+	></script>
+	</head>
+	<body>
+		<div class="medium-container">
+			<form method="post" action="">
+				<div class="col">
+					<button type="button" class="accordion">DATA AKUN</button>
+					<div class="panel">
+						<div class="col">
+							<label>Alamat Email</label>
+							<input type="email" id="txtAlamatEmail" name="AlamatEmail"
+								placeholder="Alamat email"/>
+						</div>
+						<div class="col">
+							<label>Ubah Kata Sandi</label>
+							<input type="password" id="txtKataSandi" name="KataSandi"
+								placeholder="Kata sandi baru"/>
+						</div>
+						<div class="col">
+							<label>Konfirmasi Kata Sandi</label>
+							<input type="password" id="txtKataSandi1" name="KataSandi1"
+								placeholder="Konfirmasi Kata sandi baru"/>
+						</div>
+					</div>
+
+					<button type="button" class="accordion">DATA DIRI</button>
+					<div class="panel">
+						<div class="col">
+							<label>Nama Lengkap</label>
+							<input type="text" id="txtNamaLengkap" placeholder="Nama Lengkap" />
+						</div>
+						<div class="col">
+							<label>Jenis Kelamin</label>
+							<div class="radio-group">
+								<input type="radio" id="kelamin1" name="jenisKelamin" value="L"><label for="kelamin1">Laki-laki</label>
+								<input type="radio" id="kelamin2" name="jenisKelamin" value="P"><label for="kelamin2">Perempuan</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="col-right">
+								<label>Nama Lain</label>
+								<input type="text" id="txtNamaLain" placeholder="Nama Lain" />
+							</div>
+							<div class="col-left">
+								<label>Tinggi Badan</label>
+								<input type="text" id="txtTinggiBadan" placeholder="dalam (cm)"
+									pattern="[0-9]{0,3}" />
+							</div>
+						</div>
+						<div class="col">
+							<div class="col-right">
+								<label>Tempat Lahir</label>
+								<input type="text" id="txtTempatLahir" placeholder="Tempat Lahir" />
+							</div>
+							<div class="col-left">
+								<label>Tanggal Lahir</label>
+								<input type="text" id="txtTanggalLahir" class="date" placeholder="e.g. 13 08 1997" />
+							</div>
+						</div>
+						<div class="col">
+							<div class="col-right">
+								<label>Nomor KTP WNI</label>
+								<input type="text" id="txtNomorKTPWNI" placeholder="Nomor KTP WNI" />
+							</div>
+							<div class="col-left">
+								<label>Tanggal Dikeluarkan</label>
+								<input type="text" id="txtTanggalDikeluarkan" class="date" placeholder="e.g. 13 08 1997" />
+							</div>
+						</div>
+						<div class="col">
+							<div class="col-right">
+								<label>Tempat Dikeluarkan</label>
+								<input type="text" id="txtTempatDikeluarkan" placeholder="Tempat dikeluarkan" />
+							</div>
+							<div class="col-left">
+								<label>Berlaku S/D</label>
+								<input type="text" id="txtTanggalBerakhir" class="date" placeholder="e.g. 13 08 1997" />
+							</div>
+						</div>
+						<div class="col">
+							<label>Alamat Tempat Tinggal</label>
+							<textarea id="txtAlamat" rows="4" cols="150"></textarea>
+						</div>
+						<div class="col">
+							<label>Nomor Telepon/Handphone</label>
+							<input type="text" id="txtTelepon" pattern="^(^\+62\s?|^0)(\d{3,4}){2}\d{3,4}$" placeholder="e.g. +62812341234123 atau 0812341234123"></input>
+						</div>
+						<div class="col">
+							<label>Status Sipil</label>
+							<select id="sbStatusSipil"></select>
+						</div>
+					</div>
+
+					<button type="button" class="accordion">DATA PEKERJAAN</button>
+					<div class="panel">
+						<div class="col">
+							<label>Pekerjaan</label>
+							<select id="sbPekerjaan"></select>
+						</div>
+						<div class="col">
+							<input type="text" id="txtPekerjaan" placeholder="lainnya..." />
+						</div>
+						<div class="col">
+							<label>Nama dan Alamat Kantor</label>
+							<textarea id="txtNamaAlamatKantor" rows="4" cols="150"></textarea>
+						</div>
+						<div class="col">
+							<label>Nomor Telepon/Handphone</label>
+							<input type="text" id="txtTeleponKantor" pattern="^(^\+62\s?|^0)(\d{3,4}){2}\d{3,4}$" placeholder="e.g. +62812341234123 atau 0812341234123"></input>
+						</div>
+					</div>
+					
+					<button type="button" class="accordion">DATA ORANG TUA</button>
+					<div class="panel">
+						<div class="col">
+							<button type="button" class="accordion">DATA IBU</button>
+							<div class="panel">
+								<div class="col">
+									<label>Nama</label>
+									<input type="text" id="txtNamaIbu" placeholder="Nama"/>
+								</div>
+								<div class="col">
+									<label>Kewarganegaraan</label>
+									<input type="text" id="txtKewarganegaraanIbu" placeholder="Kewarganegaraan"/>
+								</div>
+								<div class="col">
+									<div class="col-right">
+										<label>Tempat Lahir</label>
+										<input type="text" id="txtTempatLahirIbu" placeholder="Tempat Lahir" />
+									</div>
+									<div class="col-left">
+										<label>Tanggal Lahir</label>
+										<input type="text" id="txtTanggalLahirIbu" class="date" placeholder="e.g. 13 08 1997" />
+									</div>
+								</div>
+							</div>
+						<!-- </div>
+						
+						<div class="col"> -->
+							<button type="button" class="accordion">DATA AYAH</button>
+							<div class="panel">
+								<div class="col">
+									<label>Nama</label>
+									<input type="text" id="txtNamaAyah" placeholder="Nama"/>
+								</div>
+								<div class="col">
+									<label>Kewarganegaraan</label>
+									<input type="text" id="txtKewarganegaraanAyah" placeholder="Kewarganegaraan"/>
+								</div>
+								<div class="col">
+									<div class="col-right">
+										<label>Tempat Lahir</label>
+										<input type="text" id="txtTempatLahirAyah" placeholder="Tempat Lahir" />
+									</div>
+									<div class="col-left">
+										<label>Tanggal Lahir</label>
+										<input type="text" id="txtTanggalLahirAyah" class="date" placeholder="e.g. 13 08 1997" />
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col">
+							<label>Alamat Tempat Tinggal</label>
+							<textarea id="txtAlamatOrangTua" rows="4" cols="150"></textarea>
+						</div>
+						<div class="col">
+							<label>Nomor Telepon/Handphone</label>
+							<input type="text" id="txtTeleponOrangtua" pattern="^(^\+62\s?|^0)(\d{3,4}){2}\d{3,4}$" placeholder="e.g. +62812341234123 atau 0812341234123"></input>
+						</div>
+					</div>
+					
+					<button type="button" class="accordion">DATA SUAMI / ISTRI</button>
+					<div class="panel">
+						<div class="col">
+							<label>Nama</label>
+							<input type="text" id="txtNamaPasangan" placeholder="Nama"/>
+						</div>
+						<div class="col">
+							<label>Kewarganegaraan</label>
+							<input type="text" id="txtKewarganegaraanPasangan" placeholder="Kewarganegaraan"/>
+						</div>
+						<div class="col">
+							<div class="col-right">
+								<label>Tempat Lahir</label>
+								<input type="text" id="txtTempatLahirPasangan" placeholder="Tempat Lahir" />
+							</div>
+							<div class="col-left">
+								<label>Tanggal Lahir</label>
+								<input type="text" id="txtTanggalLahirPasangan" class="date" placeholder="e.g. 13 08 1997" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<label class="galat" id="lblGalat"></label>
+				</div>
+				<div class="col">
+					<button type="button" id="btnSimpan" class="btn-full" name="Simpan">SIMPAN</label>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

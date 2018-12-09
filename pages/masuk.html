@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Masuk | QuickPass</title>
+	<meta charset="utf-8">
+	<link rel="icon"  type="image/png" href="../assets/images/logo.png" />
+	<link rel="stylesheet" type="text/css" href="../contents/styles/style.css" />
+	<script type="text/javascript" src="../contents/scripts/masukController.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="logo-container">
+			<img src="../assets/svg/logo.svg" alt="logo.svg"/>
+			<label>
+				<span class="f-title">QUICK</span><span class="l-title">PASS</span>
+			</label>
+		</div>	
+		<div>
+			<form method="post" action="">
+				<div class="col">
+					<label>Alamat Email</label>
+					<input type="email" id="txtAlamatEmail" name="AlamatEmail" placeholder="Alamat email" required />
+				</div>
+				<div class="col">
+					<label>Kata Sandi</label>
+					<input type="password" id="txtKataSandi" name="KataSandi" placeholder="Kata sandi" required />
+				</div>
+				<div class="col">
+					<label class="galat" id="lblGalat"></label>
+				</div>
+				<br />
+				<div class="col">
+					<button type="button" id="btnMasuk" class="btn-full" name="Masuk">MASUK</label>
+				</div>
+				<div class="col">
+					<button type="button" id="btnDaftar" class="btn-border" name="Daftar">DAFTAR</label>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

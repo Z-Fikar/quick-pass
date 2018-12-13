@@ -16,9 +16,15 @@
 	<script type="text/javascript" src="controller.js"></script>
   </head>
   <body>
-    <div class="main">
-		<iframe src="layouts/"></iframe>
-	</div>
+	<div class="sidemenu">
+      <ul>
+        <a href="layouts/" target="layout"><li class="active">Dasbor</li></a>
+        <a href="layouts/profil.html" target="layout"><li>Profil</li></a>
+        <a href="layouts/buat-permohonan.html" target="layout"><li>Buat Permohonan</li></a>
+        <a href="layouts/daftar-permohonan.html" target="layout"><li>Daftar Permohonan</li></a>
+      </ul>
+    </div>
+  
     <div class="header">
       <div class="head-title">
         <table>
@@ -36,12 +42,9 @@
         </table>
       </div>
     </div>
-    <div class="sidemenu">
-      <ul>
-        <li>Profil</li>
-        <li>Buat Permohonan</li>
-        <li>Status Permohonan</li>
-      </ul>
-    </div>
+	
+    <div class="main">
+		<iframe name="layout" src="layouts/"></iframe>
+	</div>
   </body>
 </html>

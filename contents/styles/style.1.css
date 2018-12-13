@@ -8,6 +8,7 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
+  z-index:9;
 }
 
 .head-title {
@@ -37,7 +38,7 @@ body {
   width: 280px;
   height: 100%;
   top: 0px;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .sidemenu ul {
@@ -48,10 +49,17 @@ body {
   list-style: none;
   padding: 10px 10px;
   border-top: 1px solid lightgray;
+  color: #fff;
 }
 
-.sidemenu ul li:hover {
+.active {
+	background: #fff !important;
+	color: #000 !important;
+}
+
+.sidemenu li:hover {
   background: #222222;
+  color: #fff;
 }
 
 .main {
@@ -64,4 +72,9 @@ body {
   border: none;
   position: relative;
   top: 0;
+}
+
+.sidemenu a{
+	text-decoration: none;
+	color: white;
 }

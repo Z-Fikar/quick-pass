@@ -57,7 +57,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "../webservices.php";
+    var url = "/quickpass/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_statusSipil();"
@@ -123,7 +123,7 @@ window.onload = function() {
       } else {
         var hr = new ActiveXObject("Microsoft.XMLHTTP");
       }
-      var url = "../webservices.php";
+      var url = "/quickpass/webservices.php";
       hr.open("POST", url, true);
       var params = {
         method: "save_akun();",

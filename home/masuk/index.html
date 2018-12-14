@@ -1,41 +1,52 @@
-<html>
-<head>
-	<title>Masuk | QuickPass</title>
-	<meta charset="utf-8">
-	<link rel="icon"  type="image/png" href="/quickpass/assets/images/logo.png" />
-	<link rel="stylesheet" type="text/css" href="/quickpass/contents/styles/style.css" />
-	<script type="text/javascript" src="controller.js"></script>
-</head>
-<body>
-	<div class="container">
-		<div class="logo-container">
-			<img src="/quickpass/assets/svg/logo.svg" alt="logo.svg"/>
-			<label>
-				<span class="f-title">QUICK</span><span class="l-title">PASS</span>
-			</label>
-		</div>	
-		<div>
-			<form method="post" action="">
-				<div class="col">
-					<label>Alamat Email</label>
-					<input type="email" id="txtAlamatEmail" name="AlamatEmail" placeholder="Alamat email" required />
-				</div>
-				<div class="col">
-					<label>Kata Sandi</label>
-					<input type="password" id="txtKataSandi" name="KataSandi" placeholder="Kata sandi" required />
-				</div>
-				<div class="col">
-					<label class="galat" id="lblGalat"></label>
-				</div>
-				<br />
-				<div class="col">
-					<button type="button" id="btnMasuk" class="btn-full" name="Masuk">MASUK</label>
-				</div>
-				<div class="col">
-					<button type="button" id="btnDaftar" class="btn-border" name="Daftar">DAFTAR</label>
-				</div>
-			</form>
-		</div>
-	</div>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Masuk | QuickPass</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/quickpass/assets/images/logo.png"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/quickpass/contents/styles/style.css"
+    />
+    <script type="text/javascript" src="controller.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo-container">
+        <img src="/quickpass/assets/svg/logo.svg" alt="QP" />
+        <label>
+          <span class="f-title">QUICK</span><span class="l-title">PASS</span>
+        </label>
+      </div>
+      <div>
+		<form method="post" action="">
+			<div class="col">
+				<label>Alamat Email</label>
+				<input type="email" id="txtAlamatEmail" name="AlamatEmail" placeholder="Alamat email" required />
+			</div>
+			<div class="col">
+				<label>Kata Sandi</label>
+				<input type="password" id="txtKataSandi" name="KataSandi" placeholder="Kata sandi" required />
+			</div>
+			<div class="col">
+				<label class="galat" id="lblGalat"></label>
+			</div>
+			<br />
+			<div class="col">
+				<button type="button" id="btnMasuk" class="btn-full" name="Masuk">MASUK</label>
+			</div>
+			<div class="col">
+				<button type="button" id="btnDaftar" class="btn-border" name="Daftar">DAFTAR</label>
+			</div>
+		</form>
+	  </div>
+    </div>
+  </body>
 </html>

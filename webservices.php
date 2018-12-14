@@ -219,11 +219,15 @@ function do_login()
 
         $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
+        if(!$row["SudahAktif"]){
+            throw new Exception("Akun belum aktif");
+        }
+
         $ID = $row["ID"];
         $AksesID = $row["AksesID"];
-        $SudahAktif = $row["SudahAktif"];
 
         $_SESSION["UserID"] = $ID;
+        $_SESSION["AksesID"] = $AksesID;
 
         $return = array(
             "InfoMessage" => "Masuk sukses",
@@ -245,7 +249,9 @@ function do_logout()
 {
     try {
         unset($_SESSION["UserID"]);
-
+        unset($_SESSION["AksesID"]);
+        unset($_SESSION["Aktif"]);
+        
         $return = array(
             "InfoMessage" => "Keluar sukses",
             "SuccessMessage" => true,

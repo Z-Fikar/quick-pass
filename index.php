@@ -2,9 +2,9 @@
 session_start();
 
 if (isset($_SESSION["UserID"])) {
-	header("Location: pages/dasbor");
+	header("Location: user/dasbor");
 	// include("keluar.html");
 } else {
-	header("Location: pages/masuk");
+	header("Location: home/masuk");
 	// include("masuk.html");
 }

@@ -47,7 +47,6 @@ window.onload = function() {
         console.log(hr);
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
-          alert(data.InfoMessage);
           location.href = "/quickpass";
         }
 
@@ -71,6 +70,6 @@ window.onload = function() {
 
   var daftar = document.getElementById("btnDaftar");
   daftar.onclick = function() {
-    location.href = "daftar.html";
+    location.href = "/quickpass/home/daftar";
   };
 };

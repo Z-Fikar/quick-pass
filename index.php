@@ -2,12 +2,11 @@
 session_start();
 
 if (isset($_SESSION["UserID"]) && isset($_SESSION["AksesID"])){
-    if ($_SESSION["AksesID"] == 9) {
-		header("Location: user/dasbor");
+    if ($_SESSION["AksesID"] == 1) {
+		header("Location: admin/");
 	} else {
-		echo "admin dasbor belum bikin";
-		// header("Location: admin/dasbor");
+		header("Location: user/");
 	}
 } else {
-    header("Location: home/masuk");
+    header("Location: home/");
 }

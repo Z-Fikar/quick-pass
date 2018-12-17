@@ -299,7 +299,7 @@ function get_akun(){
     try {
         mysqli_begin_transaction($conn);
         $UserID = $_SESSION["UserID"];
-        $kueri = "select a.*, b.* from Otentikasi a inner join Profil b on a.ID = b.UserID where a.ID=$UserID;";
+        $kueri = "select a.*, b.* from Otentikasi a left join Profil b on a.ID = b.UserID where a.ID=$UserID;";
         $res = mysqli_query($conn, $kueri);
         $d = mysqli_fetch_array($res);
 

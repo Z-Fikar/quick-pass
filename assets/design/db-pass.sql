@@ -279,7 +279,7 @@ INSERT INTO profil (
 	5, 'Mahasiswa', 'Gundar, Kelapa Dua', '08123456789', 
 	'Nur', 'Indonesia', 'Bekasi', '1974-08-03', 
 	'Cuai', 'Indonesia', 'Jakarta', '1969-10-16', 
-	'JL. Bali IV', '+68123123123', 
+	'JL. Bali IV', '+628123123123', 
 	'Adin', 'Indonesia', 'Serpong', '1997-06-06'
 );
 

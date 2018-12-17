@@ -94,10 +94,12 @@ create table Profil(
 );
 
 create table Permohonan(
-	ID int,
+	ID int auto_increment,
 	PermohonanHeaderID int,
 	PermohonanDetailID int,
 	PemohonID int,
+	TanggalPermohonan date,
+
 	LoketID int,
 	WawancaraID int,
 	
@@ -105,16 +107,16 @@ create table Permohonan(
 	NIKIMPejimID int,
 	NIKIMTanggal date,
 	
-	Kelengkapan boolean,
+	Kelengkapan boolean default 0,
 	KelengkapanPejimID int,
 	KelengkapanTanggal date,
 	
-	DaftarCekal boolean,
-	KelainanSurat boolean,
+	DaftarCekal boolean default 0,
+	KelainanSurat boolean default 0,
 	CekalKelainanPejimID int,
 	CekalKelainanTanggal date,
 	
-	Persetujuan boolean,
+	Persetujuan boolean default 0,
 	KAKANIMID int,
 	PersetujuanTanggal date,
 	
@@ -258,7 +260,7 @@ insert into Otentikasi values
 	(6, 'eko@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 4, 1),
 	(7, 'feri@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 3, 1),
 	(8, 'gea@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 2, 1),
-	(9, 'hari@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 9, 1),
+	(9, 'ijul@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 9, 1),
 	(10, 'iska@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 9, 0);
 	
 INSERT INTO profil (
@@ -271,7 +273,7 @@ INSERT INTO profil (
 	AlamatOrangTua, TeleponOrangTua, 
 	NamaPasangan, KewarganegaraanPasangan, TempatLahirPasangan, TanggalLahirPasangan
 ) VALUES (
-	1, 'Zulfikar', 'L', 'Zedd', 175, 'Jakarta', '1997-08-13', 
+	9, 'Zulfikar', 'L', 'Zedd', 175, 'Jakarta', '1997-08-13', 
 	'123456789101112', '2007-08-13', 'Pamulang', '9999-12-31', 
 	'Jl. Bali IV', '08123123123', 1,
 	5, 'Mahasiswa', 'Gundar, Kelapa Dua', '08123456789', 

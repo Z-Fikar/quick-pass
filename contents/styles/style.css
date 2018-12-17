@@ -46,7 +46,7 @@
 }
 
 .col {
-  margin: 0 auto 15px auto;
+  margin: 0 auto 20px auto;
 }
 
 .col label,
@@ -58,6 +58,7 @@
   display: block;
   width: 100%;
   padding-left: 20px;
+  padding-right: 20px;
 }
 
 .col input,
@@ -78,14 +79,10 @@
 label {
   /* color: #008181; */
   color: #ff6300;
+  margin-bottom: 10px;
 }
 
-.btn-full {
-  background-color: #008181;
-  color: white;
-}
-
-.btn-full {
+.btn-full, .btn-border:hover {
   background-color: #008181;
   color: white;
 }
@@ -176,4 +173,86 @@ label {
   text-align: center;
   margin: 0 auto;
   padding-left: 0 !important;
+}
+
+.col table {
+  background: white;
+  width: 100%;
+  border: none;
+}
+
+.col thead {
+  background: #008181;
+  color: white;
+}
+
+.col th, .col td {
+  padding: 10px 20px;
+}
+
+.col table, .col th, .col td{
+  border-collapse: collapse;
+}
+
+.col th, .col td{
+  border: 1px solid white;
+}
+
+.col .circle{
+  border: 3px solid #747474;
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  /* margin: 10px 30px; */
+  filter: grayscale(100%);
+}
+
+.col .circle-checked{
+  border: 3px solid #008181;
+  filter: grayscale(0%);
+}
+
+.center{
+  text-align: center;
+}
+
+.col .circle img{
+  padding: 20px;
+  height: 100%;
+}
+
+.arrow {
+  display: inline-block;
+  height: 100px;
+  color: #ff6300;
+  filter: grayscale(100%);
+} 
+.arrow-checked{
+  filter: grayscale(0%);
+}
+.arrow::before{
+  content: "\00BB";
+  font-size: 50px;
+  display: table;
+  margin: auto 0px;
+  position: relative;
+  top: 17px;
+}
+
+.btn-cancel{
+  border: 2px solid #e10039 !important;
+  color: #e10039;
+  background: #fff;
+}
+
+.btn-cancel:hover{
+  background: #e10039;
+  color: #fff;
+}
+
+.btn {
+  width: 50% !important;
+  margin: 0 auto;
+  transition: background .2s ease-in-out, color .2s ease-in-out;
 }

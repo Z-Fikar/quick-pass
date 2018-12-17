@@ -116,7 +116,6 @@ window.onload = function() {
   // get_akun();
   
   var changeActive = function(e){
-    console.log(e);
     if(!e.classList.contains("active")){
       document.querySelector(".sidemenu .active").classList.remove("active");
       e.classList.add("active");

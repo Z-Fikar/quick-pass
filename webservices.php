@@ -488,6 +488,265 @@ function update_akun()
     echo json_encode($return);
 }
 
+function check_profil()
+{    
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        mysqli_begin_transaction($conn);
+        $UserID = $_SESSION["UserID"];
+        $kueri = "SELECT `usf_Profil_CheckEmpty`($UserID) AS `isEmpty`;";
+        $res = mysqli_query($conn, $kueri);
+        $d = mysqli_fetch_array($res);
+
+        if(intval($d["isEmpty"])){
+            throw new Exception();
+        }
+
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Data Profil Sudah diisi",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        $return = array(
+            "InfoMessage" => "Data Profil Belum diisi $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function get_permohonanHeader()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        mysqli_begin_transaction($conn);
+
+        $kueri = "select * from MasterPermohonanHeader order by ID;";
+        $res = mysqli_query($conn, $kueri);
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+            $data[] = array(
+                "ID" => $row["ID"],
+                "Nama" => $row["Nama"],
+            );
+        }
+
+        $return = array(
+            "List" => $data,
+            "InfoMessage" => "Get data success",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        $return = array(
+            "InfoMessage" => "Get data failed: $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function get_permohonanDetail()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        mysqli_begin_transaction($conn);
+
+        $kueri = "select * from MasterPermohonanDetail order by ID;";
+        $res = mysqli_query($conn, $kueri);
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+            $data[] = array(
+                "ID" => $row["ID"],
+                "HeaderID" => $row["HeaderID"],
+                "Nama" => $row["Nama"],
+            );
+        }
+
+        $return = array(
+            "List" => $data,
+            "InfoMessage" => "Get data success",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        $return = array(
+            "InfoMessage" => "Get data failed: $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function save_permohonan()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $UserID = $_SESSION["UserID"];
+        $HeaderID = $d->HeaderID;
+        $DetailID = $d->HeaderID;
+
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            select Persetujuan from Permohonan 
+            where PemohonID = $UserID 
+            and Persetujuan = 0
+			;";
+        $res = mysqli_query($conn, $kueri);
+        if(mysqli_fetch_array($res)){
+            throw new Exception("Selesaikan permohonan sebelumnya lebih dahulu");
+        }
+
+        $kueri = "
+			insert into permohonan(
+				PemohonID,
+				PermohonanHeaderID,
+				PermohonanDetailID
+			) values (
+				$UserID,
+				$HeaderID,
+				$DetailID
+			)";
+        mysqli_query($conn, $kueri);
+
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Permohonan berhasil disimpan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        
+        $return = array(
+            "InfoMessage" => "Permohonan gagal disimpan: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function get_permohonan()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $UserID = $_SESSION["UserID"];
+
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            select b.Nama as Header, c.Nama as Detail
+            from Permohonan a
+                inner join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID
+                inner join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID
+            where PemohonID = $UserID and Persetujuan = 0
+			;";
+        $res = mysqli_query($conn, $kueri);
+        if(!$row = mysqli_fetch_array($res)){
+            throw new Exception("Belum buat permohonan");
+        }
+        $data = array(
+            "Header" => $row["Header"],
+            "Detail" => $row["Detail"]
+        );
+
+        mysqli_commit($conn);
+        $return = array(
+            "List" => $data,
+            "InfoMessage" => "Permohonan ditemukan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        
+        $return = array(
+            "InfoMessage" => "Permohonan tidak ditemukan: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function delete_permohonan()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $UserID = $_SESSION["UserID"];
+        
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            delete from Permohonan where
+            PemohonID = $UserID and Persetujuan = 0
+            ;";
+        mysqli_query($conn, $kueri);
+        
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Permohonan berhasil dibatalkan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        
+        $return = array(
+            "InfoMessage" => "Permohonan gagal dibatalkan: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+
 $str_json = file_get_contents('php://input');
 if (!empty($str_json)) {
     $d = json_decode($str_json);

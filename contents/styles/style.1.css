@@ -138,11 +138,12 @@ body {
   position: absolute;
   top: 55%;
   right: 3.1%;
+  transform: scaleY(1);
+  transition: transform .2s ease-in-out;
 }
 
 .modal-hide{
-  display: none;
-  transition: display 1s ease-in-out;
+  transform: scaleY(0);
 }
 
 .menu ul{

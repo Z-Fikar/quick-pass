@@ -299,11 +299,44 @@ function get_akun(){
     try {
         mysqli_begin_transaction($conn);
         $UserID = $_SESSION["UserID"];
-        $kueri = "select a.*, b.* from Otentikasi a left join Profil b on a.ID = b.UserID where a.ID=$UserID;";
+        $kueri = "select * from Otentikasi where ID=$UserID;";
         $res = mysqli_query($conn, $kueri);
         $d = mysqli_fetch_array($res);
 
         $data["AlamatEmail"] = $d["AlamatEmail"];
+
+        mysqli_commit($conn);
+        $return = array(
+            "List"=> $data,
+            "InfoMessage" => "Data akun berhasil dikirim",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        $return = array(
+            "InfoMessage" => "Data akun gagal dikirim: $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function get_profil(){
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        mysqli_begin_transaction($conn);
+        $UserID = $_SESSION["UserID"];
+        $kueri = "select * from Profil where UserID=$UserID;";
+        $res = mysqli_query($conn, $kueri);
+        $d = mysqli_fetch_array($res);
 
         $data["NamaLengkap"] = $d["NamaLengkap"];
         $data["JenisKelamin"] = $d["JenisKelamin"];
@@ -345,13 +378,13 @@ function get_akun(){
         mysqli_commit($conn);
         $return = array(
             "List"=> $data,
-            "InfoMessage" => "Data akun berhasil dikirim",
+            "InfoMessage" => "Data profil berhasil diterima",
             "SuccessMessage" => true,
         );
     } catch (Exception $e) {
         mysqli_rollback($conn);
         $return = array(
-            "InfoMessage" => "Data akun gagal dikirim: $e",
+            "InfoMessage" => "Data profil gagal diterima: $e",
             "SuccessMessage" => false,
         );
     }
@@ -362,6 +395,57 @@ function get_akun(){
 }
 
 function update_akun()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $str_json = file_get_contents('php://input');
+        $d = json_decode($str_json);
+
+        $UserID = $_SESSION["UserID"];
+
+        mysqli_begin_transaction($conn);
+
+        $AlamatEmail = $d->AlamatEmail;
+        if($tmp = $d->KataSandi){
+            $KataSandi = md5($tmp);
+            $kueri = "
+                update Otentikasi set
+                    AlamatEmail = '$AlamatEmail',
+                    KataSandi = '$KataSandi'
+                where ID = $UserID";
+        }else{
+            $kueri = "
+                update Otentikasi set
+                    AlamatEmail = '$AlamatEmail'
+                where ID = $UserID";
+        }
+        mysqli_query($conn, $kueri);
+
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Perubahan berhasil disimpan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        $return = array(
+            "InfoMessage" => "Perubahan gagal dilakukan: $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+// TODO PROFIL
+function update_profil()
 {
     $conn = mysqli_connect("localhost", "root", "", "db_pass");
     if (mysqli_connect_errno()) {
@@ -412,22 +496,6 @@ function update_akun()
         $TanggalLahirPasangan = $d->TanggalLahirPasangan;
 
         mysqli_begin_transaction($conn);
-
-        $AlamatEmail = $d->AlamatEmail;
-        if($tmp = $d->KataSandi){
-            $KataSandi = md5($tmp);
-            $kueri = "
-                update Otentikasi set
-                    AlamatEmail = '$AlamatEmail',
-                    KataSandi = '$KataSandi'
-                where ID = $UserID";
-        }else{
-            $kueri = "
-                update Otentikasi set
-                    AlamatEmail = '$AlamatEmail'
-                where ID = $UserID";
-        }
-        mysqli_query($conn, $kueri);
 
         $kueri = "
 			update Profil set

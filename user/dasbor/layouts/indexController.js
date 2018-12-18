@@ -12,7 +12,7 @@ window.onload = function() {
     var url = "/quickpass/webservices.php";
     hr.open("POST", url, true);
     var params = {
-      method: "get_akun();"
+      method: "get_profil();"
     };
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {

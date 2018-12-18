@@ -1,5 +1,5 @@
-if(window==window.top){
-  location.href = "/quickpass"
+if (window == window.top) {
+  location.href = "/quickpass";
 }
 
 window.onload = function() {
@@ -110,18 +110,14 @@ window.onload = function() {
     return false;
   };
 
-  var update_akun = function() {
+  var update_profil = function() {
     var inputDates = document.getElementsByClassName("date");
     var allTrue = Object.keys(inputDates).every(function(k) {
       return (
         check_date(inputDates[k].value) === true || inputDates[k].value === ""
       );
     });
-    if (
-      document.getElementById("txtKataSandi").value ==
-        document.getElementById("txtKataSandi1").value &&
-      allTrue
-    ) {
+    if (allTrue) {
       if (window.XMLHttpRequest) {
         var hr = new XMLHttpRequest();
       } else {
@@ -130,9 +126,7 @@ window.onload = function() {
       var url = "/quickpass/webservices.php";
       hr.open("POST", url, true);
       var params = {
-        method: "update_akun();",
-        AlamatEmail: document.getElementById("txtAlamatEmail").value,
-        KataSandi: document.getElementById("txtKataSandi").value,
+        method: "update_profil();",
         NamaLengkap: document.getElementById("txtNamaLengkap").value,
         JenisKelamin: document.querySelector(
           "input[name='jenisKelamin']:checked"
@@ -204,8 +198,7 @@ window.onload = function() {
       hr.setRequestHeader("Content-type", "application/json");
       hr.send(JSON.stringify(params));
     } else {
-      alert("Kata Sandi belum sama!");
-      document.getElementById("txtKataSandi").focus();
+      alert("Data Tanggal belum sesuai format!");
     }
   };
 
@@ -214,7 +207,7 @@ window.onload = function() {
     return date.reverse().join(" ");
   };
 
-  var get_akun = function() {
+  var get_profil = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -223,7 +216,7 @@ window.onload = function() {
     var url = "/quickpass/webservices.php";
     hr.open("POST", url, true);
     var params = {
-      method: "get_akun();"
+      method: "get_profil();"
     };
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
@@ -231,7 +224,6 @@ window.onload = function() {
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
           d = data.List;
-          document.getElementById("txtAlamatEmail").value = d.AlamatEmail;
           document.getElementById("txtNamaLengkap").value = d.NamaLengkap;
           document.querySelector(
             "input[value='" + d.JenisKelamin + "']"
@@ -300,7 +292,7 @@ window.onload = function() {
 
   var submit = document.getElementById("btnSimpan");
   submit.onclick = function() {
-    update_akun();
+    update_profil();
   };
 
   var inputDates = document.getElementsByClassName("date");
@@ -316,5 +308,5 @@ window.onload = function() {
 
   get_statusSipil();
   get_pekerjaan();
-  get_akun();
+  get_profil();
 };

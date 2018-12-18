@@ -153,7 +153,7 @@ window.onload = function() {
         }
         if (data.SuccessMessage) {
           alert(data.InfoMessage);
-          location.href = "buat-permohonan.html";
+          location.href = "pembuatan.html";
         }else{
           var text = document.createTextNode(data.InfoMessage);
           galat.appendChild(text);
@@ -230,7 +230,7 @@ window.onload = function() {
         var data = JSON.parse(hr.response);
         alert(data.InfoMessage);
         if(data.SuccessMessage){
-          location.href = "buat-permohonan.html";
+          location.href = "pembuatan.html";
         }
       }
     };

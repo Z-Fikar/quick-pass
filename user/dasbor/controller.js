@@ -79,6 +79,16 @@ window.onload = function() {
     };
   };
 
+  var liMenu = document.querySelectorAll(".menu li");
+  for (var i = 0; i < liMenu.length; i++) {
+    liMenu[i].onclick = function() {
+      tmp = document.querySelector(".sidemenu .active");
+      if(tmp){
+        tmp.classList.remove("active");
+      }
+    };
+  }
+
   var do_logout = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
@@ -108,16 +118,11 @@ window.onload = function() {
     hr.send(JSON.stringify(params));
   };
   var keluar = document.getElementById("btnKeluar");
+  var prev_handler = keluar.onclick;
   keluar.onclick = function() {
+    prev_handler();
     do_logout();
   };
-
-  var liMenu = document.querySelectorAll(".menu li");
-  for (var i = 0; i < liMenu.length; i++) {
-    liMenu[i].onclick = function() {
-      document.querySelector(".sidemenu .active").classList.remove("active");
-    };
-  }
 
   var get_profil = function() {
     if (window.XMLHttpRequest) {

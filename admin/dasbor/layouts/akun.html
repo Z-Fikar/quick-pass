@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Profil | QuickPass</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/quickpass/assets/images/logo.png"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/quickpass/contents/styles/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/quickpass/contents/styles/accordion.css"
+    />
+    <script type="text/javascript" src="akunController.js"></script>
+    <script
+      type="text/javascript"
+      src="/quickpass/contents/scripts/accordion.js"
+    ></script>
+  </head>
+  <body>
+    <div class="iframe-container">
+      <form method="post" action="">
+        <div class="col">
+          <button type="button" class="accordion">DATA AKUN</button>
+          <div class="panel">
+            <div class="col">
+              <label>Alamat Email</label>
+              <input
+                type="email"
+                id="txtAlamatEmail"
+                name="AlamatEmail"
+                placeholder="Alamat email"
+              />
+            </div>
+            <div class="col">
+              <label>Ubah Kata Sandi</label>
+              <input
+                type="password"
+                id="txtKataSandi"
+                name="KataSandi"
+                placeholder="Kata sandi baru"
+              />
+            </div>
+            <div class="col">
+              <label>Konfirmasi Kata Sandi</label>
+              <input
+                type="password"
+                id="txtKataSandi1"
+                name="KataSandi1"
+                placeholder="Konfirmasi Kata sandi baru"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col"><label class="galat" id="lblGalat"></label></div>
+        <div class="col">
+          <button type="button" id="btnSimpan" class="btn-full" name="Simpan">
+            SIMPAN
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

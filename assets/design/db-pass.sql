@@ -283,6 +283,8 @@ INSERT INTO profil (
 	'Adin', 'Indonesia', 'Serpong', '1997-06-06'
 );
 
+INSERT INTO Profil (UserID, NamaLengkap) values (1, "Zedd");
+
 delimiter ;;
 CREATE FUNCTION `usf_Profil_CheckEmpty`(`theID` INT) RETURNS INT(1) DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN
 SELECT 

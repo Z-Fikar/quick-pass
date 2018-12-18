@@ -2,7 +2,11 @@
   <head>
     <title>Dasbor | QuickPass</title>
     <meta charset="utf-8" />
-    <link href="/quickpass/assets/images/logo.png" rel="icon" type="image/png" />
+    <link
+      href="/quickpass/assets/images/logo.png"
+      rel="icon"
+      type="image/png"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -13,17 +17,19 @@
       type="text/css"
       href="/quickpass/contents/styles/style.css"
     />
-	<script type="text/javascript" src="controller.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
   </head>
   <body>
-	<div class="sidemenu">
+    <div class="sidemenu">
       <ul>
         <a href="layouts/" target="layout"><li class="active">Dasbor</li></a>
-        <a href="layouts/profil.html" target="layout"><li>Profil</li></a>
-        <a href="layouts/daftar-permohonan.html" target="layout"><li>Daftar Permohonan</li></a>
+        <a href="layouts/profil.html" target="layout"><li>Profil Saya</li></a>
+        <a href="layouts/permohonan.html" target="layout"
+          ><li>Daftar Permohonan</li></a
+        >
       </ul>
     </div>
-  
+
     <div class="header">
       <div class="head-title">
         <table>
@@ -40,10 +46,36 @@
           </tr>
         </table>
       </div>
+      <div class="head-account">
+        <table>
+          <tr>
+            <td id="btnAccount">
+              <img type="image/svg" src="/quickpass/assets/svg/user.svg" />
+              <div class="arrow-down"></div>
+            </td>
+          </tr>
+        </table>
+
+        <div class="modal-account modal-hide">
+          <div class="account-box">
+            <div class="account">
+              Halo, Mimin <span id="lblNamaLengkap"></span>
+            </div>
+            <div class="menu">
+              <ul>
+                <a href="layouts/akun.html" target="layout"
+                  ><li>Ganti Kata Sandi</li></a
+                >
+                <li id="btnKeluar">Keluar</li>
+              </ul>
+            </div>
+          </div>
+          <div class="arrow-up dark"></div>
+          <div class="arrow-up"></div>
+        </div>
+      </div>
     </div>
-	
-    <div class="main">
-		<iframe name="layout" src="layouts/"></iframe>
-	</div>
+
+    <div class="main"><iframe name="layout" src="layouts/"></iframe></div>
   </body>
 </html>

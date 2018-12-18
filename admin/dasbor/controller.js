@@ -83,7 +83,7 @@ window.onload = function() {
   for (var i = 0; i < liMenu.length; i++) {
     liMenu[i].onclick = function() {
       tmp = document.querySelector(".sidemenu .active");
-      if(tmp){
+      if (tmp) {
         tmp.classList.remove("active");
       }
     };

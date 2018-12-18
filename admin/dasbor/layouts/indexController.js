@@ -1,5 +1,5 @@
-if(window==window.top){
-  location.href = "/quickpass"
+if (window == window.top) {
+  location.href = "/quickpass";
 }
 
 window.onload = function() {

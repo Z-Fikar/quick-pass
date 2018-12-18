@@ -30,7 +30,7 @@ window.onload = function() {
   var changeActive = function(e) {
     if (!e.classList.contains("active")) {
       tmp = document.querySelector(".sidemenu .active");
-      if(tmp){
+      if (tmp) {
         tmp.classList.remove("active");
       }
       e.classList.add("active");
@@ -52,7 +52,7 @@ window.onload = function() {
   };
 
   var btnModal = document.querySelector("#btnAccount");
-  
+
   window.onclick = function(e) {
     if (btnModal.contains(e.target)) {
       theModal.classList.toggle("modal-hide");
@@ -62,7 +62,7 @@ window.onload = function() {
   };
 
   var f = document.querySelector("iframe");
-  f.contentWindow.onclick = function(){
+  f.contentWindow.onclick = function() {
     closeModal();
   };
   f.onload = function() {
@@ -74,9 +74,9 @@ window.onload = function() {
         break;
       }
     }
-    f.contentWindow.onclick = function(){
+    f.contentWindow.onclick = function() {
       closeModal();
-    }
+    };
   };
 
   var do_logout = function() {
@@ -117,5 +117,34 @@ window.onload = function() {
     liMenu[i].onclick = function() {
       document.querySelector(".sidemenu .active").classList.remove("active");
     };
-  }  
+  }
+
+  var get_profil = function() {
+    if (window.XMLHttpRequest) {
+      var hr = new XMLHttpRequest();
+    } else {
+      var hr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    var url = "/quickpass/webservices.php";
+    hr.open("POST", url, true);
+    var params = {
+      method: "get_profil();"
+    };
+    hr.onreadystatechange = function() {
+      if (hr.readyState == 4 && hr.status == 200) {
+        console.log(hr);
+        var data = JSON.parse(hr.response);
+        if (data.SuccessMessage) {
+          var d = data.List;
+          var namaLengkap = document.getElementById("lblNamaLengkap");
+          namaLengkap.appendChild(document.createTextNode(d.NamaLengkap));
+        } else {
+          alert(data.InfoMessage);
+        }
+      }
+    };
+    hr.setRequestHeader("Content-type", "application/json");
+    hr.send(JSON.stringify(params));
+  };
+  get_profil();
 };

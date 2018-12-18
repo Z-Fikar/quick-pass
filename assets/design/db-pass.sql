@@ -1,4 +1,4 @@
-use test;
+
 drop database if exists db_pass;
 create database db_pass;
 use db_pass;

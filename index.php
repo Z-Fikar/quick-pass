@@ -3,10 +3,10 @@ session_start();
 
 if (isset($_SESSION["UserID"]) && isset($_SESSION["AksesID"])){
     if ($_SESSION["AksesID"] == 1) {
-		header("Location: admin/");
+		header("Location: admin/dasbor/");
 	} else {
-		header("Location: user/");
+		header("Location: user/dasbor/");
 	}
 } else {
-    header("Location: home/");
+    header("Location: home/masuk/");
 }

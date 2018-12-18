@@ -140,4 +140,28 @@ window.onload = function() {
       }
     }
   }
+
+  var theModal = document.querySelector(".modal-account");
+  var closeModal = function(){
+    if(!theModal.classList.contains("modal-hide")){
+      theModal.classList.toggle("modal-hide");
+    }
+  }
+
+  var btnModal = document.querySelector("#btnAccount");
+  window.onclick = function(e){
+    if(btnModal.contains(e.target)){
+      theModal.classList.toggle("modal-hide");
+    } else if(!theModal.contains(e.target)){
+      closeModal();
+    }
+  }
+
+  document.querySelector("iframe").contentDocument.onclick = function(e){
+    if(btnModal.contains(e.target)){
+      theModal.classList.toggle("modal-hide");
+    } else if(!theModal.contains(e.target)){
+      closeModal();
+    }
+  }
 };

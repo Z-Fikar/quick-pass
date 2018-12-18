@@ -17,6 +17,7 @@ body {
   display: inline-block;
   height: 100%;
 }
+
 #tdLogo img {
   /* display: inline-block; */
   height: 40px;
@@ -45,6 +46,7 @@ body {
   padding: 60px 0 0;
   border-bottom: 1px solid lightgray;
 }
+
 .sidemenu ul li {
   list-style: none;
   padding: 10px 10px;
@@ -77,4 +79,89 @@ body {
 .sidemenu a{
 	text-decoration: none;
 	color: white;
+}
+
+
+.head-account{
+  padding: 5px 20px;
+  /* background: #008181; */
+  /* display: inline-block; */
+  height: 100%;
+  float: right;
+}
+
+.head-account table{
+  height: 100%;
+}
+
+.head-account img{
+  height: 30px;
+}
+
+.arrow-down{
+  border: 5px solid transparent;
+  border-top: 5px solid white;
+  display: inline-block;
+  margin: 0 0 5px 5px;
+}
+
+.arrow-up{
+  border: 16px solid transparent;
+  border-bottom: 16px solid gray;
+  height: 0;
+  width: 0;
+}
+
+.dark{
+  border: 15px solid transparent;
+  border-bottom: 15px solid #fff;
+  position: absolute;
+  bottom:0;
+  left:5%;
+}
+
+#btnAccount{
+  cursor: pointer;
+}
+
+.account-box{
+  background: #fff;
+  right: -80%;
+  width: 300px;
+  position: absolute;
+  border: 1px solid lightgray;
+  top: 92%;
+  box-shadow: 0px 0px 10px 0px #00000055;
+}
+
+.modal-account{
+  position: absolute;
+  top: 55%;
+  right: 3.1%;
+}
+
+.modal-hide{
+  display: none;
+  transition: display 1s ease-in-out;
+}
+
+.menu ul{
+  padding: 0;
+  margin: 0 0 15px;
+  border-top: 1px solid lightgray;
+}
+
+.menu li{
+  list-style: none;
+  background: rgb(223, 223, 223);
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.menu li:hover{
+  background: lightgray;
+}
+
+.account {
+  padding: 15px;
 }

@@ -265,8 +265,15 @@ insert into MasterLampiran values
 	(3, 'Salinan Akte Kelahiran/Surat Nikah/Ijazah'),
 	(4, 'Paspor/SPLP Lama'),
 	(5, 'Surat Keterangan Hilang dari Kepolisian'),
-	(6, 'Surat Rekomendasi/Izin Atasan/Sponsor'),
-	(7, 'Surat Kuasa/Kartu Tanda Pengenal Pengurusan Keimigrasian');
+	(6, 'Surat Keterangan Ganti Nama'),
+	(7, 'Surat Rekomendasi/Izin Atasan/Sponsor'),
+	(8, 'Surat Pewarganegaraan Indonesia bagi Orang Asing WNI'),
+	(9, 'Salinan KTP Ayah/Ibu WNI atau Surat Keterangan Pindah ke Luar Negeri'),
+	(10, 'Surat Nikah Orang Tua'),
+	(11, 'Paspor Ayah/Ibu WNI'),
+	(12, 'Salinan KTP Negeri Setempat'),
+	(13, 'Surat Keterangan Lahir dari Perwakilan Republik Indonesia'),
+	(14, 'Surat Kuasa/Kartu Tanda Pengenal Pengurusan Keimigrasian');
 	
 insert into Otentikasi values
 	(1, 'zedd@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 1, 1),

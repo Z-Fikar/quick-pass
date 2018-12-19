@@ -337,12 +337,9 @@ function get_profil()
         mysqli_begin_transaction($conn);
         $tmp = $GLOBALS["d"];
         
-        if (!$UserID = $tmp->UserID) {
-            $UserID = $_SESSION["UserID"];
-        }
-
-        if (!$_SESSION["AksesID"]==1) {
-            $UserID = $_SESSION["UserID"];
+        $UserID = $_SESSION["UserID"];
+        if (isset($tmp->UserID) && $_SESSION["AksesID"]=="1") {
+            $UserID = $tmp->UserID;
         }
 
         $kueri = "select * from Profil where UserID=$UserID;";
@@ -754,7 +751,10 @@ function get_permohonan()
         mysqli_begin_transaction($conn);
 
         $kueri = "
-            select b.Nama as Header, c.Nama as Detail
+            select 
+                b.Nama as Header, 
+                c.Nama as Detail,
+                a.StatusID
             from Permohonan a
                 inner join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID
                 inner join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID
@@ -767,6 +767,7 @@ function get_permohonan()
         $data = array(
             "Header" => $row["Header"],
             "Detail" => $row["Detail"],
+            "Status" => $row["StatusID"],
         );
 
         mysqli_commit($conn);

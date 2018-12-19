@@ -3,6 +3,12 @@ drop database if exists db_pass;
 create database db_pass;
 use db_pass;
 
+create table MasterStatus(
+	ID int not null auto_increment,
+	Nama varchar(50) not null,
+	primary key(ID)
+);
+
 create table MasterPermohonanHeader(
 	ID int not null auto_increment,
 	Nama varchar(50) not null,
@@ -95,6 +101,7 @@ create table Profil(
 
 create table Permohonan(
 	ID int auto_increment,
+	StatusID int,
 	PermohonanHeaderID int,
 	PermohonanDetailID int,
 	PemohonID int,
@@ -140,6 +147,7 @@ create table PermohonanCatatan(
 
 create table Paspor(
 	UserID int,
+	NomorPaspor varchar(50),
 	NomorRegister varchar(50),
 	NamaPemilik varchar(50),
 	AlamatPemilik varchar(50),
@@ -181,6 +189,7 @@ alter table Profil
 	add foreign key (StatusSipilID) references MasterStatusSipil(ID);
 	
 alter table Permohonan
+	add foreign key (StatusID) references MasterStatus(ID),
 	add foreign key (PermohonanHeaderID) references MasterPermohonanHeader(ID),
 	add foreign key (PermohonanDetailID) references MasterPermohonanDetail(ID),
 	add foreign key (PemohonID) references Otentikasi(ID),
@@ -200,6 +209,14 @@ alter table PermohonanCatatan
 	add foreign key (PermohonanID) references Permohonan(ID),
 	add unique key uk_PermohonanCatatan (PermohonanID, Catatan);
 	
+
+insert into MasterStatus values 
+	(1, "Isi formulir"),
+	(2, "Pemeriksaan lampiran, wawancara, pengambilan foto dan sidik jari"),
+	(3, "Pembayaran"),
+	(4, "Tata Usaha"),
+	(5, "Verfikasi dan Adjudikasi");
+
 insert into MasterPermohonanHeader values
 	(1, 'BARU'),
 	(2, 'PENGGANTIAN'),

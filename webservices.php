@@ -680,7 +680,7 @@ function save_permohonan()
         $d = $GLOBALS["d"];
         $UserID = $_SESSION["UserID"];
         $HeaderID = $d->HeaderID;
-        $DetailID = $d->HeaderID;
+        $DetailID = $d->DetailID;
 
         mysqli_begin_transaction($conn);
 
@@ -698,11 +698,13 @@ function save_permohonan()
 			insert into permohonan(
 				PemohonID,
 				PermohonanHeaderID,
-				PermohonanDetailID
+                PermohonanDetailID,
+                TanggalPermohonan
 			) values (
 				$UserID,
 				$HeaderID,
-				$DetailID
+                $DetailID,
+                NOW()
 			)";
         mysqli_query($conn, $kueri);
 
@@ -814,6 +816,66 @@ function delete_permohonan()
     echo json_encode($return);
 }
 
+function getAll_permohonan()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        if($_SESSION["AksesID"]!=1){
+            throw new Exception("Bukan Admin");
+        }
+
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            select 
+                a.ID,
+                a.TanggalPermohonan, 
+                b.NamaLengkap,
+                c.Nama JenisPermohonan
+            from 
+                Permohonan a 
+                left join Profil b on a.PemohonID = b.UserID
+                left join MasterPermohonanHeader c on a.PermohonanHeaderID = c.ID   
+            order by a.TanggalPermohonan desc
+			;";
+        
+        $res = mysqli_query($conn, $kueri);
+        $data = array();
+        while($row = mysqli_fetch_array($res)){
+            $tmp = array(
+                "ID"=>$row["ID"],
+                "TanggalPermohonan"=>$row["TanggalPermohonan"],
+                "NamaLengkap"=>$row["NamaLengkap"],
+                "JenisPermohonan"=>$row["JenisPermohonan"]
+            );
+            array_push($data,$tmp);
+        }
+
+        mysqli_commit($conn);
+        $return = array(
+            "List" => $data,
+            "InfoMessage" => "Permohonan berhasil diambil",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        
+        $return = array(
+            "InfoMessage" => "Permohonan gagal diambil: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
 
 $str_json = file_get_contents('php://input');
 if (!empty($str_json)) {

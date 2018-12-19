@@ -1,12 +1,46 @@
-1. Isi formulir dengan HURUF CETAK dan TINTA HITAM
-2. Tanda asterisk berarti:
-   (*)   diisi sesuai nomor pilihan
-   (**)  lengkapi dengan nama lama/alias bila ada
-   (***) bagi mahasiswa/pelajar, alamat kantor/pekerjaan diisi 
-         dengan nama perguruan tinggi/sekolah
-3. Lampirkan dokumen identitas diri dan dokuman lain yang merupakan persyaratan.
-4. Pemohon wajib datang untuk verifikasi, pengambilan sidik jari dan foto.
-5. Formulir ini tidak dikenakan biaya apapun.
-6. Jika dalam pengisian formulir ini kurang jelas, hubungi petugas pelayanan keimigrasi.
-7. Cara pengisian tanggal adalah dengan urutan tanggal-bulan-tahun, 
-   masing-masing dinyatakan dengan dua angka.
+persyaratan berkas dokumen 
+
+warga Indonesia
+di dalam
+a. kartu tanda penduduk yang masih berlaku atau surat keterangan pindah ke luar negeri; 
+b. kartu keluarga; 
+c. akta kelahiran, akta perkawinan atau buku nikah, ijazah, atau surat baptis;(*)
+---
+d. surat pewarganegaraan Indonesia bagi Orang Asing yang memperoleh kewarganegaraan Indonesia melalui pewarganegaraan atau penyampaian pernyataan untuk memilih kewarganegaraan sesuai dengan ketentuan peraturan perundang-undangan;  
+e. surat penetapan ganti nama dari pejabat yang berwenang bagi yang telah mengganti nama; dan  
+f. Paspor biasa lama bagi yang telah memiliki Paspor biasa. 
+
+(*):
+atau dokumen yang mencakup:
+      a. nama; 
+      b. tanggal lahir; 
+      c. tempat lahir; dan 
+      d. nama orang tua. 
+atau surat keterangan dari instansi yang berwenang;
+
+anak warga Indonesia
+di dalam
+a. kartu tanda penduduk ayah atau ibu yang masih berlaku atau surat keterangan pindah ke luar negeri; 
+b. kartu keluarga; 
+c. akta kelahiran atau surat baptis; 
+d. akta perkawinan atau buku nikah orang tua; 
+e. surat penetapan ganti nama dari pejabat yang berwenang bagi yang telah mengganti nama; dan  
+f. Paspor biasa lama bagi yang telah memiliki Paspor biasa. 
+
+calon tki
+di dalam Indonesia
+a.
+..
+f.
+g. surat rekomendasi permohonan paspor calon tenaga kerja Indonesia yang diterbitkan oleh Dinas Tenaga Kerja Provinsi atau kabupaten/kota.
+
+warga Indonesia
+di luar
+a. Kartu penduduk negara setempat, bukti, petunjuk, atau keterangan yang menunjukkan bahwa pemohon bertempat tinggal di negara tersebut; dan  
+b. Paspor biasa lama. 
+
+anak Indonesia
+di luar
+a. Paspor biasa ayah dan/atau ibu warga negara Indonesia; dan 
+b. surat keterangan lahir dari Perwakilan Republik Indonesia. 
+

@@ -291,7 +291,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- permohonan -->
     <div class="medium-container readonly">
       <div class="col">
@@ -305,14 +305,14 @@
         </div>
       </div>
     </div>
-    
+
     <!-- loket -->
     <div class="medium-container">
       <div class="col">
         <button type="button" class="accordion">DATA KELENGKAPAN BERKAS</button>
         <div class="panel">
           <div class="col">
-            <label>Jenis Permohonan</label>
+            <label>Jenis Lampiran</label>
             <div class="col-right"><select id="sbLampiran"></select></div>
             <div class="col-left">
               <button type="button" id="btnLampiran" class="btn-border">
@@ -321,19 +321,14 @@
             </div>
           </div>
           <div class="col">
-            <table>
+            <table id="tblLampiran">
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Lampiran</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>KTP</td>
-                </tr>
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
@@ -351,41 +346,71 @@
         </button>
       </div>
     </div>
-    
+
     <!-- tu -->
     <div class="medium-container">
       <div class="col">
         <button type="button" class="accordion">DATA TATA USAHA</button>
         <div class="panel">
           <div class="col">
-            <div class="col">
-              <label>Nomor Paspor / SPLP Lama</label>
-              <div class="col-right">
-                <input type="text" id="lblNomorPasporLama" />
+            <button class="accordion">PASPOR LAMA</button>
+            <div class="panel">
+              <div class="col">
+                <label>Nomor Paspor / SPLP Lama</label>
+                <div class="col-right">
+                  <input type="text" id="lblNomorPasporLama" />
+                </div>
+                <div class="col-left">
+                  <button id="btnCariPaspor" class="btn-border">CARI</button>
+                </div>
               </div>
-              <div class="col-left">
-                <button class="btn-border">CARI</button>
+              <div class="col readonly">
+                <label>Nama Lama</label> <input type="text" id="lblNamaLama" />
               </div>
-            </div>
-            <div class="col">
-              <label>Nama Lama</label> <input type="text" id="lblNamaLama" />
-            </div>
-            <div class="col">
-              <label>Alamat Tempat Tinggal Lama</label>
-              <input type="text" id="lblAlamatLama" />
-            </div>
-            <div class="col">
-              <label>Nomor Register</label>
-              <input type="text" id="lblNomorRegisterLama" />
+              <div class="col readonly">
+                <label>Alamat Tempat Tinggal Lama</label>
+                <input type="text" id="lblAlamatLama" />
+              </div>
+              <div class="col readonly">
+                <label>Tanggal Dibuat</label>
+                <input type="text" id="lblTanggalDibuatLama" />
+              </div>
+              <div class="col readonly">
+                <label>Berlaku s/d</label>
+                <input type="text" id="lblTanggalBerlakuLama" />
+              </div>
+              <div class="col readonly">
+                <label>Tempat Dikeluarkan</label>
+                <input type="text" id="lblTempatDikeluarkanLama" />
+              </div>
+              <div class="col readonly">
+                <label>Nomor Register</label>
+                <input type="text" id="lblNomorRegisterLama" />
+              </div>
             </div>
 
-            <div class="col">
-              <label>Nomor Paspor / SPLP Paru</label>
-              <input type="text" id="lblNomorPasporBaru" />
-            </div>
-            <div>
-              <label>Nomor Register</label>
-              <input type="text" id="lblNomorRegisterBaru" />
+            <button class="accordion">PASPOR BARU</button>
+            <div class="panel">
+              <div class="col">
+                <label>Nomor Paspor / SPLP Paru</label>
+                <input type="text" id="lblNomorPasporBaru" />
+              </div>
+              <div class="col">
+                <label>Tanggal Dibuat</label>
+                <input type="text" id="lblTanggalDibuatBaru" />
+              </div>
+              <div class="col">
+                <label>Berlaku s/d</label>
+                <input type="text" id="lblTanggalBerlakuBaru" />
+              </div>
+              <div class="col">
+                <label>Tempat Dikeluarkan</label>
+                <input type="text" id="lblTempatDikeluarkanBaru" />
+              </div>
+              <div class="col">
+                <label>Nomor Register</label>
+                <input type="text" id="lblNomorRegisterBaru" />
+              </div>
             </div>
           </div>
         </div>
@@ -394,7 +419,7 @@
         <button type="button" id="btnSimpanTU" class="btn-full">SIMPAN</button>
       </div>
     </div>
-    
+
     <!-- verifikasi -->
     <div class="medium-container">
       <div class="col">

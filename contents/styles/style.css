@@ -82,7 +82,8 @@ label {
   margin-bottom: 10px;
 }
 
-.btn-full, .btn-border:hover {
+.btn-full,
+.btn-border:hover {
   background-color: #008181;
   color: white;
 }
@@ -185,19 +186,23 @@ label {
   color: white;
 }
 
-.col th, .col td {
+.col th,
+.col td {
   padding: 10px 20px;
 }
 
-.col table, .col th, .col td{
+.col table,
+.col th,
+.col td {
   border-collapse: collapse;
 }
 
-.col th, .col td{
+.col th,
+.col td {
   border: 1px solid white;
 }
 
-.col .circle{
+.col .circle {
   border: 3px solid #747474;
   display: inline-block;
   height: 100px;
@@ -207,16 +212,16 @@ label {
   filter: grayscale(100%);
 }
 
-.col .circle-checked{
+.col .circle-checked {
   border: 3px solid #008181;
   filter: grayscale(0%);
 }
 
-.center{
+.center {
   text-align: center;
 }
 
-.col .circle img{
+.col .circle img {
   padding: 20px;
   height: 100%;
 }
@@ -226,11 +231,11 @@ label {
   height: 100px;
   color: #ff6300;
   filter: grayscale(100%);
-} 
-.arrow-checked{
+}
+.arrow-checked {
   filter: grayscale(0%);
 }
-.arrow::before{
+.arrow::before {
   content: "\00BB";
   font-size: 50px;
   display: table;
@@ -239,13 +244,13 @@ label {
   top: 17px;
 }
 
-.btn-cancel{
+.btn-cancel {
   border: 2px solid #e10039 !important;
   color: #e10039;
   background: #fff;
 }
 
-.btn-cancel:hover{
+.btn-cancel:hover {
   background: #e10039;
   color: #fff;
 }
@@ -253,9 +258,19 @@ label {
 .btn {
   width: 50% !important;
   margin: 0 auto;
-  transition: background .2s ease-in-out, color .2s ease-in-out;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 ul {
   list-style-position: outside;
+}
+
+.col button {
+  cursor: pointer;
+}
+
+.readonly input,
+.readonly input ~ label,
+.readonly textarea {
+  background: #ecffae;
 }

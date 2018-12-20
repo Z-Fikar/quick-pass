@@ -25,7 +25,7 @@
   </head>
   <body>
     <!-- pemohon -->
-    <div class="iframe-container readonly">
+    <div id="pemohon-cont" class="iframe-container readonly">
       <div class="col">
         <button type="button" class="accordion">DATA DIRI</button>
         <div class="panel">
@@ -293,7 +293,7 @@
     </div>
 
     <!-- permohonan -->
-    <div class="medium-container readonly">
+    <div id="permohonan-cont" class="medium-container readonly">
       <div class="col">
         <button type="button" class="accordion">DATA PERMOHONAN</button>
         <div class="panel">
@@ -307,7 +307,7 @@
     </div>
 
     <!-- loket -->
-    <div class="medium-container">
+    <div id="loket-cont" class="medium-container">
       <div class="col">
         <button type="button" class="accordion">DATA KELENGKAPAN BERKAS</button>
         <div class="panel">
@@ -348,7 +348,7 @@
     </div>
 
     <!-- tu -->
-    <div class="medium-container">
+    <div id="tu-cont" class="medium-container">
       <div class="col">
         <button type="button" class="accordion">DATA TATA USAHA</button>
         <div class="panel">
@@ -430,7 +430,7 @@
     </div>
 
     <!-- verifikasi -->
-    <div class="medium-container">
+    <div id="verifikasi-cont" class="medium-container">
       <div class="col">
         <button type="button" class="accordion">DATA VERIFIKASI</button>
         <div class="panel">
@@ -511,10 +511,25 @@
               /><label for="persetujuan2">Setuju</label>
             </div>
           </div>
+
+          <div class="col">
+            <label>Catatan Petugas Imigrasi</label>
+            <textarea
+              id="txtCatatan"
+              placeholder="Contoh:\n- Tanggal 17-08-2019 insya\\'allah keluar"
+            ></textarea>
+          </div>
         </div>
       </div>
       <div class="col">
-        <button type="button" id="btnSimpan" class="btn-full">SIMPAN</button>
+        <button type="button" id="btnBatal" class="btn-cancel">
+          KEMBALIKAN
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" id="btnSimpanAkhir" class="btn-full">
+          VERIFIKASI
+        </button>
       </div>
     </div>
   </body>

@@ -282,3 +282,6 @@ ul {
 .readonly textarea {
   background: #ecffae;
 }
+.col button:disabled{
+  background: #747474;
+}

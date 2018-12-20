@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Buat Permohonan | QuickPass</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/quickpass/assets/images/logo.png"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/quickpass/contents/styles/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/quickpass/contents/styles/accordion.css"
+    />
+    <script type="text/javascript" src="detailController.js"></script>
+    <script
+      type="text/javascript"
+      src="/quickpass/contents/scripts/accordion.js"
+    ></script>
+  </head>
+  <body>
+    <div id="contDetail" class="iframe-container">
+      <div class="col">
+        <button type="button" class="accordion">PERMOHONAN TERAKHIR</button>
+        <div class="panel">
+          <div class="col">
+            <label>Jenis Permohonan</label>
+            <input id="txtJenisPermohonan" type="text" readonly />
+          </div>
+          <div class="col">
+            <input id="txtDetailPermohonan" type="text" readonly />
+          </div>
+          <div class="col">
+            <label>Status Permohonan</label>
+            <div class="circle">
+              <img src="/quickpass/assets/svg/loket.svg" type="image/svg" />
+            </div>
+            <div class="arrow"></div>
+            <div class="circle">
+              <img src="/quickpass/assets/svg/wawancara.svg" type="image/svg" />
+            </div>
+            <div class="arrow"></div>
+            <div class="circle">
+              <img src="/quickpass/assets/svg/bayar.svg" type="image/svg" />
+            </div>
+            <div class="arrow"></div>
+            <div class="circle">
+              <img src="/quickpass/assets/svg/tataUsaha.svg" type="image/svg" />
+            </div>
+            <div class="arrow"></div>
+            <div class="circle">
+              <img
+                src="/quickpass/assets/svg/persetujuan.svg"
+                type="image/svg"
+              />
+            </div>
+            <div class="circle-back">
+              <img
+                src="/quickpass/assets/svg/dikembalikan.svg"
+                type="image/svg"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <label>Catatan Petugas</label>
+            <textarea id="txtCatatan" readonly></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button type="button" id="btnBatal" class="btn btn-cancel">
+          BATAL
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" id="btnKembali" class="btn btn-full">
+          KEMBALI
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

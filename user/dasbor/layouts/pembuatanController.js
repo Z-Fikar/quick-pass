@@ -51,7 +51,6 @@ window.onload = function() {
 
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
-        console.log(hr);
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
           data_permohonanDetail = data.List;
@@ -70,11 +69,9 @@ window.onload = function() {
       select.removeChild(select.firstChild);
     }
 
-    console.log(data_permohonanDetail);
     var data = data_permohonanDetail.filter(function(item) {
       return item.HeaderID == elem.value;
     });
-    console.log(data);
 
     data.forEach(function(element) {
       var option = document.createElement("OPTION");
@@ -100,7 +97,6 @@ window.onload = function() {
 
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
-        console.log(hr);
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
           var select = document.getElementById("sbJenisPermohonan");
@@ -128,7 +124,7 @@ window.onload = function() {
   };
   get_permohonanHeader();
 
-  var save_permohonan = function(){
+  var save_permohonan = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -145,16 +141,15 @@ window.onload = function() {
 
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
-        console.log(hr);
         var data = JSON.parse(hr.response);
         var galat = document.getElementById("lblGalat");
-        while(galat.firstChild){
+        while (galat.firstChild) {
           galat.removeChild(galat.firstChild);
         }
         if (data.SuccessMessage) {
           alert(data.InfoMessage);
           location.href = "pembuatan.html";
-        }else{
+        } else {
           var text = document.createTextNode(data.InfoMessage);
           galat.appendChild(text);
         }
@@ -164,21 +159,49 @@ window.onload = function() {
     hr.setRequestHeader("Content-type", "application/json");
     hr.send(JSON.stringify(params));
   };
-  document.getElementById("btnBuat").onclick = function(){
+  document.getElementById("btnBuat").onclick = function() {
     var tmp = document.getElementById("sbDetailPermohonan").value;
-    if(tmp){
+    if (tmp) {
       save_permohonan();
-    }else{
+    } else {
       var galat = document.getElementById("lblGalat");
-      while(galat.firstChild){
+      while (galat.firstChild) {
         galat.removeChild(galat.firstChild);
       }
       var text = document.createTextNode("Lengkapi data lebih dulu!");
       galat.appendChild(text);
     }
-  }
+  };
 
-  var get_permohonan = function(){
+  var permohonan = [];
+  var generateTable = function() {
+    var d = permohonan;
+    var tbody = document.querySelector("#contTable table tbody");
+    var head = ["ID", "TanggalPermohonan", "JenisPermohonan", "Status", "ID"];
+    for (i = 0; i < d.length; i++) {
+      var tr = document.createElement("TR");
+      for (j = 0; j < head.length; j++) {
+        var td = document.createElement("TD");
+        if (j < head.length - 1) {
+          var txt = document.createTextNode(d[i][head[j]]);
+          td.appendChild(txt);
+        } else {
+          var btn = document.createElement("BUTTON");
+          var txt = document.createTextNode("DETAIL");
+          btn.appendChild(txt);
+          btn.data = d[i][head[j]];
+          btn.classList.add("btn-border");
+          btn.onclick = function() {
+            location.href = "detail.html?id=" + this.data;
+          };
+          td.appendChild(btn);
+        }
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+  };
+  var getAll_permohonan = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -188,7 +211,7 @@ window.onload = function() {
     var url = "/quickpass/webservices.php";
     hr.open("POST", url, true);
     var params = {
-      method: "get_permohonan();"
+      method: "getAll_permohonan();"
     };
 
     hr.onreadystatechange = function() {
@@ -196,36 +219,8 @@ window.onload = function() {
         console.log(hr);
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
-          var d = data.List;
-          document.getElementById("txtJenisPermohonan").value = d.Header;
-          document.getElementById("txtDetailPermohonan").value = d.Detail;
-          document.getElementById("contBuat").style.display = "none";
-          var img = document.querySelectorAll(".circle");
-          for(i=0;i<d.Status && i<5;i++){
-            img[i].classList.add("circle-checked");
-          }
-          var arr = document.querySelectorAll(".arrow");
-          for(i=0;i<d.Status && i<4;i++){
-            arr[i].classList.add("arrow-checked");
-          }
-
-          
-          if(d.Status==7){
-            var circle = document.querySelectorAll(".circle");
-            for(i=0; i<circle.length; i++){
-              circle[i].style.display = "none";
-            }
-
-            var arrow = document.querySelectorAll(".arrow");
-            for(i=0; i<arrow.length; i++){
-              arrow[i].style.display = "none";
-            }
-          }else{
-            var back = document.querySelector(".circle-back");
-            back.style.display = "none";
-          }
-        }else{
-          document.getElementById("contDetail").style.display = "none";
+          permohonan = data.List;
+          generateTable();
         }
       }
     };
@@ -233,44 +228,5 @@ window.onload = function() {
     hr.setRequestHeader("Content-type", "application/json");
     hr.send(JSON.stringify(params));
   };
-  get_permohonan();
-
-  var delete_permohonan = function(){
-    if (window.XMLHttpRequest) {
-      var hr = new XMLHttpRequest();
-    } else {
-      var hr = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    var url = "/quickpass/webservices.php";
-    hr.open("POST", url, true);
-    var params = {
-      method: "delete_permohonan();"
-    };
-
-    hr.onreadystatechange = function() {
-      if (hr.readyState == 4 && hr.status == 200) {
-        console.log(hr);
-        var data = JSON.parse(hr.response);
-        alert(data.InfoMessage);
-        if(data.SuccessMessage){
-          location.href = "pembuatan.html";
-        }
-      }
-    };
-
-    hr.setRequestHeader("Content-type", "application/json");
-    hr.send(JSON.stringify(params));
-  };
-  document.getElementById("btnBatal").onclick = function(){
-    if(confirm("Permohonan akan dibatalkan?\nTekan OK untuk melanjutkan")){
-      delete_permohonan();
-    }
-  };
-
-  var acc = document.querySelector("#contDetail .accordion");
-  acc.classList.toggle("active");
-  var panel = acc.nextElementSibling;
-  panel.style.height = "auto";
-  panel.style.padding = "15px 18px";
+  getAll_permohonan();
 };

@@ -694,7 +694,7 @@ function save_permohonan()
         $kueri = "
             select Persetujuan from Permohonan
             where PemohonID = $UserID
-            and Persetujuan = 0
+            and StatusID < 6
 			;";
         $res = mysqli_query($conn, $kueri);
         if (mysqli_fetch_array($res)) {
@@ -747,6 +747,7 @@ function get_permohonan()
     try {
         $d = $GLOBALS["d"];
         $UserID = $_SESSION["UserID"];
+        $PermohonanID = $d->PermohonanID;
 
         mysqli_begin_transaction($conn);
 
@@ -754,11 +755,12 @@ function get_permohonan()
             select
                 b.Nama as Header,
                 c.Nama as Detail,
-                a.StatusID
+                a.StatusID,
+                a.Catatan
             from Permohonan a
-                inner join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID
-                inner join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID
-            where PemohonID = $UserID and Persetujuan = 0
+                left join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID 
+                left join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID 
+            where a.ID = $PermohonanID
 			;";
         $res = mysqli_query($conn, $kueri);
         if (!$row = mysqli_fetch_array($res)) {
@@ -768,6 +770,7 @@ function get_permohonan()
             "Header" => $row["Header"],
             "Detail" => $row["Detail"],
             "Status" => $row["StatusID"],
+            "Catatan" => $row["Catatan"],
         );
 
         mysqli_commit($conn);
@@ -839,8 +842,12 @@ function getAll_permohonan()
 
     try {
         $d = $GLOBALS["d"];
+
         if ($_SESSION["AksesID"] != 1) {
-            throw new Exception("Bukan Admin");
+            $UserID = $_SESSION["UserID"];
+            $kondisi = "a.PemohonID = $UserID ";
+        } else {
+            $kondisi = "StatusID < 5";
         }
 
         mysqli_begin_transaction($conn);
@@ -850,13 +857,15 @@ function getAll_permohonan()
                 a.ID,
                 a.TanggalPermohonan,
                 b.NamaLengkap,
-                c.Nama JenisPermohonan
+                c.Nama JenisPermohonan,
+                d.Nama Status
             from
                 Permohonan a
                 left join Profil b on a.PemohonID = b.UserID
                 left join MasterPermohonanHeader c on a.PermohonanHeaderID = c.ID
-            where Persetujuan = 0
-            order by a.TanggalPermohonan desc
+                left join MasterStatus d on a.StatusID = d.ID
+            where $kondisi
+            order by a.ID desc
 			;";
 
         $res = mysqli_query($conn, $kueri);
@@ -867,6 +876,7 @@ function getAll_permohonan()
                 "TanggalPermohonan" => $row["TanggalPermohonan"],
                 "NamaLengkap" => $row["NamaLengkap"],
                 "JenisPermohonan" => $row["JenisPermohonan"],
+                "Status" => $row["Status"],
             );
             array_push($data, $tmp);
         }
@@ -915,7 +925,8 @@ function getOne_permohonan()
                 d.NamaAyah, d.KewarganegaraanAyah, d.TempatLahirAyah, d.TanggalLahirAyah,
                 d.AlamatOrangTua, d.TeleponOrangTua,
                 d.NamaPasangan, d.KewarganegaraanPasangan, d.TempatLahirPasangan, d.TanggalLahirPasangan,
-                b.Nama Header, c.Nama Detail
+                b.Nama Header, c.Nama Detail,
+                a.CatatanWawancara, a.PasporLama, a.PasporBaru
             from Permohonan a
                 left join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID
                 left join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID
@@ -967,6 +978,10 @@ function getOne_permohonan()
         $data["PermohonanHeader"] = $d["Header"];
         $data["PermohonanDetail"] = $d["Detail"];
 
+        $data["CatatanWawancara"] = $d["CatatanWawancara"];
+        $data["PasporLama"] = $d["PasporLama"];
+        $data["PasporBaru"] = $d["PasporBaru"];
+
         mysqli_commit($conn);
         $return = array(
             "List" => $data,
@@ -999,6 +1014,54 @@ function get_lampiran()
         mysqli_begin_transaction($conn);
 
         $kueri = "select * from MasterLampiran order by ID";
+        $res = mysqli_query($conn, $kueri);
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+            $data[] = array(
+                "ID" => $row["ID"],
+                "Nama" => $row["Nama"],
+            );
+        }
+
+        mysqli_commit($conn);
+        $return = array(
+            "List" => $data,
+            "InfoMessage" => "Get data success",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        $return = array(
+            "InfoMessage" => "Get data failed: $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function getAll_lampiran()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $AdminID = $_SESSION["UserID"];
+        $PermohonanID = $d->id;
+
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            select b.ID, b.Nama
+            from PermohonanLampiran a
+                left join MasterLampiran b on a.LampiranID = b.ID
+            where a.PermohonanID = $PermohonanID
+            ;";
         $res = mysqli_query($conn, $kueri);
         while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
             $data[] = array(
@@ -1103,20 +1166,20 @@ function save_loket()
         mysqli_query($conn, $kueri);
 
         $kueri = "
-            delete from PermohonanLampiran 
+            delete from PermohonanLampiran
             where PermohonanID = $PermohonanID
 			";
         mysqli_query($conn, $kueri);
 
         $tmp = [];
-        foreach($daftarLampiran as $item){
+        foreach ($daftarLampiran as $item) {
             $tmp[] = "($PermohonanID, $item->ID)";
         }
         $values = implode(", ", $tmp);
         $kueri = "
-            insert into PermohonanLampiran 
+            insert into PermohonanLampiran
             values $values;";
-            
+
         mysqli_query($conn, $kueri);
 
         mysqli_commit($conn);
@@ -1154,10 +1217,10 @@ function save_tu()
         $PasporBaru = $d->PasporBaru;
 
         mysqli_begin_transaction($conn);
-        
-        if($PasporLama){
+
+        if ($PasporLama) {
             $updatePasporLama = "PasporLama = $PasporLama,";
-        }else{
+        } else {
             $updatePasporLama = "";
         }
 
@@ -1189,8 +1252,74 @@ function save_tu()
     echo json_encode($return);
 }
 
+function save_verifikasi()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $AdminID = $_SESSION["UserID"];
+        $PermohonanID = $d->id;
+        $NIKIM = $d->NIKIM;
+        $Kelengkapan = $d->lengkap;
+        $Pencekalan = $d->cekal;
+        $Kelainan = $d->kelainan;
+        $Persetujuan = $d->persetujuan;
+        $Catatan = $d->catatan;
+        $Status = $d->status;
+
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            update Permohonan set
+                NIKIM = '$NIKIM',
+                Kelengkapan = $Kelengkapan,
+                DaftarCekal = $Pencekalan,
+                KelainanSurat = $Kelainan,
+                Persetujuan = $Persetujuan,
+                NIKIMPejimID = $AdminID,
+                KelengkapanPejimID = $AdminID,
+                CekalKelainanPejimID = $AdminID,
+                KAKANIMID = $AdminID,
+                NIKIMTanggal = NOW(),
+                KelengkapanTanggal = NOW(),
+                CekalKelainanTanggal = NOW(),
+                PersetujuanTanggal = NOW(),
+                StatusID = $Status,
+                Catatan = '$Catatan'
+            where ID = $PermohonanID
+            ;";
+        mysqli_query($conn, $kueri);
+
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Permohonan berhasil disimpan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+
+        $return = array(
+            "InfoMessage" => "Permohonan gagal disimpan: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
 $str_json = file_get_contents('php://input');
 if (!empty($str_json)) {
     $d = json_decode($str_json);
-    eval($d->method);
+    $funcs = get_defined_functions()["user"];
+    $method = substr(strtolower($d->method), 0, -3);
+    if (in_array($method, $funcs)) {
+        eval($d->method);
+    }
 }

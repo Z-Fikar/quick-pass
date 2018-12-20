@@ -132,6 +132,7 @@ CREATE TABLE Permohonan(
 	NomorSuratPersetujuan varchar(15),
 	PejimID int,
 	TanggalDibuat date,
+	Catatan text,
 	primary key (ID)
 );
 
@@ -215,7 +216,9 @@ INSERT INTO MasterStatus values
 	(2, "Pemeriksaan lampiran, wawancara, pengambilan foto dan sidik jari"),
 	(3, "Pembayaran"),
 	(4, "Tata Usaha"),
-	(5, "Verfikasi dan Adjudikasi");
+	(5, "Verfikasi dan Adjudikasi"),
+	(6, "Pengambilan"),
+	(7, "Dibatalkan");
 
 INSERT INTO MasterPermohonanHeader values
 	(1, 'BARU'),

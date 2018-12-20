@@ -217,11 +217,19 @@ label {
   filter: grayscale(0%);
 }
 
+.col .circle-back {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: 3px solid #e10039;
+}
+
 .center {
   text-align: center;
 }
 
-.col .circle img {
+.col .circle img, .col .circle-back img {
   padding: 20px;
   height: 100%;
 }

@@ -201,12 +201,28 @@ window.onload = function() {
           document.getElementById("txtDetailPermohonan").value = d.Detail;
           document.getElementById("contBuat").style.display = "none";
           var img = document.querySelectorAll(".circle");
-          for(i=0;i<d.Status;i++){
+          for(i=0;i<d.Status && i<5;i++){
             img[i].classList.add("circle-checked");
           }
           var arr = document.querySelectorAll(".arrow");
           for(i=0;i<d.Status && i<4;i++){
             arr[i].classList.add("arrow-checked");
+          }
+
+          
+          if(d.Status==7){
+            var circle = document.querySelectorAll(".circle");
+            for(i=0; i<circle.length; i++){
+              circle[i].style.display = "none";
+            }
+
+            var arrow = document.querySelectorAll(".arrow");
+            for(i=0; i<arrow.length; i++){
+              arrow[i].style.display = "none";
+            }
+          }else{
+            var back = document.querySelector(".circle-back");
+            back.style.display = "none";
           }
         }else{
           document.getElementById("contDetail").style.display = "none";
@@ -257,6 +273,4 @@ window.onload = function() {
   var panel = acc.nextElementSibling;
   panel.style.height = "auto";
   panel.style.padding = "15px 18px";
-
-
 };

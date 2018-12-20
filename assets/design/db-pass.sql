@@ -109,6 +109,7 @@ CREATE TABLE Permohonan(
 
 	LoketID int,
 	WawancaraID int,
+	CatatanWawancara text,
 	
 	NIKIM varchar(15),
 	NIKIMPejimID int,
@@ -139,11 +140,6 @@ CREATE TABLE Permohonan(
 CREATE TABLE PermohonanLampiran(
 	PermohonanID int,
 	LampiranID int
-);
-
-CREATE TABLE PermohonanCatatan(
-	PermohonanID int,
-	Catatan varchar(255)
 );
 
 CREATE TABLE Paspor(
@@ -205,11 +201,7 @@ ALTER TABLE PermohonanLampiran
 	add foreign key (PermohonanID) references Permohonan(ID),
 	add foreign key (LampiranID) references MasterLampiran(ID),
 	add unique key uk_PermohonanLampiran (PermohonanID, LampiranID);
-	
-ALTER TABLE PermohonanCatatan
-	add foreign key (PermohonanID) references Permohonan(ID),
-	add unique key uk_PermohonanCatatan (PermohonanID, Catatan);
-	
+		
 
 INSERT INTO MasterStatus values 
 	(1, "Isi formulir"),

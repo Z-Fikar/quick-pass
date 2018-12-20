@@ -3,6 +3,9 @@ if (window == window.top) {
 }
 
 window.onload = function() {
+  var url_string = window.location.href;
+  var ID = new URL(url_string).searchParams.get("id");
+
   var get_lampiran = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
@@ -45,9 +48,6 @@ window.onload = function() {
     } else {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
-
-    var url_string = window.location.href;
-    var ID = new URL(url_string).searchParams.get("id");
 
     var url = "/quickpass/webservices.php";
     hr.open("POST", url, true);
@@ -112,8 +112,10 @@ window.onload = function() {
           document.getElementById("txtTanggalLahirPasangan").value =
             d.TanggalLahirPasangan;
 
-          document.getElementById("txtJenisPermohonan").value = d.PermohonanHeader;
-          document.getElementById("txtDetailPermohonan").value = d.PermohonanDetail;
+          document.getElementById("txtJenisPermohonan").value =
+            d.PermohonanHeader;
+          document.getElementById("txtDetailPermohonan").value =
+            d.PermohonanDetail;
         }
       }
     };
@@ -161,14 +163,14 @@ window.onload = function() {
     add_lampiran();
   };
 
-  var get_paspor = function() {
+  var get_pasporLama = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var txt = document.getElementById("lblNomorPasporLama").value;
+    var txt = document.getElementById("txtNomorPasporLama").value;
     var url = "/quickpass/webservices.php";
     hr.open("POST", url, true);
     var params = {
@@ -182,15 +184,15 @@ window.onload = function() {
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
           var d = data.List;
-          document.getElementById("lblNamaLama").value = d.NamaPemilik;
-          document.getElementById("lblAlamatLama").value = d.AlamatPemilik;
-          document.getElementById("lblTanggalDibuatLama").value =
+          document.getElementById("txtNamaLama").value = d.NamaPemilik;
+          document.getElementById("txtAlamatLama").value = d.AlamatPemilik;
+          document.getElementById("txtTanggalDibuatLama").value =
             d.TanggalDibuat;
-          document.getElementById("lblTanggalBerlakuLama").value =
+          document.getElementById("txtTanggalBerlakuLama").value =
             d.TanggalBerakhir;
-          document.getElementById("lblTempatDikeluarkanLama").value =
+          document.getElementById("txtTempatDikeluarkanLama").value =
             d.TempatDikeluarkan;
-          document.getElementById("lblNomorRegisterLama").value =
+          document.getElementById("txtNomorRegisterLama").value =
             d.NomorRegister;
         }
       }
@@ -199,10 +201,115 @@ window.onload = function() {
     hr.setRequestHeader("Content-type", "application/json");
     hr.send(JSON.stringify(params));
   };
-  var btnCariPaspor = document.getElementById("btnCariPaspor");
-  btnCariPaspor.onclick = function() {
-    get_paspor();
+  var btnCariPasporLama = document.getElementById("btnCariPasporLama");
+  btnCariPasporLama.onclick = function() {
+    get_pasporLama();
   };
+
+  var get_pasporBaru = function() {
+    if (window.XMLHttpRequest) {
+      var hr = new XMLHttpRequest();
+    } else {
+      var hr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    var txt = document.getElementById("txtNomorPasporBaru").value;
+    var url = "/quickpass/webservices.php";
+    hr.open("POST", url, true);
+    var params = {
+      method: "get_paspor();",
+      NomorPaspor: txt
+    };
+
+    hr.onreadystatechange = function() {
+      if (hr.readyState == 4 && hr.status == 200) {
+        console.log(hr);
+        var data = JSON.parse(hr.response);
+        if (data.SuccessMessage) {
+          var d = data.List;
+          document.getElementById("txtTanggalDibuatBaru").value =
+            d.TanggalDibuat;
+          document.getElementById("txtTanggalBerlakuBaru").value =
+            d.TanggalBerakhir;
+          document.getElementById("txtTempatDikeluarkanBaru").value =
+            d.TempatDikeluarkan;
+          document.getElementById("txtNomorRegisterBaru").value =
+            d.NomorRegister;
+        }
+      }
+    };
+
+    hr.setRequestHeader("Content-type", "application/json");
+    hr.send(JSON.stringify(params));
+  };
+  var btnCariPasporBaru = document.getElementById("btnCariPasporBaru");
+  btnCariPasporBaru.onclick = function() {
+    get_pasporBaru();
+  };
+
+  var save_loket = function() {
+    if (window.XMLHttpRequest) {
+      var hr = new XMLHttpRequest();
+    } else {
+      var hr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    var url = "/quickpass/webservices.php";
+    hr.open("POST", url, true);
+    var params = {
+      method: "save_loket();",
+      id: ID,
+      daftarLampiran: lampiran,
+      catatanWawancara: document.getElementById("txtWawancara").value
+    };
+
+    hr.onreadystatechange = function() {
+      if (hr.readyState == 4 && hr.status == 200) {
+        console.log(hr);
+        var data = JSON.parse(hr.response);
+        alert(data.InfoMessage);
+      }
+    };
+
+    hr.setRequestHeader("Content-type", "application/json");
+    hr.send(JSON.stringify(params));
+  };
+  var btnLoket = document.getElementById("btnSimpanLoket");
+  btnLoket.onclick = function(){
+    save_loket();
+  }
+
+  var save_tu = function() {
+    if (window.XMLHttpRequest) {
+      var hr = new XMLHttpRequest();
+    } else {
+      var hr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    var url = "/quickpass/webservices.php";
+    hr.open("POST", url, true);
+    var params = {
+      method: "save_tu();",
+      id: ID,
+      PasporLama: document.getElementById("txtNomorPasporLama").value,
+      PasporBaru: document.getElementById("txtNomorPasporBaru").value
+    };
+
+    hr.onreadystatechange = function() {
+      if (hr.readyState == 4 && hr.status == 200) {
+        console.log(hr);
+        var data = JSON.parse(hr.response);
+        alert(data.InfoMessage);
+      }
+    };
+
+    hr.setRequestHeader("Content-type", "application/json");
+    hr.send(JSON.stringify(params));
+  };
+  var btnTU = document.getElementById("btnSimpanTU");
+  btnTU.onclick = function(){
+    save_tu();
+  }
 
   var inputs = document.querySelectorAll(".readonly input");
   for (i = 0; i < inputs.length; i++) {

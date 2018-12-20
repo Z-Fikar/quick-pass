@@ -1075,6 +1075,120 @@ function get_paspor()
     echo json_encode($return);
 }
 
+function save_loket()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $AdminID = $_SESSION["UserID"];
+        $PermohonanID = $d->id;
+        $daftarLampiran = $d->daftarLampiran;
+        $catatanWawancara = $d->catatanWawancara;
+
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            update Permohonan set
+                LoketID = $AdminID,
+                WawancaraID = $AdminID,
+                CatatanWawancara = '$catatanWawancara',
+                StatusID = 3
+            where ID = $PermohonanID
+			;";
+        mysqli_query($conn, $kueri);
+
+        $kueri = "
+            delete from PermohonanLampiran 
+            where PermohonanID = $PermohonanID
+			";
+        mysqli_query($conn, $kueri);
+
+        $tmp = [];
+        foreach($daftarLampiran as $item){
+            $tmp[] = "($PermohonanID, $item->ID)";
+        }
+        $values = implode(", ", $tmp);
+        $kueri = "
+            insert into PermohonanLampiran 
+            values $values;";
+            
+        mysqli_query($conn, $kueri);
+
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Permohonan berhasil disimpan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+
+        $return = array(
+            "InfoMessage" => "Permohonan gagal disimpan: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function save_tu()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $AdminID = $_SESSION["UserID"];
+        $PermohonanID = $d->id;
+        $PasporLama = $d->PasporLama;
+        $PasporBaru = $d->PasporBaru;
+
+        mysqli_begin_transaction($conn);
+        
+        if($PasporLama){
+            $updatePasporLama = "PasporLama = $PasporLama,";
+        }else{
+            $updatePasporLama = "";
+        }
+
+        $kueri = "
+            update Permohonan set
+                $updatePasporLama
+                PasporBaru = $PasporBaru,
+                StatusID = 4
+            where ID = $PermohonanID
+			;";
+        mysqli_query($conn, $kueri);
+
+        mysqli_commit($conn);
+        $return = array(
+            "InfoMessage" => "Permohonan berhasil disimpan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+
+        $return = array(
+            "InfoMessage" => "Permohonan gagal disimpan: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
 $str_json = file_get_contents('php://input');
 if (!empty($str_json)) {
     $d = json_decode($str_json);

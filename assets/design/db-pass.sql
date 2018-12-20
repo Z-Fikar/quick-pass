@@ -1,52 +1,52 @@
 
-drop database if exists db_pass;
-create database db_pass;
-use db_pass;
+DROP DATABASE IF EXISTS db_pass;
+CREATE DATABASE db_pass;
+USE db_pass;
 
-create table MasterStatus(
+CREATE TABLE MasterStatus(
+	ID int not null auto_increment,
+	Nama varchar(60) not null,
+	primary key(ID)
+);
+
+CREATE TABLE MasterPermohonanHeader(
 	ID int not null auto_increment,
 	Nama varchar(50) not null,
 	primary key(ID)
 );
 
-create table MasterPermohonanHeader(
-	ID int not null auto_increment,
-	Nama varchar(50) not null,
-	primary key(ID)
-);
-
-create table MasterPermohonanDetail(
+CREATE TABLE MasterPermohonanDetail(
 	ID int not null auto_increment,
 	HeaderID int not null,
 	Nama varchar(50) not null,
 	primary key(ID)
 );
 
-create table MasterPekerjaan(
+CREATE TABLE MasterPekerjaan(
 	ID int not null auto_increment,
 	Nama varchar(50) not null,
 	primary key(ID)
 );
 
-create table MasterStatusSipil(
+CREATE TABLE MasterStatusSipil(
 	ID int not null auto_increment,
 	Nama varchar(50) not null,
 	primary key(ID)
 );
 
-create table MasterAkses(
+CREATE TABLE MasterAkses(
 	ID int not null auto_increment,
 	Nama varchar(50) not null,
 	primary key(ID)
 );
 
-create table MasterLampiran(
+CREATE TABLE MasterLampiran(
 	ID int not null auto_increment,
 	Nama varchar(60) not null,
 	primary key(ID)
 );
 
-create table Otentikasi(
+CREATE TABLE Otentikasi(
 	ID int not null auto_increment,
 	AlamatEmail varchar(50) not null,
 	KataSandi varchar(50) not null,
@@ -55,7 +55,7 @@ create table Otentikasi(
 	primary key (ID)
 );
 
-create table Profil(
+CREATE TABLE Profil(
 	UserID int not null,
 	NamaLengkap varchar(50),
 	JenisKelamin char(1),
@@ -99,7 +99,7 @@ create table Profil(
 	primary key (UserID)
 );
 
-create table Permohonan(
+CREATE TABLE Permohonan(
 	ID int auto_increment,
 	StatusID int,
 	PermohonanHeaderID int,
@@ -135,17 +135,17 @@ create table Permohonan(
 	primary key (ID)
 );
 
-create table PermohonanLampiran(
+CREATE TABLE PermohonanLampiran(
 	PermohonanID int,
 	LampiranID int
 );
 
-create table PermohonanCatatan(
+CREATE TABLE PermohonanCatatan(
 	PermohonanID int,
 	Catatan varchar(255)
 );
 
-create table Paspor(
+CREATE TABLE Paspor(
 	UserID int,
 	NomorPaspor varchar(50),
 	NomorRegister varchar(50),
@@ -158,37 +158,37 @@ create table Paspor(
 );
 
 
-alter table MasterPermohonanHeader
+ALTER TABLE MasterPermohonanHeader
 	add unique key (Nama);
 
-alter table MasterPermohonanDetail 
+ALTER TABLE MasterPermohonanDetail 
 	add foreign key (HeaderID) references MasterPermohonanHeader(ID),
 	add unique key uk_MasterPermohonanDetail (HeaderID, Nama);
 	
-alter table MasterPekerjaan
+ALTER TABLE MasterPekerjaan
 	add unique key uk_MasterPekerjaan (nama);
 	
-alter table MasterStatusSipil
+ALTER TABLE MasterStatusSipil
 	add unique key (Nama);
 	
-alter table MasterStatusSipil
+ALTER TABLE MasterStatusSipil
 	add unique key (Nama);
 	
-alter table MasterAkses
+ALTER TABLE MasterAkses
 	add unique key (nama);
 	
-alter table MasterLampiran
+ALTER TABLE MasterLampiran
 	add unique key (nama);
 	
-alter table Otentikasi
+ALTER TABLE Otentikasi
 	add unique key (AlamatEmail);
 	
-alter table Profil
+ALTER TABLE Profil
 	add foreign key (UserID) references Otentikasi(ID),
 	add foreign key (PekerjaanID) references MasterPekerjaan(ID),
 	add foreign key (StatusSipilID) references MasterStatusSipil(ID);
 	
-alter table Permohonan
+ALTER TABLE Permohonan
 	add foreign key (StatusID) references MasterStatus(ID),
 	add foreign key (PermohonanHeaderID) references MasterPermohonanHeader(ID),
 	add foreign key (PermohonanDetailID) references MasterPermohonanDetail(ID),
@@ -200,29 +200,29 @@ alter table Permohonan
 	add foreign key (CekalKelainanPejimID) references Otentikasi(ID),
 	add foreign key (KAKANIMID) references Otentikasi(ID);
 	
-alter table PermohonanLampiran
+ALTER TABLE PermohonanLampiran
 	add foreign key (PermohonanID) references Permohonan(ID),
 	add foreign key (LampiranID) references MasterLampiran(ID),
 	add unique key uk_PermohonanLampiran (PermohonanID, LampiranID);
 	
-alter table PermohonanCatatan
+ALTER TABLE PermohonanCatatan
 	add foreign key (PermohonanID) references Permohonan(ID),
 	add unique key uk_PermohonanCatatan (PermohonanID, Catatan);
 	
 
-insert into MasterStatus values 
+INSERT INTO MasterStatus values 
 	(1, "Isi formulir"),
 	(2, "Pemeriksaan lampiran, wawancara, pengambilan foto dan sidik jari"),
 	(3, "Pembayaran"),
 	(4, "Tata Usaha"),
 	(5, "Verfikasi dan Adjudikasi");
 
-insert into MasterPermohonanHeader values
+INSERT INTO MasterPermohonanHeader values
 	(1, 'BARU'),
 	(2, 'PENGGANTIAN'),
 	(3, 'PERUBAHAN');
 	
-insert into MasterPermohonanDetail values
+INSERT INTO MasterPermohonanDetail values
 	(1, 1, 'Paspor 48 Hal'),
 	(2, 1, 'Paspor 24 Hal'),
 	(3, 1, 'SPLP'),
@@ -235,20 +235,20 @@ insert into MasterPermohonanDetail values
 	(10, 3, 'Alamat Tempat Tinggal'),
 	(11, 3, 'Lain-lain');
 
-insert into MasterPekerjaan values
+INSERT INTO MasterPekerjaan values
 	(1, 'PEJABAT NEGARA'),
 	(2, 'PEGAWAI NEGERI SIPIL'),
 	(3, 'TNI / POLRI'),
 	(4, 'PEGAWAI SWASTA'),
 	(5, 'LAINNYA');
 	
-insert into MasterStatusSipil values
+INSERT INTO MasterStatusSipil values
 	(1, 'KAWIN'),
 	(2, 'TIDAK KAWIN'),
 	(3, 'CERAI MATI'),
 	(4, 'CERAI HIDUP');
 	
-insert into MasterAkses values
+INSERT INTO MasterAkses values
 	(1, 'Administrator'),
 	(2, 'Petugas Loket'),
 	(3, 'Petugas Wawancara'),
@@ -259,16 +259,23 @@ insert into MasterAkses values
 	(8, 'Kepala Kantor Imigrasi'),
 	(9, 'Pemohon');
 	
-insert into MasterLampiran values
+INSERT INTO MasterLampiran values
 	(1, 'Salinan KTP WNI'),
 	(2, 'Salinan Kartu Keluarga'),
 	(3, 'Salinan Akte Kelahiran/Surat Nikah/Ijazah'),
 	(4, 'Paspor/SPLP Lama'),
 	(5, 'Surat Keterangan Hilang dari Kepolisian'),
-	(6, 'Surat Rekomendasi/Izin Atasan/Sponsor'),
-	(7, 'Surat Kuasa/Kartu Tanda Pengenal Pengurusan Keimigrasian');
+	(6, 'Surat Keterangan Ganti Nama'),
+	(7, 'Surat Rekomendasi/Izin Atasan/Sponsor'),
+	(8, 'Surat Pewarganegaraan Indonesia bagi Orang Asing WNI'),
+	(9, 'Salinan KTP Ayah/Ibu WNI atau Surat Keterangan Pindah ke Luar Negeri'),
+	(10, 'Surat Nikah Orang Tua'),
+	(11, 'Paspor Ayah/Ibu WNI'),
+	(12, 'Salinan KTP Negeri Setempat'),
+	(13, 'Surat Keterangan Lahir dari Perwakilan Republik Indonesia'),
+	(14, 'Surat Kuasa/Kartu Tanda Pengenal Pengurusan Keimigrasian');
 	
-insert into Otentikasi values
+INSERT INTO Otentikasi values
 	(1, 'zedd@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 1, 1),
 	(2, 'anto@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 8, 1),
 	(3, 'budi@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 7, 1),
@@ -300,7 +307,9 @@ INSERT INTO profil (
 	'Adin', 'Indonesia', 'Serpong', '1997-06-06'
 );
 
-INSERT INTO Profil (UserID, NamaLengkap) values (1, "Zedd");
+INSERT INTO Profil (UserID, NamaLengkap) VALUES (1, "Zedd");
+
+INSERT INTO Paspor VALUES(9, 123, 321, "Zulfikar", "Pamulang", "2017-08-13", "2022-08-13", "Tangsel");
 
 delimiter ;;
 CREATE FUNCTION `usf_Profil_CheckEmpty`(`theID` INT) RETURNS INT(1) DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN

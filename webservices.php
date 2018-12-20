@@ -336,13 +336,10 @@ function get_profil()
     try {
         mysqli_begin_transaction($conn);
         $tmp = $GLOBALS["d"];
-        
-        if (!$UserID = $tmp->UserID) {
-            $UserID = $_SESSION["UserID"];
-        }
 
-        if (!$_SESSION["AksesID"]==1) {
-            $UserID = $_SESSION["UserID"];
+        $UserID = $_SESSION["UserID"];
+        if (isset($tmp->UserID) && $_SESSION["AksesID"] == "1") {
+            $UserID = $tmp->UserID;
         }
 
         $kueri = "select * from Profil where UserID=$UserID;";
@@ -754,7 +751,10 @@ function get_permohonan()
         mysqli_begin_transaction($conn);
 
         $kueri = "
-            select b.Nama as Header, c.Nama as Detail
+            select
+                b.Nama as Header,
+                c.Nama as Detail,
+                a.StatusID
             from Permohonan a
                 inner join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID
                 inner join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID
@@ -767,6 +767,7 @@ function get_permohonan()
         $data = array(
             "Header" => $row["Header"],
             "Detail" => $row["Detail"],
+            "Status" => $row["StatusID"],
         );
 
         mysqli_commit($conn);
@@ -905,14 +906,14 @@ function getOne_permohonan()
         mysqli_begin_transaction($conn);
 
         $kueri = "
-            select 
-                d.UserID, d.NamaLengkap, d.JenisKelamin, d.NamaLain, d.TinggiBadan, d.TempatLahir, d.TanggalLahir, 
-                d.NomorKTPWNI, d.TanggalDikeluarkan, d.TempatDikeluarkan, d.TanggalBerakhir, 
+            select
+                d.UserID, d.NamaLengkap, d.JenisKelamin, d.NamaLain, d.TinggiBadan, d.TempatLahir, d.TanggalLahir,
+                d.NomorKTPWNI, d.TanggalDikeluarkan, d.TempatDikeluarkan, d.TanggalBerakhir,
                 d.Alamat, d.Telepon, e.Nama StatusSipil,
-                d.Pekerjaan, d.NamaAlamatKantor, d.TeleponKantor, 
-                d.NamaIbu, d.KewarganegaraanIbu, d.TempatLahirIbu, d.TanggalLahirIbu, 
-                d.NamaAyah, d.KewarganegaraanAyah, d.TempatLahirAyah, d.TanggalLahirAyah, 
-                d.AlamatOrangTua, d.TeleponOrangTua, 
+                d.Pekerjaan, d.NamaAlamatKantor, d.TeleponKantor,
+                d.NamaIbu, d.KewarganegaraanIbu, d.TempatLahirIbu, d.TanggalLahirIbu,
+                d.NamaAyah, d.KewarganegaraanAyah, d.TempatLahirAyah, d.TanggalLahirAyah,
+                d.AlamatOrangTua, d.TeleponOrangTua,
                 d.NamaPasangan, d.KewarganegaraanPasangan, d.TempatLahirPasangan, d.TanggalLahirPasangan,
                 b.Nama Header, c.Nama Detail
             from Permohonan a
@@ -926,7 +927,7 @@ function getOne_permohonan()
         if (!$d = mysqli_fetch_array($res)) {
             throw new Exception("Belum buat permohonan");
         }
-        
+
         $data["NamaLengkap"] = $d["NamaLengkap"];
         $data["JenisKelamin"] = $d["JenisKelamin"];
         $data["NamaLain"] = $d["NamaLain"];
@@ -966,6 +967,93 @@ function getOne_permohonan()
         $data["PermohonanHeader"] = $d["Header"];
         $data["PermohonanDetail"] = $d["Detail"];
 
+        mysqli_commit($conn);
+        $return = array(
+            "List" => $data,
+            "InfoMessage" => "Permohonan ditemukan",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+
+        $return = array(
+            "InfoMessage" => "Permohonan tidak ditemukan: " . $e->getMessage(),
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function get_lampiran()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        mysqli_begin_transaction($conn);
+
+        $kueri = "select * from MasterLampiran order by ID";
+        $res = mysqli_query($conn, $kueri);
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+            $data[] = array(
+                "ID" => $row["ID"],
+                "Nama" => $row["Nama"],
+            );
+        }
+
+        mysqli_commit($conn);
+        $return = array(
+            "List" => $data,
+            "InfoMessage" => "Get data success",
+            "SuccessMessage" => true,
+        );
+    } catch (Exception $e) {
+        mysqli_rollback($conn);
+        $return = array(
+            "InfoMessage" => "Get data failed: $e",
+            "SuccessMessage" => false,
+        );
+    }
+
+    header('Content-type: application/json');
+    mysqli_close($conn);
+    echo json_encode($return);
+}
+
+function get_paspor()
+{
+    $conn = mysqli_connect("localhost", "root", "", "db_pass");
+    if (mysqli_connect_errno()) {
+        echo "Connect failed: %s\n", mysqli_connect_error();
+        exit();
+    }
+
+    try {
+        $d = $GLOBALS["d"];
+        $NomorPaspor = $d->NomorPaspor;
+
+        mysqli_begin_transaction($conn);
+
+        $kueri = "
+            select * from Paspor where NomorPaspor = '$NomorPaspor'
+			;";
+        $res = mysqli_query($conn, $kueri);
+        if (!$d = mysqli_fetch_array($res)) {
+            throw new Exception("Belum buat permohonan");
+        }
+
+        $data["NomorRegister"] = $d["NomorRegister"];
+        $data["NamaPemilik"] = $d["NamaPemilik"];
+        $data["AlamatPemilik"] = $d["AlamatPemilik"];
+        $data["TanggalDibuat"] = $d["TanggalDibuat"];
+        $data["TanggalBerakhir"] = $d["TanggalBerakhir"];
+        $data["TempatDikeluarkan"] = $d["TempatDikeluarkan"];
 
         mysqli_commit($conn);
         $return = array(

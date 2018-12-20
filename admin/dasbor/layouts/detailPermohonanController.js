@@ -117,8 +117,7 @@ window.onload = function() {
           document.getElementById("txtDetailPermohonan").value =
             d.PermohonanDetail;
 
-          document.getElementById("txtWawancara").value =
-            d.CatatanWawancara;
+          document.getElementById("txtWawancara").value = d.CatatanWawancara;
           document.getElementById("txtNomorPasporLama").value = d.PasporLama;
           document.getElementById("txtNomorPasporBaru").value = d.PasporBaru;
           get_pasporLama();
@@ -384,7 +383,9 @@ window.onload = function() {
   };
   var btnBatal = document.getElementById("btnBatal");
   btnBatal.onclick = function() {
-    save_verifikasi(7);
+    if (confirm("Permohonan akan dikembalikan?\nTekan OK untuk melanjutkan")) {
+      save_verifikasi(7);
+    }
   };
   var btnAkhir = document.getElementById("btnSimpanAkhir");
   btnAkhir.onclick = function() {

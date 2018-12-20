@@ -804,12 +804,13 @@ function delete_permohonan()
     try {
         $d = $GLOBALS["d"];
         $UserID = $_SESSION["UserID"];
+        $PermohonanID = $d->id;
 
         mysqli_begin_transaction($conn);
 
         $kueri = "
-            delete from Permohonan where
-            PemohonID = $UserID and Persetujuan = 0
+            update Permohonan set StatusID = 7
+            where ID = $PermohonanID
             ;";
         mysqli_query($conn, $kueri);
 

@@ -210,7 +210,7 @@ INSERT INTO MasterStatus values
 	(4, "Sedang dilakukan Verfikasi dan Adjudikasi"),
 	(5, "Sudah dilakukan Verfikasi dan Adjudikasi"),
 	(6, "Pengambilan"),
-	(7, "Dibatalkan");
+	(7, "Dibatalkan/Dikembalikan");
 
 INSERT INTO MasterPermohonanHeader values
 	(1, 'BARU'),

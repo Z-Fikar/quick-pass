@@ -76,7 +76,8 @@ window.onload = function() {
     var url = "/quickpass/webservices.php";
     hr.open("POST", url, true);
     var params = {
-      method: "delete_permohonan();"
+      method: "delete_permohonan();",
+      id: id
     };
 
     hr.onreadystatechange = function() {

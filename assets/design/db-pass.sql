@@ -204,12 +204,12 @@ ALTER TABLE PermohonanLampiran
 		
 
 INSERT INTO MasterStatus values 
-	(1, "Pengisian formulir"),
-	(2, "Pemeriksaan lampiran, wawancara, pengambilan foto dan sidik jari"),
-	(3, "Pembayaran"),
-	(4, "Sedang dilakukan Verfikasi dan Adjudikasi"),
-	(5, "Sudah dilakukan Verfikasi dan Adjudikasi"),
-	(6, "Pengambilan"),
+	(1, "Sudah mengisi formulir"),
+	(2, "Sudah diperiksa dan diisi kelengkapan dokumen"),
+	(3, "Sudah dibayar"),
+	(4, "Sudah dilakukan Verfikasi dan Adjudikasi"),
+	(5, "Penerbitan paspor"),
+	(6, "Sudah diambil"),
 	(7, "Dibatalkan/Dikembalikan");
 
 INSERT INTO MasterPermohonanHeader values

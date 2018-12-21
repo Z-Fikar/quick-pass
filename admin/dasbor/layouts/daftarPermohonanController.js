@@ -10,6 +10,7 @@ window.onload = function() {
       "TanggalPermohonan",
       "NamaLengkap",
       "JenisPermohonan",
+      "Status",
       "ID"
     ];
     var tbody = document.querySelector(".col table tbody");

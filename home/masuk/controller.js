@@ -16,7 +16,7 @@ var check_login = function() {
       console.log(hr);
       var data = JSON.parse(hr.response);
       if (data.SuccessMessage) {
-        location.href = "/quickpass";
+        location.href = "/";
       }
     }
   };

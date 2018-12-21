@@ -8,7 +8,6 @@ $user = $cdb["user"];
 $pass = $cdb["pass"];
 $db = substr($cdb["path"],1);
 $conn = mysqli_connect($server, $user, $pass, $db);
-echo "masuk";
 
 function get_pekerjaan()
 {

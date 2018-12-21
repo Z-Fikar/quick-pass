@@ -43,8 +43,8 @@ window.onload = function() {
     };
 
     hr.onreadystatechange = function() {
+      console.log(hr);
       if (hr.readyState == 4 && hr.status == 200) {
-        console.log(hr);
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
           location.href = "/";

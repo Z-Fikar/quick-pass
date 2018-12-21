@@ -3,37 +3,37 @@ if (window == window.top) {
 }
 
 window.onload = function() {
-  var check_profil = function() {
-    if (window.XMLHttpRequest) {
-      var hr = new XMLHttpRequest();
-    } else {
-      var hr = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+  // var check_profil = function() {
+  //   if (window.XMLHttpRequest) {
+  //     var hr = new XMLHttpRequest();
+  //   } else {
+  //     var hr = new ActiveXObject("Microsoft.XMLHTTP");
+  //   }
 
-    var url = "/webservices.php";
-    hr.open("POST", url, true);
-    var params = {
-      method: "check_profil();"
-    };
+  //   var url = "/webservices.php";
+  //   hr.open("POST", url, true);
+  //   var params = {
+  //     method: "check_profil();"
+  //   };
 
-    hr.onreadystatechange = function() {
-      if (hr.readyState == 4 && hr.status == 200) {
-        var data = JSON.parse(hr.response);
-        var label = document.getElementById("lblCekProfil");
-        while (label.firstChild) {
-          label.removeChild(label.firstChild);
-        }
-        if (!data.SuccessMessage) {
-          alert("Data Profil harap dilengkapi");
-          location.href = "profil.html";
-        }
-      }
-    };
+  //   hr.onreadystatechange = function() {
+  //     if (hr.readyState == 4 && hr.status == 200) {
+  //       var data = JSON.parse(hr.response);
+  //       var label = document.getElementById("lblCekProfil");
+  //       while (label.firstChild) {
+  //         label.removeChild(label.firstChild);
+  //       }
+  //       if (!data.SuccessMessage) {
+  //         alert("Data Profil harap dilengkapi");
+  //         location.href = "profil.html";
+  //       }
+  //     }
+  //   };
 
-    hr.setRequestHeader("Content-type", "application/json");
-    hr.send(JSON.stringify(params));
-  };
-  check_profil();
+  //   hr.setRequestHeader("Content-type", "application/json");
+  //   hr.send(JSON.stringify(params));
+  // };
+  // check_profil();
 
   var data_permohonanDetail = [];
   var get_permohonanDetail = function() {

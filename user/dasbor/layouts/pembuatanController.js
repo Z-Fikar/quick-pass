@@ -1,5 +1,5 @@
 if (window == window.top) {
-  // location.href = "/quickpass"
+  // location.href = "/"
 }
 
 window.onload = function() {
@@ -10,7 +10,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "check_profil();"
@@ -43,7 +43,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_permohonanDetail();"
@@ -89,7 +89,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_permohonanHeader();"
@@ -131,7 +131,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "save_permohonan();",
@@ -208,7 +208,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "getAll_permohonan();"

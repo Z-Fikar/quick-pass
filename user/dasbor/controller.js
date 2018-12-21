@@ -5,7 +5,7 @@ var check_login = function() {
     var hr = new ActiveXObject("Microsoft.XMLHTTP");
   }
 
-  var url = "/quickpass/webservices.php";
+  var url = "/webservices.php";
   hr.open("POST", url, true);
   var params = {
     method: "check_login();"
@@ -16,7 +16,7 @@ var check_login = function() {
       console.log(hr);
       var data = JSON.parse(hr.response);
       if (!data.SuccessMessage) {
-        location.href = "/quickpass";
+        location.href = "/";
       }
     }
   };
@@ -96,7 +96,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "do_logout();"
@@ -107,7 +107,7 @@ window.onload = function() {
         console.log(hr);
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
-          location.href = "/quickpass";
+          location.href = "/";
         } else {
           alert(data.InfoMessage);
         }
@@ -130,7 +130,7 @@ window.onload = function() {
     } else {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_profil();"

@@ -65,7 +65,6 @@ window.onload = function() {
 
   var masuk = document.getElementById("btnMasuk");
   masuk.onclick = function() {
-    alert("ke klik");
     do_login();
   };
 

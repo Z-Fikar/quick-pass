@@ -11,7 +11,7 @@ $conn = mysqli_connect($server, $user, $pass, $db);
 
 function get_pekerjaan()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -48,7 +48,7 @@ function get_pekerjaan()
 
 function get_statusSipil()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -86,7 +86,7 @@ function get_statusSipil()
 
 function save_akun()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -199,7 +199,7 @@ function save_akun()
 
 function do_login()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -298,7 +298,7 @@ function check_login()
 
 function get_akun()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -334,7 +334,7 @@ function get_akun()
 
 function get_profil()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -411,7 +411,7 @@ function get_profil()
 
 function update_akun()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -461,7 +461,7 @@ function update_akun()
 
 function update_profil()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -572,7 +572,7 @@ function update_profil()
 
 function check_profil()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -609,7 +609,7 @@ function check_profil()
 
 function get_permohonanHeader()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -646,7 +646,7 @@ function get_permohonanHeader()
 
 function get_permohonanDetail()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -684,7 +684,7 @@ function get_permohonanDetail()
 
 function save_permohonan()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -745,7 +745,7 @@ function save_permohonan()
 
 function get_permohonan()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -802,7 +802,7 @@ function get_permohonan()
 
 function delete_permohonan()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -842,7 +842,7 @@ function delete_permohonan()
 
 function getAll_permohonan()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -911,7 +911,7 @@ function getAll_permohonan()
 
 function getOne_permohonan()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -1012,7 +1012,7 @@ function getOne_permohonan()
 
 function get_lampiran()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -1051,7 +1051,7 @@ function get_lampiran()
 
 function getAll_lampiran()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -1099,7 +1099,7 @@ function getAll_lampiran()
 
 function get_paspor()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -1148,7 +1148,7 @@ function get_paspor()
 
 function save_loket()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -1211,7 +1211,7 @@ function save_loket()
 
 function save_tu()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();
@@ -1262,7 +1262,7 @@ function save_tu()
 
 function save_verifikasi()
 {
-    $conn = $GLOBALS[“conn”];
+    $conn = $GLOBALS["conn"];
     if (mysqli_connect_errno()) {
         echo "Connect failed: %s\n", mysqli_connect_error();
         exit();

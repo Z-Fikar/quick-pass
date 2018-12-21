@@ -47,7 +47,7 @@ window.onload = function() {
         console.log(hr);
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
-          location.href = "/quickpass";
+          location.href = "/";
         }
 
         var galat = document.getElementById("lblGalat");
@@ -65,6 +65,7 @@ window.onload = function() {
 
   var masuk = document.getElementById("btnMasuk");
   masuk.onclick = function() {
+    alert("ke klik");
     do_login();
   };
 

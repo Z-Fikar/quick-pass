@@ -20,7 +20,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_pekerjaan();"
@@ -57,7 +57,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_statusSipil();"
@@ -123,7 +123,7 @@ window.onload = function() {
       } else {
         var hr = new ActiveXObject("Microsoft.XMLHTTP");
       }
-      var url = "/quickpass/webservices.php";
+      var url = "/webservices.php";
       hr.open("POST", url, true);
       var params = {
         method: "save_akun();",
@@ -187,7 +187,7 @@ window.onload = function() {
           var data = JSON.parse(hr.response);
           if (data.SuccessMessage) {
             alert(data.InfoMessage);
-            location.href = "login.php";
+            location.href = "/";
           }
           var galat = document.getElementById("lblGalat");
           while (galat.firstChild) {

@@ -5,7 +5,7 @@ var check_login = function() {
     var hr = new ActiveXObject("Microsoft.XMLHTTP");
   }
 
-  var url = "/quickpass/webservices.php";
+  var url = "/webservices.php";
   hr.open("POST", url, true);
   var params = {
     method: "check_login();"
@@ -34,7 +34,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "do_login();",
@@ -70,6 +70,6 @@ window.onload = function() {
 
   var daftar = document.getElementById("btnDaftar");
   daftar.onclick = function() {
-    location.href = "/quickpass/home/daftar";
+    location.href = "/home/daftar";
   };
 };

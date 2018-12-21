@@ -389,7 +389,9 @@ window.onload = function() {
   };
   var btnAkhir = document.getElementById("btnSimpanAkhir");
   btnAkhir.onclick = function() {
-    save_verifikasi(5);
+    if (confirm("Permohonan akan selesai diproses.\nTekan OK untuk melanjutkan")) {
+      save_verifikasi(6);
+    }
   };
 
   var enableVerifikasi = function() {

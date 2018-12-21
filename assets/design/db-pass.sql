@@ -1,7 +1,21 @@
+--user b3ec54291aa0c0
+--pass 42450637
+--host us-cdbr-iron-east-01.cleardb.net
+--db heroku_f4b7857c0620d82
+--mysql -u b3ec54291aa0c0 -h us-cdbr-iron-east-01.cleardb.net heroku_f4b7857c0620d82 -p
 
-DROP DATABASE IF EXISTS db_pass;
-CREATE DATABASE db_pass;
-USE db_pass;
+drop table if exists Paspor;
+drop table if exists PermohonanLampiran;
+drop table if exists Permohonan;
+drop table if exists Profil;
+drop table if exists Otentikasi;
+drop table if exists MasterLampiran;
+drop table if exists MasterAkses;
+drop table if exists MasterStatusSipil;
+drop table if exists MasterPekerjaan;
+drop table if exists MasterPermohonanDetail;
+drop table if exists MasterPermohonanHeader;
+drop table if exists MasterStatus;
 
 CREATE TABLE MasterStatus(
 	ID int not null auto_increment,
@@ -207,7 +221,7 @@ INSERT INTO MasterStatus values
 	(1, "Sudah mengisi formulir"),
 	(2, "Sudah diperiksa dan diisi kelengkapan dokumen"),
 	(3, "Sudah dibayar"),
-	(4, "Sudah dilakukan Verfikasi dan Adjudikasi"),
+	(4, "Sedang dilakukan Verfikasi dan Adjudikasi"),
 	(5, "Penerbitan paspor"),
 	(6, "Sudah diambil"),
 	(7, "Dibatalkan/Dikembalikan");
@@ -306,8 +320,10 @@ INSERT INTO Profil (UserID, NamaLengkap) VALUES (1, "Zedd");
 
 INSERT INTO Paspor VALUES(9, 123, 321, "Zulfikar", "Pamulang", "2017-08-13", "2022-08-13", "Tangsel");
 
+
+drop function if exists usf_Profil_CheckEmpty;
 delimiter ;;
-CREATE FUNCTION `usf_Profil_CheckEmpty`(`theID` INT) RETURNS INT(1) DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN
+CREATE FUNCTION `usf_Profil_CheckEmpty`(`theID` INT) RETURNS INT(1) NO SQL SQL SECURITY DEFINER BEGIN
 SELECT 
 	if(UserID>'',0,1)+if(NamaLengkap>'',0,1)+if(JenisKelamin>'',0,1)+if(NamaLain>'',0,1)+if(TinggiBadan>'',0,1)+if(TempatLahir>'',0,1)+if(TanggalLahir>'',0,1)
 	+if(NomorKTPWNI>'',0,1)+if(TanggalDikeluarkan>'',0,1)+if(TempatDikeluarkan>'',0,1)+if(TanggalBerakhir>'',0,1)

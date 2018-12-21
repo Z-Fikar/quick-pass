@@ -2,6 +2,13 @@
 session_start();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+$cdb = parse_url("mysql://b3ec54291aa0c0:42450637@us-cdbr-iron-east-01.cleardb.net/heroku_f4b7857c0620d82?reconnect=true");
+$server = $cdb["host"];
+$user = $cdb["user"];
+$pass = $cdb["pass"];
+$db = substr($cdb["path"],1);
+$conn = mysqli_connect($server, $user, $pass, $db);
+
 function get_pekerjaan()
 {
     $conn = mysqli_connect("localhost", "root", "", "db_pass");

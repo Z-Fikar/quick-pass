@@ -1,5 +1,5 @@
 if (window == window.top) {
-  // location.href = "/quickpass";
+  // location.href = "/";
 }
 
 window.onload = function() {
@@ -13,7 +13,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_lampiran();"
@@ -49,7 +49,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "getOne_permohonan();",
@@ -158,7 +158,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "getAll_lampiran();",
@@ -207,7 +207,7 @@ window.onload = function() {
     }
 
     var txt = document.getElementById("txtNomorPasporLama").value;
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_paspor();",
@@ -250,7 +250,7 @@ window.onload = function() {
     }
 
     var txt = document.getElementById("txtNomorPasporBaru").value;
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "get_paspor();",
@@ -290,7 +290,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "save_loket();",
@@ -322,7 +322,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "save_tu();",
@@ -354,7 +354,7 @@ window.onload = function() {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var url = "/quickpass/webservices.php";
+    var url = "/webservices.php";
     hr.open("POST", url, true);
     var params = {
       method: "save_verifikasi();",

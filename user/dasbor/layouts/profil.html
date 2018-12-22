@@ -1,6 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Profil | QuickPass</title>
     <link rel="icon" type="image/png" href="/assets/images/logo.png" />
     <link rel="stylesheet" type="text/css" href="/contents/styles/style.css" />
@@ -132,38 +135,37 @@
               <select id="sbStatusSipil"></select>
             </div>
             <div class="col" id="pPasangan">
-                <button type="button" class="accordion">DATA SUAMI / ISTRI</button>
-                <div class="panel">
-                  <div class="col">
-                    <label>Nama</label>
-                    <input type="text" id="txtNamaPasangan" placeholder="Nama" />
-                  </div>
-                  <div class="col">
-                    <label>Kewarganegaraan</label>
+              <button type="button" class="accordion">
+                DATA SUAMI / ISTRI
+              </button>
+              <div class="panel">
+                <div class="col">
+                  <label>Nama</label>
+                  <input type="text" id="txtNamaPasangan" placeholder="Nama" />
+                </div>
+                <div class="col">
+                  <label>Kewarganegaraan</label>
+                  <input
+                    type="text"
+                    id="txtKewarganegaraanPasangan"
+                    placeholder="Kewarganegaraan"
+                  />
+                </div>
+                <div class="col">
+                  <div class="col-right">
+                    <label>Tempat Lahir</label>
                     <input
                       type="text"
-                      id="txtKewarganegaraanPasangan"
-                      placeholder="Kewarganegaraan"
+                      id="txtTempatLahirPasangan"
+                      placeholder="Tempat Lahir"
                     />
                   </div>
-                  <div class="col">
-                    <div class="col-right">
-                      <label>Tempat Lahir</label>
-                      <input
-                        type="text"
-                        id="txtTempatLahirPasangan"
-                        placeholder="Tempat Lahir"
-                      />
-                    </div>
-                    <div class="col-left">
-                      <label>Tanggal Lahir</label>
-                      <input
-                        type="date"
-                        id="txtTanggalLahirPasangan"
-                      />
-                    </div>
+                  <div class="col-left">
+                    <label>Tanggal Lahir</label>
+                    <input type="date" id="txtTanggalLahirPasangan" />
                   </div>
                 </div>
+              </div>
             </div>
           </div>
 

@@ -142,6 +142,9 @@ window.onload = function() {
         if (data.SuccessMessage) {
           var d = data.List;
           var namaLengkap = document.getElementById("lblNamaLengkap");
+          if(d.NamaLengkap == ""){
+            d.NamaLengkap = "Lengkapi Profil dulu ya"
+          }
           namaLengkap.appendChild(document.createTextNode(d.NamaLengkap));
         } else {
           alert(data.InfoMessage);

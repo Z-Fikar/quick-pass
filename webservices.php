@@ -520,6 +520,19 @@ function update_profil()
         $TempatLahirPasangan = $d->TempatLahirPasangan;
         $TanggalLahirPasangan = $d->TanggalLahirPasangan;
 
+        $pasanganSet = ",
+            NamaPasangan = '$NamaPasangan',
+            KewarganegaraanPasangan = '$KewarganegaraanPasangan',
+            TempatLahirPasangan = '$TempatLahirPasangan',
+            TanggalLahirPasangan = '$TanggalLahirPasangan'";
+        if ($StatusSipilID == 2) {
+            $pasanganSet = ",
+                NamaPasangan = 'TIDAK KAWIN',
+                KewarganegaraanPasangan = 'TIDAK KAWIN',
+                TempatLahirPasangan = 'TIDAK KAWIN',
+                TanggalLahirPasangan = '9999-12-12'";
+        }
+
         mysqli_begin_transaction($conn);
 
         $kueri = "
@@ -555,11 +568,9 @@ function update_profil()
                 TanggalLahirAyah = '$TanggalLahirAyah',
 
                 AlamatOrangTua = '$AlamatOrangTua',
-                TeleponOrangTua = '$TeleponOrangTua',
-                NamaPasangan = '$NamaPasangan',
-                KewarganegaraanPasangan = '$KewarganegaraanPasangan',
-                TempatLahirPasangan = '$TempatLahirPasangan',
-                TanggalLahirPasangan = '$TanggalLahirPasangan'
+                TeleponOrangTua = '$TeleponOrangTua'
+
+                $pasanganSet
 			where UserID = $UserID";
         mysqli_query($conn, $kueri);
 
@@ -592,11 +603,23 @@ function check_profil()
     try {
         mysqli_begin_transaction($conn);
         $UserID = $_SESSION["UserID"];
-        $kueri = "SELECT `usf_Profil_CheckEmpty`($UserID) AS `isEmpty`;";
+        $kueri = "
+        SELECT 
+            if(UserID>'',0,1)+if(NamaLengkap>'',0,1)+if(JenisKelamin>'',0,1)+if(NamaLain>'',0,1)+if(TinggiBadan>'',0,1)+if(TempatLahir>'',0,1)+if(TanggalLahir>'',0,1)
+            +if(NomorKTPWNI>'',0,1)+if(TanggalDikeluarkan>'',0,1)+if(TempatDikeluarkan>'',0,1)+if(TanggalBerakhir>'',0,1)
+            +if(Alamat>'',0,1)+if(Telepon>'',0,1)+if(StatusSipilID,0,1)
+            +if(PekerjaanID>'',0,1)+if(Pekerjaan>'',0,1)+if(NamaAlamatKantor>'',0,1)+if(TeleponKantor>'',0,1)
+            +if(NamaIbu>'',0,1)+if(KewarganegaraanIbu>'',0,1)+if(TempatLahirIbu>'',0,1)+if(TanggalLahirIbu>'',0,1)
+            +if(NamaAyah>'',0,1)+if(KewarganegaraanAyah>'',0,1)+if(TempatLahirAyah>'',0,1)+if(TanggalLahirAyah>'',0,1)
+            +if(AlamatOrangTua>'',0,1)+if(TeleponOrangTua>'',0,1)
+            +if(NamaPasangan>'',0,1)+if(KewarganegaraanPasangan>'',0,1)+if(TempatLahirPasangan>'',0,1)+if(TanggalLahirPasangan>'',0,1) 
+        JumlahKosong 
+        FROM profil WHERE UserID = $UserID;
+        ";
         $res = mysqli_query($conn, $kueri);
         $d = mysqli_fetch_array($res);
 
-        if (intval($d["isEmpty"])) {
+        if (intval($d["JumlahKosong"])) {
             throw new Exception();
         }
 

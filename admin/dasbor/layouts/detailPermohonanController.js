@@ -389,6 +389,7 @@ window.onload = function() {
         console.log(hr);
         var data = JSON.parse(hr.response);
         alert(data.InfoMessage);
+        location.href = "daftar-permohonan.html";
       }
     };
 

@@ -7,7 +7,8 @@ $server = $cdb["host"];
 $user = $cdb["user"];
 $pass = $cdb["pass"];
 $db = substr($cdb["path"],1);
-$conn = mysqli_connect($server, $user, $pass, $db);
+// $conn = mysqli_connect($server, $user, $pass, $db);
+$conn = mysqli_connect('localhost', 'root', '', 'db_pass');
 
 function get_pekerjaan()
 {

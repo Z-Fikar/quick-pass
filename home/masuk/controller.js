@@ -27,12 +27,14 @@ var check_login = function() {
 check_login();
 
 window.onload = function() {
+  var l = document.querySelector(".overlay");
   var do_login = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
       var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
+    l.style.display = "block";
 
     var url = "/webservices.php";
     hr.open("POST", url, true);
@@ -43,7 +45,6 @@ window.onload = function() {
     };
 
     hr.onreadystatechange = function() {
-      console.log(hr);
       if (hr.readyState == 4 && hr.status == 200) {
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
@@ -56,9 +57,9 @@ window.onload = function() {
         }
         var text = document.createTextNode(data.InfoMessage);
         galat.appendChild(text);
+        l.style.display = "none";
       }
     };
-
     hr.setRequestHeader("Content-type", "application/json");
     hr.send(JSON.stringify(params));
   };

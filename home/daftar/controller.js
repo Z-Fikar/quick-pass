@@ -1,4 +1,5 @@
 window.onload = function() {
+  var l = document.querySelector(".overlay");
   var change_pekerjaan = function(element) {
     input = document.getElementById("txtPekerjaan");
     input.value = element.options[element.selectedIndex].text;
@@ -13,7 +14,9 @@ window.onload = function() {
     }
   };
 
+  // db - done
   var get_pekerjaan = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -29,6 +32,7 @@ window.onload = function() {
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var select = document.getElementById("sbPekerjaan");
           select.onchange = function() {
@@ -50,7 +54,9 @@ window.onload = function() {
     hr.send(JSON.stringify(params));
   };
 
+  // db - done
   var get_statusSipil = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -66,6 +72,7 @@ window.onload = function() {
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var select = document.getElementById("sbStatusSipil");
           data.List.forEach(element => {
@@ -106,6 +113,7 @@ window.onload = function() {
     return false;
   };
 
+  // db - done
   var save_akun = function() {
     var inputDates = document.getElementsByClassName("date");
     var allTrue = Object.keys(inputDates).every(function(k) {
@@ -118,11 +126,13 @@ window.onload = function() {
         document.getElementById("txtKataSandi1").value &&
       allTrue
     ) {
+      l.style.display = "block";
       if (window.XMLHttpRequest) {
         var hr = new XMLHttpRequest();
       } else {
         var hr = new ActiveXObject("Microsoft.XMLHTTP");
       }
+
       var url = "/webservices.php";
       hr.open("POST", url, true);
       var params = {
@@ -185,6 +195,7 @@ window.onload = function() {
         if (hr.readyState == 4 && hr.status == 200) {
           console.log(hr);
           var data = JSON.parse(hr.response);
+          l.style.display = "none";
           if (data.SuccessMessage) {
             alert(data.InfoMessage);
             location.href = "/";

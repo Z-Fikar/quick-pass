@@ -3,40 +3,47 @@ if (window == window.top) {
 }
 
 window.onload = function() {
-  // var check_profil = function() {
-  //   if (window.XMLHttpRequest) {
-  //     var hr = new XMLHttpRequest();
-  //   } else {
-  //     var hr = new ActiveXObject("Microsoft.XMLHTTP");
-  //   }
+  var l = document.querySelector(".overlay");
 
-  //   var url = "/webservices.php";
-  //   hr.open("POST", url, true);
-  //   var params = {
-  //     method: "check_profil();"
-  //   };
+  // db
+  var check_profil = function() {
+    l.style.display = "block";
+    if (window.XMLHttpRequest) {
+      var hr = new XMLHttpRequest();
+    } else {
+      var hr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
 
-  //   hr.onreadystatechange = function() {
-  //     if (hr.readyState == 4 && hr.status == 200) {
-  //       var data = JSON.parse(hr.response);
-  //       var label = document.getElementById("lblCekProfil");
-  //       while (label.firstChild) {
-  //         label.removeChild(label.firstChild);
-  //       }
-  //       if (!data.SuccessMessage) {
-  //         alert("Data Profil harap dilengkapi");
-  //         location.href = "profil.html";
-  //       }
-  //     }
-  //   };
+    var url = "/webservices.php";
+    hr.open("POST", url, true);
+    var params = {
+      method: "check_profil();"
+    };
 
-  //   hr.setRequestHeader("Content-type", "application/json");
-  //   hr.send(JSON.stringify(params));
-  // };
-  // check_profil();
+    hr.onreadystatechange = function() {
+      if (hr.readyState == 4 && hr.status == 200) {
+        var data = JSON.parse(hr.response);
+        var label = document.getElementById("lblCekProfil");
+        while (label.firstChild) {
+          label.removeChild(label.firstChild);
+        }
+        l.style.display = "none";
+        if (!data.SuccessMessage) {
+          alert("Data Profil harap dilengkapi");
+          location.href = "profil.html";
+        }
+      }
+    };
+
+    hr.setRequestHeader("Content-type", "application/json");
+    hr.send(JSON.stringify(params));
+  };
+  check_profil();
 
   var data_permohonanDetail = [];
+  // db
   var get_permohonanDetail = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -53,6 +60,7 @@ window.onload = function() {
       console.log(hr);
       if (hr.readyState == 4 && hr.status == 200) {
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           data_permohonanDetail = data.List;
         }
@@ -83,7 +91,9 @@ window.onload = function() {
     });
   };
 
+  // db
   var get_permohonanHeader = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -99,6 +109,7 @@ window.onload = function() {
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var select = document.getElementById("sbJenisPermohonan");
           select.onclick = function() {
@@ -125,7 +136,9 @@ window.onload = function() {
   };
   get_permohonanHeader();
 
+  // db
   var save_permohonan = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -147,6 +160,7 @@ window.onload = function() {
         while (galat.firstChild) {
           galat.removeChild(galat.firstChild);
         }
+        l.style.display = "none";
         if (data.SuccessMessage) {
           alert(data.InfoMessage);
           location.href = "pembuatan.html";
@@ -202,7 +216,9 @@ window.onload = function() {
       tbody.appendChild(tr);
     }
   };
+  // db
   var getAll_permohonan = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -219,6 +235,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           permohonan = data.List;
           generateTable();

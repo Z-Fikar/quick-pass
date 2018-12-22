@@ -1,12 +1,14 @@
 if (window == window.top) {
-  // location.href = "/";
+  location.href = "/";
 }
 
 window.onload = function() {
+  var l = document.querySelector(".overlay");
   var url_string = window.location.href;
   var ID = new URL(url_string).searchParams.get("id");
 
   var get_lampiran = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -23,6 +25,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var sb = document.getElementById("sbLampiran");
           var d = data.List;
@@ -43,6 +46,7 @@ window.onload = function() {
   get_lampiran();
 
   var get_permohonan = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -60,6 +64,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           d = data.List;
           document.getElementById("txtNamaLengkap").value = d.NamaLengkap;
@@ -152,6 +157,7 @@ window.onload = function() {
     }
   };
   var getAll_lampiran = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -169,6 +175,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           lampiran = data.List;
           generateTable();
@@ -200,6 +207,7 @@ window.onload = function() {
   };
 
   var get_pasporLama = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -218,6 +226,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var d = data.List;
           document.getElementById("txtNamaLama").value = d.NamaPemilik;
@@ -243,6 +252,7 @@ window.onload = function() {
   };
 
   var get_pasporBaru = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -261,6 +271,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var d = data.List;
           document.getElementById("txtTanggalDibuatBaru").value =
@@ -284,6 +295,7 @@ window.onload = function() {
   };
 
   var save_loket = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -316,6 +328,7 @@ window.onload = function() {
   };
 
   var save_tu = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -348,6 +361,7 @@ window.onload = function() {
   };
 
   var save_verifikasi = function(data) {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -389,7 +403,9 @@ window.onload = function() {
   };
   var btnAkhir = document.getElementById("btnSimpanAkhir");
   btnAkhir.onclick = function() {
-    if (confirm("Permohonan akan selesai diproses.\nTekan OK untuk melanjutkan")) {
+    if (
+      confirm("Permohonan akan selesai diproses.\nTekan OK untuk melanjutkan")
+    ) {
       save_verifikasi(6);
     }
   };

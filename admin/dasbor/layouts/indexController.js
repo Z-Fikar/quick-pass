@@ -3,7 +3,9 @@ if (window == window.top) {
 }
 
 window.onload = function() {
+  var l = document.querySelector(".overlay");
   var get_profil = function() {
+    l.style.display = "black";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -18,6 +20,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var d = data.List;
           var namaLengkap = document.getElementById("lblNamaLengkap");

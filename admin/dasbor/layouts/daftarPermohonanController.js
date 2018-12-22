@@ -3,6 +3,8 @@ if (window == window.top) {
 }
 
 window.onload = function() {
+  var l = document.querySelector(".overlay");
+
   var list = [];
   var generateTable = function(d) {
     var head = [
@@ -41,6 +43,7 @@ window.onload = function() {
     }
   };
   var getAll_permohonan = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -55,6 +58,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           list = data.List;
           generateTable(list);

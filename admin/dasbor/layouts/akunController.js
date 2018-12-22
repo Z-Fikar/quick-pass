@@ -3,6 +3,8 @@ if (window == window.top) {
 }
 
 window.onload = function() {
+  // db
+  var l = document.querySelector(".overlay");
   var update_akun = function() {
     var inputDates = document.getElementsByClassName("date");
     var allTrue = Object.keys(inputDates).every(function(k) {
@@ -15,6 +17,7 @@ window.onload = function() {
         document.getElementById("txtKataSandi1").value &&
       allTrue
     ) {
+      l.style.display = "block";
       if (window.XMLHttpRequest) {
         var hr = new XMLHttpRequest();
       } else {
@@ -31,6 +34,7 @@ window.onload = function() {
         if (hr.readyState == 4 && hr.status == 200) {
           console.log(hr);
           var data = JSON.parse(hr.response);
+          l.style.display = "none";
           if (data.SuccessMessage) {
             alert(data.InfoMessage);
             location.href = "index.html";
@@ -51,7 +55,9 @@ window.onload = function() {
     }
   };
 
+  // db
   var get_akun = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -66,6 +72,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           d = data.List;
           document.getElementById("txtAlamatEmail").value = d.AlamatEmail;

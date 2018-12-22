@@ -1,8 +1,9 @@
 if (window == window.top) {
-  location.href = "/";
+  // location.href = "/";
 }
 
 window.onload = function() {
+  var l = document.querySelector(".overlay");
   var change_pekerjaan = function(element) {
     input = document.getElementById("txtPekerjaan");
     input.value = element.options[element.selectedIndex].text;
@@ -17,7 +18,9 @@ window.onload = function() {
     }
   };
 
+  // db
   var get_pekerjaan = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -33,6 +36,7 @@ window.onload = function() {
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var select = document.getElementById("sbPekerjaan");
           select.onchange = function() {
@@ -54,7 +58,18 @@ window.onload = function() {
     hr.send(JSON.stringify(params));
   };
 
+  var showPasangan = function(sb) {
+    var p = document.getElementById("pPasangan");
+    if (sb.selectedIndex == 1 || sb.selectedIndex == -1) {
+      p.style.display = "none";
+    } else {
+      p.style.display = "block";
+    }
+  };
+
+  // db
   var get_statusSipil = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -70,6 +85,7 @@ window.onload = function() {
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           var select = document.getElementById("sbStatusSipil");
           data.List.forEach(element => {
@@ -80,6 +96,10 @@ window.onload = function() {
             select.appendChild(option);
           });
           select.selectedIndex = 1;
+          select.onclick = function() {
+            showPasangan(this);
+          };
+          showPasangan(select);
         }
       }
     };
@@ -88,126 +108,82 @@ window.onload = function() {
     hr.send(JSON.stringify(params));
   };
 
-  var change_date = function(str_date) {
-    var list_date = str_date.split(" ");
-    var str_date = list_date.reverse().join("-");
-    return new Date(str_date);
-  };
-
-  var check_date = function(str_date) {
-    var list_date = str_date.split(" ");
-    var str_date = [list_date[1], list_date[0], list_date[2]].join(" ");
-    var the_date = new Date(str_date);
-    if (the_date) {
-      if (
-        +list_date[0] == the_date.getDate() &&
-        +list_date[1] == the_date.getMonth() + 1 &&
-        +list_date[2] == the_date.getFullYear()
-      ) {
-        return true;
-      }
-    }
-    return false;
-  };
-
+  // db
   var update_profil = function() {
-    var inputDates = document.getElementsByClassName("date");
-    var allTrue = Object.keys(inputDates).every(function(k) {
-      return (
-        check_date(inputDates[k].value) === true || inputDates[k].value === ""
-      );
-    });
-    if (allTrue) {
-      if (window.XMLHttpRequest) {
-        var hr = new XMLHttpRequest();
-      } else {
-        var hr = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      var url = "/webservices.php";
-      hr.open("POST", url, true);
-      var params = {
-        method: "update_profil();",
-        NamaLengkap: document.getElementById("txtNamaLengkap").value,
-        JenisKelamin: document.querySelector(
-          "input[name='jenisKelamin']:checked"
-        ).value,
-        NamaLain: document.getElementById("txtNamaLain").value,
-        TinggiBadan: +document.getElementById("txtTinggiBadan").value,
-        TempatLahir: document.getElementById("txtTempatLahir").value,
-        TanggalLahir: change_date(
-          document.getElementById("txtTanggalLahir").value
-        ),
-        NomorKTPWNI: document.getElementById("txtNomorKTPWNI").value,
-        TanggalDikeluarkan: change_date(
-          document.getElementById("txtTanggalDikeluarkan").value
-        ),
-        TempatDikeluarkan: document.getElementById("txtTempatDikeluarkan")
-          .value,
-        TanggalBerakhir: change_date(
-          document.getElementById("txtTanggalBerakhir").value
-        ),
-        Alamat: document.getElementById("txtAlamat").value,
-        Telepon: document.getElementById("txtTelepon").value,
-        StatusSipilID: document.getElementById("sbStatusSipil").value,
-        PekerjaanID: document.getElementById("sbPekerjaan").value,
-        Pekerjaan: document.getElementById("txtPekerjaan").value,
-        NamaAlamatKantor: document.getElementById("txtNamaAlamatKantor").value,
-        TeleponKantor: document.getElementById("txtTeleponKantor").value,
-        NamaIbu: document.getElementById("txtNamaIbu").value,
-        KewarganegaraanIbu: document.getElementById("txtKewarganegaraanIbu")
-          .value,
-        TempatLahirIbu: document.getElementById("txtTempatLahirIbu").value,
-        TanggalLahirIbu: change_date(
-          document.getElementById("txtTanggalLahirIbu").value
-        ),
-        NamaAyah: document.getElementById("txtNamaAyah").value,
-        KewarganegaraanAyah: document.getElementById("txtKewarganegaraanAyah")
-          .value,
-        TempatLahirAyah: document.getElementById("txtTempatLahirAyah").value,
-        TanggalLahirAyah: change_date(
-          document.getElementById("txtTanggalLahirAyah").value
-        ),
-        AlamatOrangTua: document.getElementById("txtAlamatOrangTua").value,
-        TeleponOrangTua: document.getElementById("txtTeleponOrangtua").value,
-        NamaPasangan: document.getElementById("txtNamaPasangan").value,
-        KewarganegaraanPasangan: document.getElementById(
-          "txtKewarganegaraanPasangan"
-        ).value,
-        TempatLahirPasangan: document.getElementById("txtTempatLahirPasangan")
-          .value,
-        TanggalLahirPasangan: change_date(
-          document.getElementById("txtTanggalLahirPasangan").value
-        )
-      };
-      hr.onreadystatechange = function() {
-        if (hr.readyState == 4 && hr.status == 200) {
-          console.log(hr);
-          var data = JSON.parse(hr.response);
-          if (data.SuccessMessage) {
-            alert(data.InfoMessage);
-            location.href = "profil.html";
-          }
-          var galat = document.getElementById("lblGalat");
-          while (galat.firstChild) {
-            galat.removeChild(galat.firstChild);
-          }
-          var text = document.createTextNode(data.InfoMessage);
-          galat.appendChild(text);
-        }
-      };
-      hr.setRequestHeader("Content-type", "application/json");
-      hr.send(JSON.stringify(params));
+    l.style.display = "block";
+    if (window.XMLHttpRequest) {
+      var hr = new XMLHttpRequest();
     } else {
-      alert("Data Tanggal belum sesuai format!");
+      var hr = new ActiveXObject("Microsoft.XMLHTTP");
     }
+    var url = "/webservices.php";
+    hr.open("POST", url, true);
+    var params = {
+      method: "update_profil();",
+      NamaLengkap: document.getElementById("txtNamaLengkap").value,
+      JenisKelamin: document.querySelector("input[name='jenisKelamin']:checked")
+        .value,
+      NamaLain: document.getElementById("txtNamaLain").value,
+      TinggiBadan: +document.getElementById("txtTinggiBadan").value,
+      TempatLahir: document.getElementById("txtTempatLahir").value,
+      TanggalLahir: document.getElementById("txtTanggalLahir").value,
+      NomorKTPWNI: document.getElementById("txtNomorKTPWNI").value,
+      TanggalDikeluarkan: document.getElementById("txtTanggalDikeluarkan")
+        .value,
+      TempatDikeluarkan: document.getElementById("txtTempatDikeluarkan").value,
+      TanggalBerakhir: document.getElementById("txtTanggalBerakhir").value,
+      Alamat: document.getElementById("txtAlamat").value,
+      Telepon: document.getElementById("txtTelepon").value,
+      StatusSipilID: document.getElementById("sbStatusSipil").value,
+      PekerjaanID: document.getElementById("sbPekerjaan").value,
+      Pekerjaan: document.getElementById("txtPekerjaan").value,
+      NamaAlamatKantor: document.getElementById("txtNamaAlamatKantor").value,
+      TeleponKantor: document.getElementById("txtTeleponKantor").value,
+      NamaIbu: document.getElementById("txtNamaIbu").value,
+      KewarganegaraanIbu: document.getElementById("txtKewarganegaraanIbu")
+        .value,
+      TempatLahirIbu: document.getElementById("txtTempatLahirIbu").value,
+      TanggalLahirIbu: document.getElementById("txtTanggalLahirIbu").value,
+      NamaAyah: document.getElementById("txtNamaAyah").value,
+      KewarganegaraanAyah: document.getElementById("txtKewarganegaraanAyah")
+        .value,
+      TempatLahirAyah: document.getElementById("txtTempatLahirAyah").value,
+      TanggalLahirAyah: document.getElementById("txtTanggalLahirAyah").value,
+      AlamatOrangTua: document.getElementById("txtAlamatOrangTua").value,
+      TeleponOrangTua: document.getElementById("txtTeleponOrangtua").value,
+      NamaPasangan: document.getElementById("txtNamaPasangan").value,
+      KewarganegaraanPasangan: document.getElementById(
+        "txtKewarganegaraanPasangan"
+      ).value,
+      TempatLahirPasangan: document.getElementById("txtTempatLahirPasangan")
+        .value,
+      TanggalLahirPasangan: document.getElementById("txtTanggalLahirPasangan")
+        .value
+    };
+    hr.onreadystatechange = function() {
+      if (hr.readyState == 4 && hr.status == 200) {
+        console.log(hr);
+        var data = JSON.parse(hr.response);
+        l.style.display = "none";
+        if (data.SuccessMessage) {
+          alert(data.InfoMessage);
+          location.href = "profil.html";
+        }
+        var galat = document.getElementById("lblGalat");
+        while (galat.firstChild) {
+          galat.removeChild(galat.firstChild);
+        }
+        var text = document.createTextNode(data.InfoMessage);
+        galat.appendChild(text);
+      }
+    };
+    hr.setRequestHeader("Content-type", "application/json");
+    hr.send(JSON.stringify(params));
   };
 
-  var change_date_format = function(str_date) {
-    var date = str_date.split("-");
-    return date.reverse().join(" ");
-  };
-
+  // db
   var get_profil = function() {
+    l.style.display = "block";
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
     } else {
@@ -222,6 +198,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         if (data.SuccessMessage) {
           d = data.List;
           document.getElementById("txtNamaLengkap").value = d.NamaLengkap;
@@ -231,18 +208,14 @@ window.onload = function() {
           document.getElementById("txtNamaLain").value = d.NamaLain;
           document.getElementById("txtTinggiBadan").value = d.TinggiBadan;
           document.getElementById("txtTempatLahir").value = d.TempatLahir;
-          document.getElementById("txtTanggalLahir").value = change_date_format(
-            d.TanggalLahir
-          );
+          document.getElementById("txtTanggalLahir").value = d.TanggalLahir;
           document.getElementById("txtNomorKTPWNI").value = d.NomorKTPWNI;
-          document.getElementById(
-            "txtTanggalDikeluarkan"
-          ).value = change_date_format(d.TanggalDikeluarkan);
+          document.getElementById("txtTanggalDikeluarkan").value =
+            d.TanggalDikeluarkan;
           document.getElementById("txtTempatDikeluarkan").value =
             d.TempatDikeluarkan;
-          document.getElementById(
-            "txtTanggalBerakhir"
-          ).value = change_date_format(d.TanggalBerakhir);
+          document.getElementById("txtTanggalBerakhir").value =
+            d.TanggalBerakhir;
           document.getElementById("txtAlamat").value = d.Alamat;
           document.getElementById("txtTelepon").value = d.Telepon;
           document.getElementById("sbStatusSipil").value = d.StatusSipilID;
@@ -256,18 +229,16 @@ window.onload = function() {
           document.getElementById("txtKewarganegaraanIbu").value =
             d.KewarganegaraanIbu;
           document.getElementById("txtTempatLahirIbu").value = d.TempatLahirIbu;
-          document.getElementById(
-            "txtTanggalLahirIbu"
-          ).value = change_date_format(d.TanggalLahirIbu);
+          document.getElementById("txtTanggalLahirIbu").value =
+            d.TanggalLahirIbu;
 
           document.getElementById("txtNamaAyah").value = d.NamaAyah;
           document.getElementById("txtKewarganegaraanAyah").value =
             d.KewarganegaraanAyah;
           document.getElementById("txtTempatLahirAyah").value =
             d.TempatLahirAyah;
-          document.getElementById(
-            "txtTanggalLahirAyah"
-          ).value = change_date_format(d.TanggalLahirAyah);
+          document.getElementById("txtTanggalLahirAyah").value =
+            d.TanggalLahirAyah;
 
           document.getElementById("txtAlamatOrangTua").value = d.AlamatOrangTua;
           document.getElementById("txtTeleponOrangtua").value =
@@ -278,9 +249,8 @@ window.onload = function() {
             d.KewarganegaraanPasangan;
           document.getElementById("txtTempatLahirPasangan").value =
             d.TempatLahirPasangan;
-          document.getElementById(
-            "txtTanggalLahirPasangan"
-          ).value = change_date_format(d.TanggalLahirPasangan);
+          document.getElementById("txtTanggalLahirPasangan").value =
+            d.TanggalLahirPasangan;
         } else {
           alert(data.InfoMessage);
         }

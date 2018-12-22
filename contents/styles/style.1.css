@@ -42,6 +42,10 @@ body {
   z-index: 1;
 }
 
+.burakku {
+  background: #131313;
+}
+
 .sidemenu ul {
   padding: 60px 0 0;
   border-bottom: 1px solid lightgray;

@@ -54,6 +54,14 @@ window.onload = function() {
     hr.send(JSON.stringify(params));
   };
 
+  var showPasangan = function(sb) {
+    var p = document.getElementById("pPasangan");
+    if (sb.selectedIndex == 1 || sb.selectedIndex == -1) {
+      p.style.display = "none";
+    } else {
+      p.style.display = "block";
+    }
+  };
   // db - done
   var get_statusSipil = function() {
     l.style.display = "block";
@@ -83,6 +91,10 @@ window.onload = function() {
             select.appendChild(option);
           });
           select.selectedIndex = 1;
+          select.onclick = function() {
+            showPasangan(this);
+          };
+          showPasangan(select);
         }
       }
     };

@@ -105,10 +105,10 @@ CREATE TABLE Profil(
 	AlamatOrangTua varchar(50),
 	TeleponOrangTua varchar(15),
 	
-	NamaPasangan varchar(50),
-	KewarganegaraanPasangan varchar(50),
-	TempatLahirPasangan varchar(50),
-	TanggalLahirPasangan date,
+	NamaPasangan varchar(50) default "TIDAK KAWIN",
+	KewarganegaraanPasangan varchar(50) default "TIDAK KAWIN",
+	TempatLahirPasangan varchar(50) default "TIDAK KAWIN",
+	TanggalLahirPasangan date default "9999-12-12",
 	
 	primary key (UserID)
 );

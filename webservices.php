@@ -6,7 +6,7 @@ $cdb = parse_url("mysql://b3ec54291aa0c0:42450637@us-cdbr-iron-east-01.cleardb.n
 $server = $cdb["host"];
 $user = $cdb["user"];
 $pass = $cdb["pass"];
-$db = substr($cdb["path"],1);
+$db = substr($cdb["path"], 1);
 // $conn = mysqli_connect($server, $user, $pass, $db);
 $conn = mysqli_connect('localhost', 'root', '', 'db_pass');
 
@@ -136,6 +136,16 @@ function save_akun()
         $TempatLahirPasangan = $d->TempatLahirPasangan;
         $TanggalLahirPasangan = $d->TanggalLahirPasangan;
 
+        $pasanganFields = "";
+        $pasanganValues = "";
+        if ($NamaPasangan
+            && $KewarganegaraanPasangan
+            && $TempatLahirPasangan
+            && $TanggalLahirPasangan) {
+            $pasanganFields = ",NamaPasangan, KewarganegaraanPasangan, TempatLahirPasangan, TanggalLahirPasangan";
+            $pasanganValues = ",'$NamaPasangan', '$KewarganegaraanPasangan', '$TempatLahirPasangan', '$TanggalLahirPasangan'";
+        }
+
         mysqli_begin_transaction($conn);
 
         $kueri = "
@@ -161,8 +171,8 @@ function save_akun()
 				PekerjaanID, Pekerjaan, NamaAlamatKantor, TeleponKantor,
 				NamaIbu, KewarganegaraanIbu, TempatLahirIbu, TanggalLahirIbu,
 				NamaAyah, KewarganegaraanAyah, TempatLahirAyah, TanggalLahirAyah,
-				AlamatOrangTua, TeleponOrangTua,
-				NamaPasangan, KewarganegaraanPasangan, TempatLahirPasangan, TanggalLahirPasangan
+				AlamatOrangTua, TeleponOrangTua
+				$pasanganFields
 			) VALUES (
 				$UserID, '$NamaLengkap', '$JenisKelamin', '$NamaLain', $TinggiBadan, '$TempatLahir', '$TanggalLahir',
 				'$NomorKTPWNI', '$TanggalDikeluarkan', '$TempatDikeluarkan', '$TanggalBerakhir',
@@ -170,8 +180,8 @@ function save_akun()
 				$PekerjaanID, '$Pekerjaan',' $NamaAlamatKantor', '$TeleponKantor',
 				'$NamaIbu', '$KewarganegaraanIbu', '$TempatLahirIbu', '$TanggalLahirIbu',
 				'$NamaAyah', '$KewarganegaraanAyah', '$TempatLahirAyah', '$TanggalLahirAyah',
-				'$AlamatOrangTua', '$TeleponOrangTua',
-				'$NamaPasangan', '$KewarganegaraanPasangan', '$TempatLahirPasangan', '$TanggalLahirPasangan'
+				'$AlamatOrangTua', '$TeleponOrangTua'
+				$pasanganValues
 			)";
         mysqli_query($conn, $kueri);
 
@@ -766,8 +776,8 @@ function get_permohonan()
                 a.StatusID,
                 a.Catatan
             from Permohonan a
-                left join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID 
-                left join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID 
+                left join MasterPermohonanHeader b on a.PermohonanHeaderID = b.ID
+                left join MasterPermohonanDetail c on a.PermohonanDetailID = c.ID
             where a.ID = $PermohonanID
 			;";
         $res = mysqli_query($conn, $kueri);
@@ -1332,4 +1342,3 @@ if (!empty($str_json)) {
         eval($d->method);
     }
 }
-

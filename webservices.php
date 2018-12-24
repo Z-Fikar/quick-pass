@@ -9,10 +9,10 @@ $pass = $cdb["pass"];
 $db = substr($cdb["path"], 1);
 
 // server
-// $conn = mysqli_connect($server, $user, $pass, $db);
+$conn = mysqli_connect($server, $user, $pass, $db);
 
 // local
-$conn = mysqli_connect('localhost', 'root', '', 'db_pass');
+// $conn = mysqli_connect('localhost', 'root', '', 'db_pass');
 
 function get_pekerjaan()
 {

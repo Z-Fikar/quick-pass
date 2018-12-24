@@ -91,7 +91,7 @@ window.onload = function() {
             select.appendChild(option);
           });
           select.selectedIndex = 1;
-          select.onclick = function() {
+          select.onchange = function() {
             showPasangan(this);
           };
           showPasangan(select);

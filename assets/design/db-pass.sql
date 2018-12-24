@@ -180,11 +180,7 @@ ALTER TABLE MasterPekerjaan
 	add unique key uk_MasterPekerjaan (nama);
 	
 ALTER TABLE MasterStatusSipil
-	add unique key (Nama);
-	
-ALTER TABLE MasterStatusSipil
-	add unique key (Nama);
-	
+	add unique key (Nama);	
 ALTER TABLE MasterAkses
 	add unique key (nama);
 	
@@ -259,13 +255,13 @@ INSERT INTO MasterStatusSipil values
 	
 INSERT INTO MasterAkses values
 	(1, 'Administrator'),
-	(2, 'Petugas Loket'),
-	(3, 'Petugas Wawancara'),
-	(4, 'Pegawai Tata Usaha'),
-	(5, 'Pejim NIKIM'),
-	(6, 'Pejim Kelengkapan'),
-	(7, 'Pejim Daftar Cekal dan Kelainan Surat'),
-	(8, 'Kepala Kantor Imigrasi'),
+	-- (2, 'Petugas Loket'),
+	-- (3, 'Petugas Wawancara'),
+	-- (4, 'Pegawai Tata Usaha'),
+	-- (5, 'Pejim NIKIM'),
+	-- (6, 'Pejim Kelengkapan'),
+	-- (7, 'Pejim Daftar Cekal dan Kelainan Surat'),
+	-- (8, 'Kepala Kantor Imigrasi'),
 	(9, 'Pemohon');
 	
 INSERT INTO MasterLampiran values
@@ -286,15 +282,15 @@ INSERT INTO MasterLampiran values
 	
 INSERT INTO Otentikasi values
 	(1, 'zedd@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 1, 1),
-	(2, 'anto@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 8, 1),
-	(3, 'budi@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 7, 1),
-	(4, 'caca@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 6, 1),
-	(5, 'dudi@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 5, 1),
-	(6, 'eko@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 4, 1),
-	(7, 'feri@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 3, 1),
-	(8, 'gea@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 2, 1),
+	-- (2, 'anto@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 8, 1),
+	-- (3, 'budi@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 7, 1),
+	-- (4, 'caca@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 6, 1),
+	-- (5, 'dudi@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 5, 1),
+	-- (6, 'eko@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 4, 1),
+	-- (7, 'feri@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 3, 1),
+	-- (8, 'gea@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 2, 1),
 	(9, 'ijul@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 9, 1),
-	(10, 'iska@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 9, 0);
+	(10, 'rizka@gmail.com', 'f8701e5e12e11940da9fa9d57d44d8bf', 9, 1);
 	
 INSERT INTO profil (
 	UserID, NamaLengkap, JenisKelamin, NamaLain, TinggiBadan, TempatLahir, TanggalLahir, 
@@ -315,7 +311,32 @@ INSERT INTO profil (
 	'JL. Bali IV', '+628123123123', 
 	'Adin', 'Indonesia', 'Serpong', '1997-06-06'
 );
+INSERT INTO profil (
+	UserID, NamaLengkap, JenisKelamin, NamaLain, TinggiBadan, TempatLahir, TanggalLahir, 
+	NomorKTPWNI, TanggalDikeluarkan, TempatDikeluarkan, TanggalBerakhir, 
+	Alamat, Telepon, StatusSipilID,
+	PekerjaanID, Pekerjaan, NamaAlamatKantor, TeleponKantor, 
+	NamaIbu, KewarganegaraanIbu, TempatLahirIbu, TanggalLahirIbu, 
+	NamaAyah, KewarganegaraanAyah, TempatLahirAyah, TanggalLahirAyah, 
+	AlamatOrangTua, TeleponOrangTua
+) VALUES 
+	(
+		10, 'Rizka Auliaf', 'P', 'Aulia', 168, 'Bogor', '1997-08-13', 
+		'1918273645712346', '2007-08-13', 'Pamulang', '9999-12-31', 
+		'Jl. Jawa IV', '7496412', 2,
+		5, 'Mahasiswa', 'Gunadarma, Kelapa Dua', '0217496412', 
+		'Nur', 'Indonesia', 'Bekasi', '1974-08-03', 
+		'Cuai', 'Indonesia', 'Jakarta', '1969-10-16', 
+		'JL. Bali IV', '08569308056'
+	),(
+		1, "Zedd", 'L', 'Zedd', 175, 'Jakarta', '1997-08-13', 
+		'123456789101112', '2007-08-13', 'Pamulang', '9999-12-31', 
+		'Jl. Bali IV', '08123123123', 1,
+		5, 'Mahasiswa', 'Gundar, Kelapa Dua', '08123456789', 
+		'Nur', 'Indonesia', 'Bekasi', '1974-08-03', 
+		'Cuai', 'Indonesia', 'Jakarta', '1969-10-16', 
+		'JL. Bali IV', '+628123123123'
+	);
 
-INSERT INTO Profil (UserID, NamaLengkap) VALUES (1, "Zedd");
-
-INSERT INTO Paspor VALUES(9, 123, 321, "Zulfikar", "Pamulang", "2017-08-13", "2022-08-13", "Tangsel");
+INSERT INTO Paspor VALUES(9, 123, 321, "Zulfikar", "Tangsel", "2018-08-13", "2023-08-13", "Tangsel");
+INSERT INTO Paspor VALUES(10, 234, 432, "Rizka", "Bogor", "2017-08-13", "2022-08-13", "Bogor");

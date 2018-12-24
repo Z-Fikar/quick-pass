@@ -229,7 +229,8 @@ label {
   text-align: center;
 }
 
-.col .circle img, .col .circle-back img {
+.col .circle img,
+.col .circle-back img {
   padding: 20px;
   height: 100%;
 }
@@ -282,11 +283,11 @@ ul {
 .readonly textarea {
   background: #ecffae;
 }
-.col button:disabled{
+.col button:disabled {
   background: #747474;
 }
 
-.overlay{
+.overlay {
   position: absolute;
   background: #00000041;
   height: 100%;
@@ -294,25 +295,25 @@ ul {
   top: 0;
   left: 0;
   text-align: center;
-  z-index: 99; 
+  z-index: 99;
   display: none;
   transition: display ease-in-out;
 }
 
-.overlay div{
+.overlay div {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
 
-[class*= "dot-"]{
-  background: #FFF;
+[class*="dot-"] {
+  background: #fff;
   border: 1px solid #008181;
   width: 50px;
   height: 50px;
   border-radius: 100%;
   margin: 5px;
-  display: inline-block; 
+  display: inline-block;
   animation: moveY 1s infinite ease-in-out;
 }
 
@@ -320,29 +321,48 @@ ul {
   animation-delay: 0s;
 }
 .dot-5 {
-  animation-delay: .2s;
+  animation-delay: 0.2s;
 }
 .dot-4 {
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 .dot-3 {
-  animation-delay: .6s;
+  animation-delay: 0.6s;
 }
 .dot-2 {
-  animation-delay: .8s;
+  animation-delay: 0.8s;
 }
 .dot-1 {
   animation-delay: 1s;
 }
 
-@keyframes moveY{
-  0%{
+@keyframes moveY {
+  0% {
     transform: translateY(0%);
   }
-  50%{
+  50% {
     transform: translateY(200%);
   }
-  100%{
+  100% {
     transform: translateY(0%);
   }
+}
+
+.keterangan {
+  padding-top: 20px;
+}
+
+.keterangan tr td:first-child {
+  vertical-align: baseline;
+  width: 0px;
+  padding-right: 0px;
+}
+
+.keterangan ol,
+.keterangan ul {
+  margin: 0px;
+}
+
+.orenji, .keterangan tr td:first-child {
+  color: #e10039;
 }

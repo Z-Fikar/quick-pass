@@ -534,7 +534,7 @@ function update_profil()
                 NamaPasangan = 'TIDAK KAWIN',
                 KewarganegaraanPasangan = 'TIDAK KAWIN',
                 TempatLahirPasangan = 'TIDAK KAWIN',
-                TanggalLahirPasangan = '9999-12-12'";
+                TanggalLahirPasangan = '9999-12-31'";
         }
 
         mysqli_begin_transaction($conn);

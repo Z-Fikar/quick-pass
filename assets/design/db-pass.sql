@@ -108,7 +108,7 @@ CREATE TABLE Profil(
 	NamaPasangan varchar(50) default "TIDAK KAWIN",
 	KewarganegaraanPasangan varchar(50) default "TIDAK KAWIN",
 	TempatLahirPasangan varchar(50) default "TIDAK KAWIN",
-	TanggalLahirPasangan date default "9999-12-12",
+	TanggalLahirPasangan date default "9999-12-31",
 	
 	primary key (UserID)
 );
@@ -303,7 +303,7 @@ INSERT INTO profil (
 	NamaPasangan, KewarganegaraanPasangan, TempatLahirPasangan, TanggalLahirPasangan
 ) VALUES (
 	9, 'Zulfikar', 'L', 'Zedd', 175, 'Jakarta', '1997-08-13', 
-	'123456789101112', '2007-08-13', 'Pamulang', '9999-12-31', 
+	'1234567891011121', '2007-08-13', 'Pamulang', '9999-12-31', 
 	'Jl. Bali IV', '08123123123', 1,
 	5, 'Mahasiswa', 'Gundar, Kelapa Dua', '08123456789', 
 	'Nur', 'Indonesia', 'Bekasi', '1974-08-03', 

@@ -1,5 +1,5 @@
-if(window==window.top){
-  location.href = "/quickpass"
+if (window == window.top) {
+  location.href = "/quickpass";
 }
 
 window.onload = function() {
@@ -24,8 +24,8 @@ window.onload = function() {
         if (data.SuccessMessage) {
           var d = data.List;
           var namaLengkap = document.getElementById("lblNamaLengkap");
-          if(d.NamaLengkap==""){
-            d.NamaLengkap = "silahkan lengkapi data Profil anda di sini."
+          if (d.NamaLengkap == "" || d.NamaLengkap == null) {
+            d.NamaLengkap = "silahkan lengkapi data Profil anda di sini.";
           }
           namaLengkap.appendChild(document.createTextNode(d.NamaLengkap));
         } else {

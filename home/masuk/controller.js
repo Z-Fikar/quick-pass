@@ -28,6 +28,15 @@ check_login();
 
 window.onload = function() {
   var l = document.querySelector(".overlay");
+  var reportError = function(m) {
+    var galat = document.getElementById("lblGalat");
+    while (galat.firstChild) {
+      galat.removeChild(galat.firstChild);
+    }
+    var text = document.createTextNode(m);
+    galat.appendChild(text);
+  };
+
   var do_login = function() {
     if (window.XMLHttpRequest) {
       var hr = new XMLHttpRequest();
@@ -49,15 +58,10 @@ window.onload = function() {
         var data = JSON.parse(hr.response);
         if (data.SuccessMessage) {
           location.href = "/";
+        } else {
+          reportError(data.InfoMessage);
+          l.style.display = "none";
         }
-
-        var galat = document.getElementById("lblGalat");
-        while (galat.firstChild) {
-          galat.removeChild(galat.firstChild);
-        }
-        var text = document.createTextNode(data.InfoMessage);
-        galat.appendChild(text);
-        l.style.display = "none";
       }
     };
     hr.setRequestHeader("Content-type", "application/json");
@@ -66,7 +70,13 @@ window.onload = function() {
 
   var masuk = document.getElementById("btnMasuk");
   masuk.onclick = function() {
-    do_login();
+    var mail = document.getElementById("txtAlamatEmail");
+    var pass = document.getElementById("txtKataSandi");
+    if (mail.value.length && pass.value.length) {
+      do_login();
+    } else {
+      reportError("Harap untuk melengkapi masukkan");
+    }
   };
 
   var daftar = document.getElementById("btnDaftar");

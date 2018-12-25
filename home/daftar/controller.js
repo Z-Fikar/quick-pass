@@ -64,4 +64,13 @@ window.onload = function() {
   submit.onclick = function() {
     save_akun();
   };
+
+  var input = document.querySelectorAll("input");
+  for (i = 0; i < input.length; i++) {
+    input[i].onkeyup = function(event) {
+      if (event.keyCode === 13) {
+        submit.click();
+      }
+    };
+  }
 };

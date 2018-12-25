@@ -70,14 +70,31 @@ window.onload = function() {
 
   var masuk = document.getElementById("btnMasuk");
   masuk.onclick = function() {
-    var mail = document.getElementById("txtAlamatEmail");
-    var pass = document.getElementById("txtKataSandi");
-    if (mail.value.length && pass.value.length) {
+    var inputs = document.querySelectorAll("input");
+    var valid = true;
+    for (i = 0; i < inputs.length; i++) {
+      if (inputs[i].validationMessage != "") {
+        inputs[i].reportValidity();
+        valid = false;
+        break;
+      }
+    }
+
+    if (valid) {
       do_login();
     } else {
       reportError("Harap untuk melengkapi masukkan");
     }
   };
+
+  var input = document.querySelectorAll("input");
+  for (i = 0; i < input.length; i++) {
+    input[i].onkeyup = function(event) {
+      if (event.keyCode === 13) {
+        masuk.click();
+      }
+    };
+  }
 
   var daftar = document.getElementById("btnDaftar");
   daftar.onclick = function() {

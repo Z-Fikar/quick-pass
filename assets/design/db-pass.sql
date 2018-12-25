@@ -72,7 +72,7 @@ CREATE TABLE Otentikasi(
 CREATE TABLE Profil(
 	UserID int not null,
 	NamaLengkap varchar(50),
-	JenisKelamin char(1),
+	JenisKelamin char(1) default "L",
 	NamaLain varchar(50),
 	TinggiBadan int,
 	TempatLahir varchar(50),
@@ -85,7 +85,7 @@ CREATE TABLE Profil(
 	
 	Alamat varchar(50),
 	Telepon varchar(15),
-	StatusSipilID int,
+	StatusSipilID int default 2,
 	
 	PekerjaanID int,
 	Pekerjaan varchar(50),

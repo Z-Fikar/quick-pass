@@ -103,53 +103,6 @@ function save_akun()
         $AlamatEmail = $d->AlamatEmail;
         $KataSandi = md5($d->KataSandi);
 
-        $NamaLengkap = $d->NamaLengkap;
-        $JenisKelamin = $d->JenisKelamin;
-        $NamaLain = $d->NamaLain;
-        $TinggiBadan = $d->TinggiBadan;
-        $TempatLahir = $d->TempatLahir;
-        $TanggalLahir = $d->TanggalLahir;
-        $NomorKTPWNI = $d->NomorKTPWNI;
-        $TanggalDikeluarkan = $d->TanggalDikeluarkan;
-        $TempatDikeluarkan = $d->TempatDikeluarkan;
-        $TanggalBerakhir = $d->TanggalBerakhir;
-        $Alamat = $d->Alamat;
-        $Telepon = $d->Telepon;
-        $StatusSipilID = $d->StatusSipilID;
-
-        $PekerjaanID = $d->PekerjaanID;
-        $Pekerjaan = $d->Pekerjaan;
-        $NamaAlamatKantor = $d->NamaAlamatKantor;
-        $TeleponKantor = $d->TeleponKantor;
-
-        $NamaIbu = $d->NamaIbu;
-        $KewarganegaraanIbu = $d->KewarganegaraanIbu;
-        $TempatLahirIbu = $d->TempatLahirIbu;
-        $TanggalLahirIbu = $d->TanggalLahirIbu;
-
-        $NamaAyah = $d->NamaAyah;
-        $KewarganegaraanAyah = $d->KewarganegaraanAyah;
-        $TempatLahirAyah = $d->TempatLahirAyah;
-        $TanggalLahirAyah = $d->TanggalLahirAyah;
-
-        $AlamatOrangTua = $d->AlamatOrangTua;
-        $TeleponOrangTua = $d->TeleponOrangTua;
-
-        $NamaPasangan = $d->NamaPasangan;
-        $KewarganegaraanPasangan = $d->KewarganegaraanPasangan;
-        $TempatLahirPasangan = $d->TempatLahirPasangan;
-        $TanggalLahirPasangan = $d->TanggalLahirPasangan;
-
-        $pasanganFields = "";
-        $pasanganValues = "";
-        if ($NamaPasangan
-            && $KewarganegaraanPasangan
-            && $TempatLahirPasangan
-            && $TanggalLahirPasangan) {
-            $pasanganFields = ",NamaPasangan, KewarganegaraanPasangan, TempatLahirPasangan, TanggalLahirPasangan";
-            $pasanganValues = ",'$NamaPasangan', '$KewarganegaraanPasangan', '$TempatLahirPasangan', '$TanggalLahirPasangan'";
-        }
-
         mysqli_begin_transaction($conn);
 
         $kueri = "
@@ -168,25 +121,7 @@ function save_akun()
 
         $UserID = mysqli_insert_id($conn);
         $kueri = "
-			INSERT INTO profil (
-				UserID, NamaLengkap, JenisKelamin, NamaLain, TinggiBadan, TempatLahir, TanggalLahir,
-				NomorKTPWNI, TanggalDikeluarkan, TempatDikeluarkan, TanggalBerakhir,
-				Alamat, Telepon, StatusSipilID,
-				PekerjaanID, Pekerjaan, NamaAlamatKantor, TeleponKantor,
-				NamaIbu, KewarganegaraanIbu, TempatLahirIbu, TanggalLahirIbu,
-				NamaAyah, KewarganegaraanAyah, TempatLahirAyah, TanggalLahirAyah,
-				AlamatOrangTua, TeleponOrangTua
-				$pasanganFields
-			) VALUES (
-				$UserID, '$NamaLengkap', '$JenisKelamin', '$NamaLain', $TinggiBadan, '$TempatLahir', '$TanggalLahir',
-				'$NomorKTPWNI', '$TanggalDikeluarkan', '$TempatDikeluarkan', '$TanggalBerakhir',
-				'$Alamat', '$Telepon', $StatusSipilID,
-				$PekerjaanID, '$Pekerjaan',' $NamaAlamatKantor', '$TeleponKantor',
-				'$NamaIbu', '$KewarganegaraanIbu', '$TempatLahirIbu', '$TanggalLahirIbu',
-				'$NamaAyah', '$KewarganegaraanAyah', '$TempatLahirAyah', '$TanggalLahirAyah',
-				'$AlamatOrangTua', '$TeleponOrangTua'
-				$pasanganValues
-			)";
+			INSERT INTO profil (UserID) VALUES ($UserID)";
         mysqli_query($conn, $kueri);
 
         mysqli_commit($conn);

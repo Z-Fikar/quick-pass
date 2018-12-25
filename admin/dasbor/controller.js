@@ -120,6 +120,8 @@ window.onload = function() {
   var keluar = document.getElementById("btnKeluar");
   var prev_handler = keluar.onclick;
   keluar.onclick = function() {
+    var f = document.querySelector("iframe");
+    f.contentWindow.document.querySelector(".overlay").style.display = "block";
     prev_handler();
     do_logout();
   };

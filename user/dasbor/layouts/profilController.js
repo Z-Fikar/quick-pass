@@ -63,9 +63,9 @@ window.onload = function() {
     if (sb.selectedIndex == 1 || sb.selectedIndex == -1) {
       p.style.display = "none";
       var inputs = document.querySelectorAll("#pPasangan input");
-        for (i = 0; i < inputs.length; i++) {
-          inputs[i].value = "";
-        }
+      for (i = 0; i < inputs.length; i++) {
+        inputs[i].value = "";
+      }
     } else {
       p.style.display = "block";
     }
@@ -165,19 +165,19 @@ window.onload = function() {
     };
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
-        console.log(hr);
         var data = JSON.parse(hr.response);
         l.style.display = "none";
         if (data.SuccessMessage) {
           alert(data.InfoMessage);
-          location.href = "profil.html";
+          parent.location.href = "/";
+        } else {
+          var galat = document.getElementById("lblGalat");
+          while (galat.firstChild) {
+            galat.removeChild(galat.firstChild);
+          }
+          var text = document.createTextNode(data.InfoMessage);
+          galat.appendChild(text);
         }
-        var galat = document.getElementById("lblGalat");
-        while (galat.firstChild) {
-          galat.removeChild(galat.firstChild);
-        }
-        var text = document.createTextNode(data.InfoMessage);
-        galat.appendChild(text);
       }
     };
     hr.setRequestHeader("Content-type", "application/json");
@@ -199,7 +199,6 @@ window.onload = function() {
     };
     hr.onreadystatechange = function() {
       if (hr.readyState == 4 && hr.status == 200) {
-        console.log(hr);
         var data = JSON.parse(hr.response);
         l.style.display = "none";
         if (data.SuccessMessage) {

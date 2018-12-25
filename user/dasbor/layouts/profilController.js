@@ -62,6 +62,10 @@ window.onload = function() {
     var p = document.getElementById("pPasangan");
     if (sb.selectedIndex == 1 || sb.selectedIndex == -1) {
       p.style.display = "none";
+      var inputs = document.querySelectorAll("#pPasangan input");
+        for (i = 0; i < inputs.length; i++) {
+          inputs[i].value = "";
+        }
     } else {
       p.style.display = "block";
     }
@@ -96,10 +100,9 @@ window.onload = function() {
             select.appendChild(option);
           });
           select.selectedIndex = 1;
-          select.onclick = function() {
+          select.onchange = function() {
             showPasangan(this);
           };
-          showPasangan(select);
         }
       }
     };
@@ -219,6 +222,7 @@ window.onload = function() {
           document.getElementById("txtAlamat").value = d.Alamat;
           document.getElementById("txtTelepon").value = d.Telepon;
           document.getElementById("sbStatusSipil").value = d.StatusSipilID;
+          showPasangan(document.getElementById("sbStatusSipil"));
           document.getElementById("sbPekerjaan").value = d.PekerjaanID;
           document.getElementById("txtPekerjaan").value = d.Pekerjaan;
           document.getElementById("txtNamaAlamatKantor").value =

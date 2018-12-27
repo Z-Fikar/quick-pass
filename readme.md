@@ -1,3 +1,16 @@
+<style>
+    code {
+        color: #ff6300;
+    }
+    pre {
+        border: 1px solid #131313;
+        border-radius: 50%;
+    }
+    h1,h2,h3{
+        font-weight: bold;
+    }
+</style>
+
 # QUICKPASS
 
 Merupakan aplikasi web yang dibangun untuk mempercepat proses permohonan pembuatan paspor.
@@ -63,11 +76,32 @@ $ python change_to_local.py --server
 ### Alternatif
 
 Selain menggunakan python script kami, anda juga bisa membuat virtual host pada XAMPP.
+
+Dengan membuat virtual host dengan nama misalkan `quick-pass.local`, maka relative link "`/`" akan bekerja sama halnya ketika menggunakan server.
+
 Untuk langkah-langkah pembuatannya bisa dilihat disini
 
 https://stackoverflow.com/a/36572751
 
-Jangan lupa untuk merestart apache pada XAMPP setelah melakukan perubahan.
+Jangan lupa untuk me-restart apache pada XAMPP setelah melakukan perubahan.
+
+## Database
+
+SQL untuk mengisi database terdapat pada `assets/design/`. Namun kode dalam program ini masih terhubung dengan database server.
+
+Anda bisa ubah kode pada `webservices.php`, dimana sudah terdapat dua perintah untuk menghubungkan program ke database server atau lokal. Perintah untuk menghubungkan ke database lokal sudah ditandai sebagai komentar, sehingga jika ingin menggunakan database lokal tandai perintah server sebagai komentar dan hapus tanda komentar pada perintah lokal.
+
+```php
+...
+
+// server
+$conn = mysqli_connect($server, $user, $pass, $db);
+
+// local
+// $conn = mysqli_connect('localhost', 'root', '', 'db_pass');
+
+...
+```
 
 ## Disclaimer
 

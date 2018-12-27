@@ -23,7 +23,19 @@
         
     </head>
     <body>
-        <h1 id="quickpass">QUICKPASS</h1>
+        <style>
+    code {
+        color: #ff6300;
+    }
+    pre {
+        border: 1px solid #131313;
+        border-radius: 50%;
+    }
+    h1,h2,h3{
+        font-weight: bold;
+    }
+</style>
+<h1 id="quickpass">QUICKPASS</h1>
 <p>Merupakan aplikasi web yang dibangun untuk mempercepat proses permohonan pembuatan paspor.
 Aplikasi ini dibuat untuk menyelesaikan tugas akhir dari mata kuliah kami yaitu Pemrograman Web, yang mana kami ditantang untuk membangun sebuah web tanpa menggunakan framework (dan library?)</p>
 <h2 id="requirements">Requirements</h2>
@@ -58,10 +70,24 @@ XAMPP:
 <pre><code><div>$ python change_to_local.py --server
 </div></code></pre>
 <h3 id="alternatif">Alternatif</h3>
-<p>Selain menggunakan python script kami, anda juga bisa membuat virtual host pada XAMPP.
-Untuk langkah-langkah pembuatannya bisa dilihat disini</p>
+<p>Selain menggunakan python script kami, anda juga bisa membuat virtual host pada XAMPP.</p>
+<p>Dengan membuat virtual host dengan nama misalkan <code>quick-pass.local</code>, maka relative link &quot;<code>/</code>&quot; akan bekerja sama halnya ketika menggunakan server.</p>
+<p>Untuk langkah-langkah pembuatannya bisa dilihat disini</p>
 <p><a href="https://stackoverflow.com/a/36572751">https://stackoverflow.com/a/36572751</a></p>
-<p>Jangan lupa untuk merestart apache pada XAMPP setelah melakukan perubahan.</p>
+<p>Jangan lupa untuk me-restart apache pada XAMPP setelah melakukan perubahan.</p>
+<h2 id="database">Database</h2>
+<p>SQL untuk mengisi database terdapat pada <code>assets/design/</code>. Namun kode dalam program ini masih terhubung dengan database server.</p>
+<p>Anda bisa ubah kode pada <code>webservices.php</code>, dimana sudah terdapat dua perintah untuk menghubungkan program ke database server atau lokal. Perintah untuk menghubungkan ke database lokal sudah ditandai sebagai komentar, sehingga jika ingin menggunakan database lokal tandai perintah server sebagai komentar dan hapus tanda komentar pada perintah lokal.</p>
+<pre><code class="language-php"><div>...
+
+<span class="hljs-comment">// server</span>
+$conn = mysqli_connect($server, $user, $pass, $db);
+
+<span class="hljs-comment">// local</span>
+<span class="hljs-comment">// $conn = mysqli_connect('localhost', 'root', '', 'db_pass');</span>
+
+...
+</div></code></pre>
 <h2 id="disclaimer">Disclaimer</h2>
 <p>Kami masih pemula pada saat pembuatan aplikasi ini.</p>
 

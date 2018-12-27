@@ -27,7 +27,7 @@ Sedangkan pada XAMPP
 localhost/quickpass/
 ```
 
-Sehingga jika pada suatu kode dalam script menggunakan relative link `/`, pada masing-masing kasus, sejatinya program akan merujuk ke
+Sehingga jika pada suatu kode dalam script menggunakan relative link "`/`", pada masing-masing kasus, sejatinya program akan merujuk ke
 
 ```
 Server:
@@ -42,7 +42,7 @@ Oleh sebab itu, kami membuat sebuah python script untuk mengatasi hal tersebut, 
 
 ### Penggunaan
 
-Untuk merubah menjadi local, cukup jalankan dengan perintah dasar:
+Untuk penggunaan di localhost, cukup jalankan dengan perintah dasar:
 
 ```
 $ python change_to_local.py
@@ -60,6 +60,15 @@ atau:
 $ python change_to_local.py --server
 ```
 
+### Alternatif
+
+Selain menggunakan python script kami, anda juga bisa membuat virtual host pada XAMPP.
+Untuk langkah-langkah pembuatannya bisa dilihat disini
+
+https://stackoverflow.com/a/36572751
+
+Jangan lupa untuk merestart apache pada XAMPP setelah melakukan perubahan.
+
 ## Disclaimer
 
-Kami masih pemula dalam pembuatan aplikasi web.
+Kami masih pemula pada saat pembuatan aplikasi ini.

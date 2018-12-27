@@ -20,7 +20,7 @@ Aplikasi ini dibuat untuk menyelesaikan tugas akhir dari mata kuliah kami yaitu 
 
 HTML, CSS, Javascript, PHP, MySQL, dan Python 3.x.
 
-Untuk bagian frontend-nya, dibangun dalam tiga bahasa dasar HTML, CCSS, dan Javascript.
+Untuk bagian frontend-nya, dibangun dalam tiga bahasa dasar HTML, CSS, dan Javascript.
 Sedangkan untuk bagian backend, digunakan bahasa PHP disertai MySQL sebagai DBMS-nya (XAMPP).
 Python digunakan untuk merubah relative link.
 

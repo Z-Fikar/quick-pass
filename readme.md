@@ -1,5 +1,5 @@
 <!-- <style>
-    code {
+    code, a {
         color: #ff6300;
     }
     pre {

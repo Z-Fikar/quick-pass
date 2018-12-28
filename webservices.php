@@ -9,7 +9,7 @@ $pass = $cdb["pass"];
 $db = substr($cdb["path"], 1);
 
 var_dump(getenv("CLEARDB_DATABASE_URL"));
-echo getenv("CLEARDB_DATABASE_URL")
+echo getenv("CLEARDB_DATABASE_URL");
 
 // server
 $conn = mysqli_connect($server, $user, $pass, $db);

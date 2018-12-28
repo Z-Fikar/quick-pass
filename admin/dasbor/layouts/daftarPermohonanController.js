@@ -90,4 +90,6 @@ window.onload = function() {
     var str = document.getElementById("txtCari").value;
     cariPermohonan(str);
   };
+  var txtCari = document.getElementById("txtCari");
+  txtCari.onkeyup = cari.onclick;
 };

@@ -2,18 +2,22 @@
 session_start();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-$cdb = parse_url(getenv("CLEARDB_DATABASE_URL"));
-if($cdb){
+$db_url = getenv("CLEARDB_DATABASE_URL");
+
+if ($db_url) {
+    $cdb = parse_url($db_url);
     $server = $cdb["host"];
     $user = $cdb["user"];
     $pass = $cdb["pass"];
     $db = substr($cdb["path"], 1);
-    $conn = mysqli_connect($server, $user, $pass, $db);
-    echo "satu";
-}else{
-    $conn = mysqli_connect('localhost', 'root', '', 'db_pass');
-    echo "dua";
+} else {
+    $server = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "db_pass";
 }
+echo $server;
+$conn = mysqli_connect($server, $user, $pass, $db);
 
 function get_pekerjaan()
 {
@@ -544,7 +548,7 @@ function check_profil()
         mysqli_begin_transaction($conn);
         $UserID = $_SESSION["UserID"];
         $kueri = "
-        SELECT 
+        SELECT
             if(UserID>'',0,1)+if(NamaLengkap>'',0,1)+if(JenisKelamin>'',0,1)+if(NamaLain>'',0,1)+if(TinggiBadan>'',0,1)+if(TempatLahir>'',0,1)+if(TanggalLahir>'',0,1)
             +if(NomorKTPWNI>'',0,1)+if(TanggalDikeluarkan>'',0,1)+if(TempatDikeluarkan>'',0,1)+if(TanggalBerakhir>'',0,1)
             +if(Alamat>'',0,1)+if(Telepon>'',0,1)+if(StatusSipilID,0,1)
@@ -552,8 +556,8 @@ function check_profil()
             +if(NamaIbu>'',0,1)+if(KewarganegaraanIbu>'',0,1)+if(TempatLahirIbu>'',0,1)+if(TanggalLahirIbu>'',0,1)
             +if(NamaAyah>'',0,1)+if(KewarganegaraanAyah>'',0,1)+if(TempatLahirAyah>'',0,1)+if(TanggalLahirAyah>'',0,1)
             +if(AlamatOrangTua>'',0,1)+if(TeleponOrangTua>'',0,1)
-            +if(NamaPasangan>'',0,1)+if(KewarganegaraanPasangan>'',0,1)+if(TempatLahirPasangan>'',0,1)+if(TanggalLahirPasangan>'',0,1) 
-        JumlahKosong 
+            +if(NamaPasangan>'',0,1)+if(KewarganegaraanPasangan>'',0,1)+if(TempatLahirPasangan>'',0,1)+if(TanggalLahirPasangan>'',0,1)
+        JumlahKosong
         FROM profil WHERE UserID = $UserID;
         ";
         $res = mysqli_query($conn, $kueri);

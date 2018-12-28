@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
     code {
         color: #ff6300;
     }
@@ -9,7 +9,7 @@
     h1,h2,h3{
         font-weight: bold;
     }
-</style>
+</style> -->
 
 # QUICKPASS
 

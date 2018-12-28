@@ -76,15 +76,22 @@ XAMPP:
 <p><a href="https://stackoverflow.com/a/36572751">https://stackoverflow.com/a/36572751</a></p>
 <p>Jangan lupa untuk me-restart apache pada XAMPP setelah melakukan perubahan.</p>
 <h2 id="database">Database</h2>
-<p>SQL untuk mengisi database terdapat pada <code>assets/design/</code>. Namun kode dalam program ini masih terhubung dengan database server.</p>
-<p>Anda bisa ubah kode pada <code>webservices.php</code>, dimana sudah terdapat dua perintah untuk menghubungkan program ke database server atau lokal. Perintah untuk menghubungkan ke database lokal sudah ditandai sebagai komentar, sehingga jika ingin menggunakan database lokal tandai perintah server sebagai komentar dan hapus tanda komentar pada perintah lokal.</p>
+<p>SQL untuk mengisi database terdapat pada <code>assets/design/</code>. <s>Namun kode dalam program ini masih terhubung dengan database server.</s></p>
+<p>Anda bisa ubah kode pada <code>webservices.php</code>, untuk menyesuaikan dengan database yang anda gunakan.</p>
 <pre><code class="language-php"><div>...
 
-<span class="hljs-comment">// server</span>
-$conn = mysqli_connect($server, $user, $pass, $db);
-
-<span class="hljs-comment">// local</span>
-<span class="hljs-comment">// $conn = mysqli_connect('localhost', 'root', '', 'db_pass');</span>
+<span class="hljs-keyword">if</span> ($db_url) {          <span class="hljs-comment">// server</span>
+    $cdb = parse_url($db_url);
+    $server = $cdb[<span class="hljs-string">"host"</span>];
+    $user = $cdb[<span class="hljs-string">"user"</span>];
+    $pass = $cdb[<span class="hljs-string">"pass"</span>];
+    $db = substr($cdb[<span class="hljs-string">"path"</span>], <span class="hljs-number">1</span>);
+} <span class="hljs-keyword">else</span> {                <span class="hljs-comment">// local</span>
+    $server = <span class="hljs-string">"localhost"</span>;
+    $user = <span class="hljs-string">"root"</span>;
+    $pass = <span class="hljs-string">""</span>;
+    $db = <span class="hljs-string">"db_pass"</span>;
+}
 
 ...
 </div></code></pre>

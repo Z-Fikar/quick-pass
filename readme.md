@@ -87,18 +87,25 @@ Jangan lupa untuk me-restart apache pada XAMPP setelah melakukan perubahan.
 
 ## Database
 
-SQL untuk mengisi database terdapat pada `assets/design/`. Namun kode dalam program ini masih terhubung dengan database server.
+SQL untuk mengisi database terdapat pada `assets/design/`. ~~Namun kode dalam program ini masih terhubung dengan database server.~~
 
-Anda bisa ubah kode pada `webservices.php`, dimana sudah terdapat dua perintah untuk menghubungkan program ke database server atau lokal. Perintah untuk menghubungkan ke database lokal sudah ditandai sebagai komentar, sehingga jika ingin menggunakan database lokal tandai perintah server sebagai komentar dan hapus tanda komentar pada perintah lokal.
+Anda bisa ubah kode pada `webservices.php`, untuk menyesuaikan dengan database yang anda gunakan.
 
 ```php
 ...
 
-// server
-$conn = mysqli_connect($server, $user, $pass, $db);
-
-// local
-// $conn = mysqli_connect('localhost', 'root', '', 'db_pass');
+if ($db_url) {          // server
+    $cdb = parse_url($db_url);
+    $server = $cdb["host"];
+    $user = $cdb["user"];
+    $pass = $cdb["pass"];
+    $db = substr($cdb["path"], 1);
+} else {                // local
+    $server = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "db_pass";
+}
 
 ...
 ```

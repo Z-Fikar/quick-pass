@@ -16,7 +16,7 @@ if ($db_url) {
     $pass = "";
     $db = "db_pass";
 }
-echo $server;
+
 $conn = mysqli_connect($server, $user, $pass, $db);
 
 function get_pekerjaan()

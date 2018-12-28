@@ -1,7 +1,3 @@
---user b3ec54291aa0c0
---pass 42450637
---host us-cdbr-iron-east-01.cleardb.net
---db heroku_f4b7857c0620d82
 --mysql -u b3ec54291aa0c0 -h us-cdbr-iron-east-01.cleardb.net heroku_f4b7857c0620d82 -p
 
 drop table if exists Paspor;

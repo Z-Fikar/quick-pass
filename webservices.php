@@ -1049,6 +1049,7 @@ function getAll_lampiran()
             where a.PermohonanID = $PermohonanID
             ;";
         $res = mysqli_query($conn, $kueri);
+        $data = [];
         while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
             $data[] = array(
                 "ID" => $row["ID"],

@@ -315,6 +315,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         alert(data.InfoMessage);
       }
     };
@@ -348,6 +349,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         alert(data.InfoMessage);
       }
     };
@@ -388,6 +390,7 @@ window.onload = function() {
       if (hr.readyState == 4 && hr.status == 200) {
         console.log(hr);
         var data = JSON.parse(hr.response);
+        l.style.display = "none";
         alert(data.InfoMessage);
         location.href = "daftar-permohonan.html";
       }

@@ -1,5 +1,5 @@
 if (window == window.top) {
-  location.href = "/";
+  // location.href = "/";
 }
 
 window.onload = function() {

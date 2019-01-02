@@ -3,25 +3,23 @@
   font-family: Roboto;
 }
 
+body {
+  margin: 0;
+}
+
 .container,
 .medium-container,
 .iframe-container {
   background: #f2f2f2;
-  padding: 1% 4%;
-  margin: 0 auto 60px auto;
-  box-shadow: 0px 10px 10px 5px #00000055;
-  width: 400px;
-  position: relative;
-  top: 5vh;
-}
-
-.iframe-container {
-  width: 1000px;
-  margin: 45px auto 55px auto;
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+  padding: 1% 0%;
 }
 
 .logo-container {
   margin: 0 auto 25px;
+  padding-top: 5%;
   text-align: center;
 }
 
@@ -46,7 +44,11 @@
 }
 
 .col {
-  margin: 0 auto 20px auto;
+  margin: 0 5% 20px;
+}
+
+.col-right {
+  margin-bottom: 20px;
 }
 
 .col label,
@@ -71,6 +73,11 @@
   padding-bottom: 10px;
 }
 
+.col input[type="radio"] {
+  display: inline;
+  margin-left: 15px;
+}
+
 .col button,
 .col label {
   font-weight: bold;
@@ -80,6 +87,23 @@ label {
   /* color: #008181; */
   color: #ff6300;
   margin-bottom: 10px;
+}
+
+.btn-cancel {
+  border: 2px solid #e10039 !important;
+  color: #e10039;
+  background: #fff;
+}
+
+.btn-cancel:hover {
+  background: #e10039;
+  color: #fff;
+}
+
+.col button {
+  margin: 0 auto;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .btn-full,
@@ -92,45 +116,6 @@ label {
   background-color: white;
   color: #008181;
   border-color: #008181;
-}
-
-.col input:invalid {
-  box-shadow: 0px 0px 10px 3px #ff000055;
-}
-
-.medium-container {
-  width: 1000px;
-}
-
-.left-part-container {
-  float: left;
-}
-
-.right-part-container {
-  margin-left: 250px;
-}
-
-.col input[type="radio"] {
-  display: inline;
-  margin-left: 15px;
-}
-
-.col-right,
-.col-left {
-  display: inline-block;
-}
-
-.col-right {
-  width: 70%;
-}
-
-.col-left {
-  width: 28%;
-  float: right;
-}
-
-#txtPekerjaan {
-  transition: display 0.2s ease-out;
 }
 
 .col textarea {
@@ -167,49 +152,14 @@ label {
   background: #008181;
 }
 
-.galat {
-  color: #e10039;
-  font-size: 14px !important;
-  text-align: center;
-  margin: 0 auto;
-  padding-left: 0 !important;
-}
-
-.col table {
-  background: white;
-  width: 100%;
-  border: none;
-}
-
-.col thead {
-  background: #008181;
-  color: white;
-}
-
-.col th,
-.col td {
-  padding: 10px 20px;
-}
-
-.col table,
-.col th,
-.col td {
-  border-collapse: collapse;
-}
-
-.col th,
-.col td {
-  border: 1px solid white;
-}
-
 .col .circle {
   border: 3px solid #747474;
-  display: inline-block;
-  height: 100px;
-  width: 100px;
   border-radius: 100%;
-  /* margin: 10px 30px; */
+  display: inline-block;
   filter: grayscale(100%);
+
+  height: 11vw;
+  width: 11vw;
 }
 
 .col .circle-checked {
@@ -219,10 +169,10 @@ label {
 
 .col .circle-back {
   display: inline-block;
-  height: 100px;
-  width: 100px;
   border-radius: 100%;
   border: 3px solid #e10039;
+  height: 11vw;
+  width: 11vw;
 }
 
 .center {
@@ -231,65 +181,36 @@ label {
 
 .col .circle img,
 .col .circle-back img {
-  padding: 20px;
   height: 100%;
+  padding: 2vw;
 }
 
 .arrow {
   display: inline-block;
-  height: 100px;
   color: #ff6300;
   filter: grayscale(100%);
+  height: 11vw;
 }
 .arrow-checked {
   filter: grayscale(0%);
 }
 .arrow::before {
   content: "\00BB";
-  font-size: 50px;
   display: table;
   margin: auto 0px;
   position: relative;
   top: 17px;
+  font-size: 5vw;
 }
 
-.btn-cancel {
-  border: 2px solid #e10039 !important;
-  color: #e10039;
-  background: #fff;
-}
-
-.btn-cancel:hover {
-  background: #e10039;
-  color: #fff;
-}
-
-.btn {
-  width: 50% !important;
-  margin: 0 auto;
-  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-ul {
-  list-style-position: outside;
-}
-
-.col button {
-  cursor: pointer;
-}
-
-.readonly input,
-.readonly input ~ label,
-.readonly textarea {
-  background: #ecffae;
-}
-.col button:disabled {
-  background: #747474;
+.col input:invalid {
+  box-shadow: 0px 0px 10px 3px #ff000055;
 }
 
 .overlay {
   position: absolute;
   background: #00000041;
+  min-height: 100vh;
   height: 100%;
   width: 100%;
   top: 0;
@@ -348,6 +269,57 @@ ul {
   }
 }
 
+.galat {
+  color: #e10039;
+  font-size: 14px !important;
+  text-align: center;
+  margin: 0 auto;
+  padding-left: 0 !important;
+}
+
+#txtPekerjaan {
+  transition: display 0.2s ease-out;
+}
+
+.scrollX {
+  overflow-x: auto;
+}
+
+.col table {
+  background: white;
+  width: 100%;
+  border: none;
+}
+
+.col thead {
+  background: #008181;
+  color: white;
+}
+
+.col th,
+.col td {
+  padding: 10px 20px;
+}
+
+.col table,
+.col th,
+.col td {
+  border-collapse: collapse;
+}
+
+.col th,
+.col td {
+  border: 1px solid white;
+}
+
+#contBuat {
+  min-height: 60vh;
+}
+
+#contTable {
+  min-height: 40vh;
+}
+
 .keterangan {
   padding-top: 20px;
 }
@@ -363,6 +335,122 @@ ul {
   margin: 0px;
 }
 
-.orenji, .keterangan tr td:first-child {
+.orenji,
+.keterangan tr td:first-child {
   color: #e10039;
+}
+
+.readonly input,
+.readonly input ~ label,
+.readonly textarea {
+  background: #ecffae;
+}
+.col button:disabled {
+  background: #747474;
+}
+
+#pemohon-cont,
+#permohonan-cont,
+#loket-cont,
+#tu-cont,
+#verifikasi-cont {
+  min-height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 1000px) {
+  .container,
+  .medium-container,
+  .iframe-container {
+    background: #f2f2f2;
+    padding: 1% 4%;
+    margin: 0 auto 60px auto;
+    box-shadow: 0px 10px 10px 5px #00000055;
+    width: 400px;
+    position: relative;
+    top: 5vh;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .iframe-container {
+    width: 1000px;
+    margin: 45px auto 55px auto;
+  }
+
+  .logo-container {
+    margin: 0 auto 25px;
+    text-align: center;
+  }
+
+  .col {
+    margin: 0 auto 20px auto;
+  }
+
+  .medium-container {
+    width: 1000px;
+  }
+
+  .left-part-container {
+    float: left;
+  }
+
+  .right-part-container {
+    margin-left: 250px;
+  }
+
+  #contBuat,
+  #contTable {
+    min-height: 100%;
+  }
+
+  .col-right,
+  .col-left {
+    display: inline-block;
+  }
+
+  .col-right {
+    width: 70%;
+    margin-bottom: 0;
+  }
+
+  .col-left {
+    width: 28%;
+    float: right;
+  }
+
+  .col .circle,
+  .col .circle-back {
+    height: 100px;
+    width: 100px;
+  }
+
+  .col .circle img,
+  .col .circle-back img {
+    padding: 20px;
+  }
+
+  .arrow {
+    height: 100px;
+  }
+  .arrow::before {
+    font-size: 50px;
+  }
 }

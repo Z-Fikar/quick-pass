@@ -112,4 +112,6 @@ if ($db_url) {          // server
 
 ## Disclaimer
 
-Kami masih pemula pada saat pembuatan aplikasi ini.
+Kami masih pemula pada saat pembuatan aplikasi ini. 
+
+
